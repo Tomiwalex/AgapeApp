@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useCallback } from "react";
+import { AppProvider } from "./src/context/AppContext";
+import { NativeWindStyleSheet } from "nativewind";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import MainScreen from "./src/screens/general/MainScreen";
 
+// SplashScreen.preventAutoHideAsync();
 export default function App() {
+  // making the tailwind stylesheet available
+  NativeWindStyleSheet.setOutput({
+    default: "native",
+  });
+
+  // Ensuring the fonts are loaded before loading the app
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  //  importing the font family
+  const [fontsLoaded] = useFonts({
+    "Inter-Black": require("./assets/fonts/Inter-Black.ttf"),
+    "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
+    "Inter-Medium": require("./assets/fonts/Inter-Medium.ttf"),
+    "Inter-SemiBold": require("./assets/fonts/Inter-SemiBold.ttf"),
+    "Inter-Bold": require("./assets/fonts/Inter-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppProvider>
+      <MainScreen />
+    </AppProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
