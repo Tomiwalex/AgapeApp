@@ -37,7 +37,7 @@ export const LocationNavbar = ({ focused }) => {
 };
 export const GivingNavbar = ({ focused }) => {
   return (
-    <View className="justify-center items-center ">
+    <View className="justify-center items-center">
       <EvilIcons name="heart" size={24} color={focused ? "#EFDA67" : "white"} />
       <Text
         className="text-white text-xs mt-1"

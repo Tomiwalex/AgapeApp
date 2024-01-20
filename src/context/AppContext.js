@@ -5,10 +5,13 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [isAppLoading, setAppLoading] = useState(false);
+  const [isTabBarVisible, setTabBarVisible] = useState(true);
 
   const contextValue = {
     isAppLoading,
     setAppLoading,
+    isTabBarVisible,
+    setTabBarVisible,
   };
 
   return (

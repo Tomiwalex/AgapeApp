@@ -1,23 +1,23 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import React from "react";
-import { StatusBar } from "expo-status-bar";
+// import { StatusBar } from "expo-status-bar";
 import { styles } from "../../components/metrics/styles";
 import { colors } from "../../components/metrics/colors";
 import Animated, { FadeIn } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 import AuthHeader from "../../components/ui/AuthHeader";
+import Touchable from "../../components/custom-ui/Touchable";
 
 const AuthScreen = () => {
   const navigation = useNavigation();
+
   return (
     <View
-      style={[styles.container, { backgroundColor: colors.lightBlue }]}
+      style={[{ backgroundColor: colors.lightBlue }]}
       className="flex-1 justify-center items-center "
     >
-      <StatusBar style="light" />
-
-      <Animated.View
-        entering={FadeIn.duration(500)}
+      <StatusBar backgroundColor={colors.mediumBlue} barStyle="light-content" />
+      <View
         className="p-6 py-14 rounded-[39px] w-[90%] max-w-[394px]"
         style={{ backgroundColor: colors.mediumBlue }}
       >
@@ -37,7 +37,7 @@ const AuthScreen = () => {
 
           <Text
             style={styles.textmedium}
-            className="text-white text-xs mt-3 max-w-[231px]"
+            className="text-white text-xs mt-3 max-w-[231px] mb-5"
           >
             Experience faith, fellowship, and inspiration at your fingertips
           </Text>
@@ -45,11 +45,12 @@ const AuthScreen = () => {
 
         {/* Buttons */}
         {/* SIGN IN */}
-        <TouchableOpacity
+        <Touchable
+          radius={17}
           onPress={() => navigation.navigate("Signin")}
           activeOpacity={0.7}
           style={{ backgroundColor: colors.gold }}
-          className="p-4 mt-5 rounded-[17px]"
+          className="p-4  rounded-[17px]"
         >
           <Text
             className="text-center text-base"
@@ -57,7 +58,7 @@ const AuthScreen = () => {
           >
             Sign in
           </Text>
-        </TouchableOpacity>
+        </Touchable>
 
         {/* Sign up button */}
         <TouchableOpacity
@@ -86,7 +87,7 @@ const AuthScreen = () => {
             Continue as guest
           </Text>
         </TouchableOpacity>
-      </Animated.View>
+      </View>
     </View>
   );
 };

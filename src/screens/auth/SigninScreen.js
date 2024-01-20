@@ -26,7 +26,7 @@ const SigninScreen = () => {
       contentContainerStyle={{ flex: 1 }}
     >
       <View
-        style={[styles.container, { backgroundColor: colors.lightBlue }]}
+        style={[{ backgroundColor: colors.lightBlue }]}
         className="flex-1 justify-center items-center"
       >
         <Animated.View

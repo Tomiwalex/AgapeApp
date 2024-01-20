@@ -1,36 +1,25 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeTab from "./HomeTab";
-import LocationTab from "./LocationTab";
-import GivingTab from "./GivingTab";
+import GivingTab from "./giving/GivingTab";
 import HomeNavbar, {
   GivingNavbar,
   LocationNavbar,
 } from "../../components/ui/Navbar";
+import CustomTabBar from "../../components/custom-ui/CustomTabBar";
+import HomeStacks from "./home";
+import LocationStacks from "./location";
 
-const DasboardScreen = () => {
+const DashboardScreen = () => {
   const Tab = createBottomTabNavigator();
 
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          alignItems: "center",
-          height: 64,
-          width: "85%",
-          marginHorizontal: "7.5%",
-          marginBottom: 10,
-          borderRadius: 21,
-          backgroundColor: "#14338366",
-          shadowColor: "transparent",
-          elevation: 0,
-          position: "absolute",
-          borderTopWidth: 0,
-        },
       }}
+      tabBar={(props) => <CustomTabBar {...props} />}
     >
+      {/* The home tab */}
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
@@ -38,8 +27,11 @@ const DasboardScreen = () => {
           },
         }}
         name="Home"
-        component={HomeTab}
-      />
+      >
+        {(props) => <HomeStacks {...props} />}
+      </Tab.Screen>
+
+      {/* The location tab */}
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
@@ -47,8 +39,9 @@ const DasboardScreen = () => {
           },
         }}
         name="Location"
-        component={LocationTab}
+        component={LocationStacks}
       />
+
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
@@ -62,4 +55,4 @@ const DasboardScreen = () => {
   );
 };
 
-export default DasboardScreen;
+export default DashboardScreen;

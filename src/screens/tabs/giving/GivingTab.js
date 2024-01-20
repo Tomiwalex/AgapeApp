@@ -1,18 +1,18 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
-import { styles } from "../../components/metrics/styles";
-import not from "../../../assets/icons/notification-icon.png";
-import logo from "../../../assets/icon.png";
-import LoadingDot from "../loading/LoadingDot";
-import { colors } from "../../components/metrics/colors";
+import { styles } from "../../../components/metrics/styles";
+import logo from "../../../../assets/icon.png";
+import LoadingDot from "../../loading/LoadingDot";
+import not from "../../../../assets/icons/notification-icon.png";
+import { colors } from "../../../components/metrics/colors";
 
-const LocationTab = () => {
+const GivingTab = () => {
   return (
     <View style={styles.container} className="flex-1 bg-[#0a0a0c]">
       {/* Header */}
-      <View className="p-5 flex-row items-center justify-between border-b-[1px] border-b-[#F0DA6B]">
+      <View className="p-5 flex-row items-center justify-between ">
         <Text style={styles.textbold} className="text-white text-2xl">
-          Locations
+          Giving
         </Text>
 
         <View className="flex-row items-center">
@@ -34,4 +34,4 @@ const LocationTab = () => {
   );
 };
 
-export default LocationTab;
+export default GivingTab;
