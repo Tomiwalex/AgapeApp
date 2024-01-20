@@ -1,5 +1,5 @@
 import { View, Image, ScrollView, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import not from "../../../../../assets/icons/notification-icon.png";
 import ham from "../../../../../assets/icons/ham-menu-icon.png";
 import logo from "../../../../../assets/icon.png";
@@ -19,7 +19,16 @@ const HomeTab = () => {
   const [isMenuShown, setShowMenu] = React.useState(false);
   const { setTabBarVisible } = useAppContext();
 
-  const navigation = useNavigation();
+  // set the tab bar visible after 500ms
+  useEffect(() => {
+    setTimeout(() => {
+      setTabBarVisible(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(setTabBarVisible);
+    };
+  }, []);
 
   return (
     <View className="flex-1 bg-[#0a0a0c]">

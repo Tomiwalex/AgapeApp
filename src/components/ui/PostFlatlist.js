@@ -1,10 +1,11 @@
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import PostItem from "./PostItem";
-import { deviceWidth } from "../metrics/styles";
+import { deviceHeight, deviceWidth } from "../metrics/styles";
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../metrics/colors";
 import { Entypo } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
 
 const PostFlatlist = ({ data }) => {
   const [index, setIndex] = useState(0);

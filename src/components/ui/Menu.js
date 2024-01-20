@@ -22,9 +22,9 @@ const Menu = ({ setShowMenu }) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          onPress();
           setTabBarVisible(true);
           setShowMenu(false);
+          onPress();
         }}
         activeOpacity={0.6}
         className="flex-row items-center p-4 py-6  rounded-xl my-3 bg-black"
@@ -74,33 +74,43 @@ const Menu = ({ setShowMenu }) => {
             {/* profile */}
             <MenuBtn
               icon={<Ionicons name="person" size={24} color={colors.gold} />}
-              title="PROFILE"
+              title="Profile"
             />
 
             {/* testimony */}
             <MenuBtn
               icon={<Entypo name="slideshare" size={24} color={colors.gold} />}
-              title="TESTIMONY"
+              title="Testimony"
             />
 
             {/* share app */}
             <MenuBtn
               icon={<Entypo name="share" size={24} color={colors.gold} />}
-              title="SHARE APP"
+              title="Share App"
             />
 
             {/* Rate app */}
             <MenuBtn
               icon={<Ionicons name="ios-star" size={24} color={colors.gold} />}
-              title="RATE APP"
+              title="Rate App"
             />
 
             {/* testimony */}
             <MenuBtn
               icon={<Entypo name="log-out" size={24} color={colors.gold} />}
-              title="SIGN OUT"
-              onPress={() => navigation.navigate("Auth")}
+              title="Sign Out"
+              onPress={() => {
+                navigation.navigate("Auth");
+                setTabBarVisible(false);
+              }}
             />
+
+            <Text
+              style={[styles.textsemibold, { color: colors.goldOpacity }]}
+              className="text-center text-sm mt-auto"
+            >
+              V1.0.01
+            </Text>
           </Animated.View>
         </Pressable>
       </BlurView>

@@ -1,9 +1,7 @@
 import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import React from "react";
-// import { StatusBar } from "expo-status-bar";
 import { styles } from "../../components/metrics/styles";
 import { colors } from "../../components/metrics/colors";
-import Animated, { FadeIn } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 import AuthHeader from "../../components/ui/AuthHeader";
 import Touchable from "../../components/custom-ui/Touchable";

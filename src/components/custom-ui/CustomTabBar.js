@@ -1,7 +1,6 @@
 import { View } from "react-native";
 import React from "react";
 import { BlurView } from "expo-blur";
-import { styles } from "../metrics/styles";
 import HomeNavbar, { GivingNavbar, LocationNavbar } from "../ui/Navbar";
 import Touchable from "./Touchable";
 import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";

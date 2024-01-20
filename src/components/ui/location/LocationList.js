@@ -29,7 +29,7 @@ const LocationList = ({ image, description, location, distance }) => {
         )}
 
         {!image && (
-          <View className="w-[107px] h-20 rounded-[14px] items-center justify-center bg-[#5F5F5F]">
+          <View className="w-[107px] h-20 rounded-[14px] items-center justify-center bg-[#5F5F5F6E]">
             <FontAwesome5 name="church" size={60} color="#ffffff10" />
           </View>
         )}

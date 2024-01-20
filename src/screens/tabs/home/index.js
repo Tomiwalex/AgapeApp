@@ -8,13 +8,14 @@ import StreamScreen from "./stack/StreamScreen";
 import AmplifiedScreen from "./stack/AmplifiedScreen";
 import KidsScreen from "./stack/KidsScreen";
 import TeensScreen from "./stack/TeensScreen";
+import ImageExpand from "./stack/ImageExpand";
 
 const HomeStacks = () => {
   const HomeStack = createNativeStackNavigator();
 
   return (
     <HomeStack.Navigator
-      screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      screenOptions={{ headerShown: false, animation: "none" }}
     >
       <HomeStack.Screen name="HomeScreen" component={HomeTab} />
       <HomeStack.Screen name="Agape" component={AgapeScreen} />
@@ -23,6 +24,11 @@ const HomeStacks = () => {
       <HomeStack.Screen name="Amplified" component={AmplifiedScreen} />
       <HomeStack.Screen name="eKids" component={KidsScreen} />
       <HomeStack.Screen name="eTeens" component={TeensScreen} />
+      <HomeStack.Screen
+        options={{ animation: "none" }}
+        name="ImageExpand"
+        component={ImageExpand}
+      />
     </HomeStack.Navigator>
   );
 };

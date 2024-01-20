@@ -4,6 +4,8 @@ import {
   Text,
   Image,
   TouchableHighlight,
+  ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import not from "../../../../../assets/icons/notification-icon.png";
@@ -12,6 +14,7 @@ import { styles } from "../../../../components/metrics/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../../../components/metrics/colors";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const LocationDetails = ({ route }) => {
   const navigation = useNavigation();
@@ -20,7 +23,7 @@ const LocationDetails = ({ route }) => {
       showsVerticalScrollIndicator={false}
       vertical
       style={styles.container}
-      className="flex-1 bg-[#111111]"
+      className="flex-1 bg-[#1f1f29]"
     >
       {/* Header */}
       <View className="p-5 px-4 flex-row items-center justify-between border-b-[1px] border-b-[#F0DA6B]">
@@ -41,8 +44,106 @@ const LocationDetails = ({ route }) => {
         </View>
       </View>
 
-      <View>
-        <Text>LocationDetails</Text>
+      {/* image */}
+      <ImageBackground
+        className="m-4 rounded-3xl overflow-hidden"
+        source={require("../../../../../assets/post-images/pastor-image.png")}
+      >
+        <View className="min-h-[354px] justify-end rounded-3xl overflow-auto">
+          <LinearGradient
+            colors={["transparent", "#000000", "#000000"]}
+            className="p-5 py-8"
+          >
+            {/* pastor's name and location */}
+            <View className="flex-row items-center">
+              <Text style={styles.textbold} className="text-base text-white">
+                {route.params.location}
+              </Text>
+
+              <Text
+                style={[styles.textmedium, { color: colors.gold }]}
+                className="text-base text-white ml-1"
+              >
+                {`(Pastor Alex)`}
+              </Text>
+            </View>
+
+            {/* description */}
+            <View>
+              <Text
+                style={styles.textmedium}
+                className="text-xs mt-2 text-white"
+              >
+                Lorem ipsum dolor sit amet consectetur. Nunc eleifend risus
+                lectus tincidunt. Morbi leo accumsan.
+              </Text>
+
+              {/* number */}
+              <View className="flex-row items-center mt-2 flex-wrap ">
+                <Text
+                  style={[styles.textmedium, { color: colors.gold }]}
+                  className="text-xs text-white"
+                >
+                  (+234) 801-234-5678
+                </Text>
+
+                <Text
+                  style={[styles.textmedium, { color: colors.gold }]}
+                  className="text-xs text-white ml-1"
+                >
+                  E-mail: pastoralex@gmail.com
+                </Text>
+              </View>
+            </View>
+          </LinearGradient>
+        </View>
+      </ImageBackground>
+
+      {/* navigation */}
+      <View className="flex-row px-6 mt-3">
+        {/* mail icon */}
+        <TouchableOpacity className="flex-1">
+          <Ionicons
+            name="mail"
+            size={27}
+            color={colors.gold}
+            style={{
+              borderColor: colors.gold,
+              paddingHorizontal: 18,
+              borderRadius: 11,
+              paddingVertical: 9,
+              borderWidth: 1,
+              width: 65,
+            }}
+          />
+        </TouchableOpacity>
+
+        {/* navigate icon */}
+        <TouchableOpacity>
+          <Ionicons
+            name="navigate-circle"
+            size={33}
+            color={colors.gold}
+            style={{
+              borderColor: colors.gold,
+              paddingHorizontal: 14,
+              borderRadius: 11,
+              paddingVertical: 6,
+              borderWidth: 1,
+            }}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            borderColor: colors.gold,
+          }}
+          className="px-10 border-[1px] py-[10] rounded-[12px] ml-2 justify-self-end"
+        >
+          <Text style={[styles.textbold]} className="text-base text-white">
+            Navigate
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

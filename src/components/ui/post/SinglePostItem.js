@@ -9,11 +9,15 @@ import React from "react";
 import { Video } from "expo-av";
 import { deviceWidth } from "../../metrics/styles";
 import playIcon from "../../../../assets/icons/play-icon.png";
+import { useNavigation } from "@react-navigation/native";
+import { useAppContext } from "../../../context/AppContext";
 
 const SinglePostItem = ({ item }) => {
   const postWidth = deviceWidth - 40;
   const videoRef = React.useRef(null);
   const [status, setStatus] = React.useState({});
+  const navigation = useNavigation();
+  const { setTabBarVisible } = useAppContext();
 
   return (
     <View style={{ width: deviceWidth }}>
@@ -22,7 +26,13 @@ const SinglePostItem = ({ item }) => {
         <TouchableHighlight
           className="rounded-[22px] px-5"
           underlayColor={"#00000030"}
-          onPress={() => null}
+          onPress={() => {
+            navigation.navigate("Home", {
+              screen: "ImageExpand",
+              params: { image: item.url },
+            });
+            setTabBarVisible(false);
+          }}
         >
           <Image
             source={item.url}
