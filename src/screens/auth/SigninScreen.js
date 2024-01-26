@@ -15,10 +15,19 @@ import AuthHeader from "../../components/ui/AuthHeader";
 import { Ionicons } from "@expo/vector-icons";
 import googleIcon from "../../../assets/icons/google-icon.png";
 import { useNavigation } from "@react-navigation/native";
+import useGetLogin from "../../hooks/useGetLogin";
+import axios from "axios";
 
 const SigninScreen = () => {
   const navigation = useNavigation();
   const [isPasswordShown, setIsPasswordShown] = React.useState(false);
+  const [userInfo, setUserInfo] = React.useState({
+    emailOrUsername: "",
+    password: "",
+  });
+
+  const { data, error, fetchDetails } = useGetLogin({ userInfo });
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -53,6 +62,10 @@ const SigninScreen = () => {
             {/* Mail input */}
             <TextInput
               className="text-xs border-white border-[1px] rounded-[17px] p-3 text-white"
+              value={userInfo.emailOrUsername}
+              onChangeText={(e) =>
+                setUserInfo({ ...userInfo, emailOrUsername: e })
+              }
               style={styles.textbold}
               placeholder="example@gmail.com"
               placeholderTextColor={"#A8A8A8"}
@@ -65,6 +78,8 @@ const SigninScreen = () => {
                 style={styles.textbold}
                 secureTextEntry={isPasswordShown ? false : true}
                 className="text-xm text-white flex-1 mr-1"
+                value={userInfo.password}
+                onChangeText={(e) => setUserInfo({ ...userInfo, password: e })}
                 cursorColor={colors.gold}
               />
 
@@ -79,9 +94,16 @@ const SigninScreen = () => {
 
             {/* Sign in button */}
             <TouchableOpacity
-              onPress={() => navigation.navigate("Dashboard")}
+              disabled={
+                !userInfo.emailOrUsername || !userInfo.password ? true : false
+              }
+              style={{
+                opacity:
+                  !userInfo.emailOrUsername || !userInfo.password ? 0.5 : 1,
+                backgroundColor: colors.gold,
+              }}
+              onPress={fetchDetails}
               activeOpacity={0.7}
-              style={{ backgroundColor: colors.gold }}
               className="p-4 mt-5 rounded-[17px]"
             >
               <Text

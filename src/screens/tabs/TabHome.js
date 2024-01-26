@@ -1,6 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import GivingTab from "./giving/GivingTab";
 import HomeNavbar, {
   GivingNavbar,
   LocationNavbar,
@@ -8,6 +7,7 @@ import HomeNavbar, {
 import CustomTabBar from "../../components/custom-ui/CustomTabBar";
 import HomeStacks from "./home";
 import LocationStacks from "./location";
+import GivingStacks from "./giving";
 
 const DashboardScreen = () => {
   const Tab = createBottomTabNavigator();
@@ -49,7 +49,7 @@ const DashboardScreen = () => {
           },
         }}
         name="Giving"
-        component={GivingTab}
+        component={GivingStacks}
       />
     </Tab.Navigator>
   );

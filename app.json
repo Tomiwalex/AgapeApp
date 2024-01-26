@@ -3,7 +3,7 @@
     "name": "Agape",
     "slug": "AgapeApp",
     "version": "1.0.01",
-    "orientation": "potrait",
+    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {

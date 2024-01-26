@@ -3,12 +3,12 @@ import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { styles } from "../../metrics/styles";
 
-const CommunityPost = ({ bg, title, description }) => {
+const CommunityPost = ({ bg, title, description, onPress }) => {
   return (
-    <ImageBackground source={bg} className="rounded-[23px] overflow-hidden">
+    <ImageBackground source={bg} className="rounded-[34px] overflow-hidden">
       <TouchableHighlight
         underlayColor={"#00000080"}
-        onPress={() => null}
+        onPress={onPress ? onPress : null}
         className="min-h-[350px] justify-end"
       >
         <LinearGradient
