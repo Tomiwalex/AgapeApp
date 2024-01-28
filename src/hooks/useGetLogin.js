@@ -22,7 +22,8 @@ const useGetLogin = ({ userInfo }) => {
       );
   
       console.log(userInfo);
-      console.log(response.data, "response");
+      console.log(response.data.token, "response");
+      setData(response.data)
       console.log("done....");
     } catch (error) {
       console.log("Error from request:", error);
