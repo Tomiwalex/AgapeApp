@@ -16,23 +16,41 @@ const useGetLogin = ({ userInfo }) => {
       const response = await axios.post(
         `https://api.agapechristianministries.com/api/users/login`,
         {
-          emailOrUsername: "kdqsjfeq",
-          password: "tomiwa218",
+          emailOrUsername: userInfo.emailOrUsername,
+          password: userInfo.password,
         }
       );
-
+  
       console.log(userInfo);
-      const json = await response.json();
-      setData(json);
-      console.log(response);
+      console.log(response.data, "response");
       console.log("done....");
     } catch (error) {
+      console.log("Error from request:", error);
+  
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // other than 2xx. Access the response data for more details.
+        console.log("Server response data:", error.response.data);
+        console.log("Status code:", error.response.status);
+      Alert.alert("Error", error.response.data.message);
+
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log("No response received. The request was made but no response was received.");
+        console.log("Request config:", error.config);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error message:", error.message);
+      Alert.alert("Error", "Something went wrong. Please try again later.");
+
+      }
+  
       setError(error);
-      Alert.alert(error.message);
     } finally {
       setAppLoading(false);
     }
   };
+  
 
   const fetchDetails = () => {
     fetchData();

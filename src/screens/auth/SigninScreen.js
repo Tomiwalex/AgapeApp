@@ -79,7 +79,7 @@ const SigninScreen = () => {
                 secureTextEntry={isPasswordShown ? false : true}
                 className="text-xm text-white flex-1 mr-1"
                 value={userInfo.password}
-                onChangeText={(e) => setUserInfo({ ...userInfo, password: e })}
+                onChangeText={(e) => {setUserInfo({ ...userInfo, password: e });console.log(e)}}
                 cursorColor={colors.gold}
               />
 
