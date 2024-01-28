@@ -26,6 +26,7 @@ const SigninScreen = () => {
     password: "",
   });
 
+  // function to run the login process
   const { data, error, fetchDetails } = useGetLogin({ userInfo });
 
   return (

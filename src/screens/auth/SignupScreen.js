@@ -7,7 +7,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { styles } from "../../components/metrics/styles";
 import { colors } from "../../components/metrics/colors";
 import Animated, { FadeIn } from "react-native-reanimated";
@@ -16,14 +16,54 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import googleIcon from "../../../assets/icons/google-icon.png";
 import { Feather } from "@expo/vector-icons";
-import { useAppContext } from "../../context/AppContext";
+import useGetSignUp from "../../hooks/useGetSignUp";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
   const [isPasswordShown, setIsPasswordShown] = React.useState(false);
   const [isPassword2Shown, setIsPassword2Shown] = React.useState(false);
   const [isChecked, setIsChecked] = React.useState(false);
-  const { setAppLoading } = useAppContext();
+  const [userInfo, setUserInfo] = React.useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+    verifyPassword: "",
+  });
+
+  const [inputError, setInputError] = React.useState({
+    mailError: false,
+    verifyPasswordError:
+      userInfo.password !== userInfo.verifyPassword ? true : false,
+  });
+
+  // function to check if the email is valid
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailRegex.test(email)) {
+      setInputError({ ...inputError, mailError: false });
+    } else {
+      setInputError({ ...inputError, mailError: true });
+    }
+  };
+
+  // reseting all the states when the component is unmounted
+  useEffect(() => {
+    return () => {
+      setUserInfo({
+        firstName: "",
+        lastName: "",
+        username: "",
+        email: "",
+        password: "",
+        verifyPassword: "",
+      });
+    };
+  }, []);
+
+  const { data, error, signup } = useGetSignUp({ userInfo });
 
   return (
     <ScrollView
@@ -52,6 +92,8 @@ const SignupScreen = () => {
             <View className="flex-row justify-between">
               {/* Frst name */}
               <TextInput
+                value={userInfo.firstName}
+                onChangeText={(e) => setUserInfo({ ...userInfo, firstName: e })}
                 className="text-xs border-white border-[1px] rounded-[17px] p-3 text-white basis-[49%]"
                 style={styles.textbold}
                 placeholder="First Name"
@@ -61,6 +103,8 @@ const SignupScreen = () => {
 
               {/* Last name */}
               <TextInput
+                value={userInfo.lastName}
+                onChangeText={(e) => setUserInfo({ ...userInfo, lastName: e })}
                 className="text-xs border-white border-[1px] rounded-[17px] p-3 text-white basis-[49%]"
                 style={styles.textbold}
                 placeholder="Last Name"
@@ -69,18 +113,51 @@ const SignupScreen = () => {
               />
             </View>
 
-            {/* mail */}
+            {/* username */}
             <TextInput
+              value={userInfo.username}
+              onChangeText={(e) => setUserInfo({ ...userInfo, username: e })}
               className="text-xs border-white border-[1px] rounded-[17px] p-3 text-white mt-7"
               style={styles.textbold}
+              placeholder="Username"
+              placeholderTextColor={"#fff"}
+              cursorColor={colors.gold}
+              keyboardType="email-address"
+            />
+
+            {/* mail */}
+            <TextInput
+              value={userInfo.email}
+              onChangeText={(e) => {
+                setUserInfo({ ...userInfo, email: e });
+                isEmailValid(e);
+              }}
+              className="text-xs border-white border-[1px] rounded-[17px] p-3 text-white mt-7"
+              style={[
+                styles.textbold,
+                { borderColor: inputError.mailError ? "red" : "white" },
+              ]}
               placeholder="Email"
               placeholderTextColor={"#fff"}
               cursorColor={colors.gold}
+              keyboardType="email-address"
             />
+
+            {/* error message for mail */}
+            {inputError.mailError ? (
+              <Text
+                style={styles.textmedium}
+                className="text-red-500 text-xs ml-2 mt-1"
+              >
+                *Input a valid mail!
+              </Text>
+            ) : null}
 
             {/* Password input */}
             <View className="p-3 border-white border-[1px] rounded-[17px] mt-7 flex-row">
               <TextInput
+                value={userInfo.password}
+                onChangeText={(e) => setUserInfo({ ...userInfo, password: e })}
                 style={styles.textbold}
                 secureTextEntry={isPasswordShown ? false : true}
                 className="text-xs text-white flex-1 mr-1"
@@ -99,8 +176,20 @@ const SignupScreen = () => {
             </View>
 
             {/* confirm password input */}
-            <View className="p-3 border-white border-[1px] rounded-[17px] mt-7 flex-row">
+            <View
+              style={{
+                borderColor:
+                  userInfo.password !== userInfo.verifyPassword
+                    ? "red"
+                    : "white",
+              }}
+              className="p-3 border-white border-[1px] rounded-[17px] mt-7 flex-row"
+            >
               <TextInput
+                value={userInfo.verifyPassword}
+                onChangeText={(e) =>
+                  setUserInfo({ ...userInfo, verifyPassword: e })
+                }
                 style={styles.textbold}
                 secureTextEntry={isPassword2Shown ? false : true}
                 className="text-xs text-white flex-1 mr-1"
@@ -117,6 +206,16 @@ const SignupScreen = () => {
                 )}
               </Pressable>
             </View>
+
+            {/* error message when passwords don't match */}
+            {userInfo.password !== userInfo.verifyPassword && (
+              <Text
+                style={styles.textmedium}
+                className="text-red-500 text-xs mt-1 ml-2"
+              >
+                *Passwords don't match!
+              </Text>
+            )}
           </View>
 
           {/* agree to privacy policy */}
@@ -157,11 +256,36 @@ const SignupScreen = () => {
 
           {/* sign up button */}
           <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Dashboard");
-            }}
+            onPress={signup}
             activeOpacity={0.7}
-            style={{ backgroundColor: colors.gold }}
+            disabled={
+              userInfo.firstName !== "" &&
+              inputError.mailError === false &&
+              userInfo.password == userInfo.verifyPassword &&
+              userInfo.lastName !== "" &&
+              userInfo.email !== "" &&
+              userInfo.password !== "" &&
+              userInfo.username !== "" &&
+              userInfo.verifyPassword !== "" &&
+              isChecked
+                ? false
+                : true
+            }
+            style={{
+              backgroundColor: colors.gold,
+              opacity:
+                userInfo.firstName !== "" &&
+                inputError.mailError === false &&
+                userInfo.password == userInfo.verifyPassword &&
+                userInfo.lastName !== "" &&
+                userInfo.email !== "" &&
+                userInfo.password !== "" &&
+                userInfo.username !== "" &&
+                userInfo.verifyPassword !== "" &&
+                isChecked
+                  ? 1
+                  : 0.7,
+            }}
             className="p-4 rounded-[17px]"
           >
             <Text
