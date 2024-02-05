@@ -6,12 +6,18 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isAppLoading, setAppLoading] = useState(false);
   const [isTabBarVisible, setTabBarVisible] = useState(false);
+  const [isAlertVisible, setAlertVisible] = useState(false);
+  const [alertDetails, setAlertDetails] = useState({ error: false, text: "" });
 
   const contextValue = {
     isAppLoading,
     setAppLoading,
     isTabBarVisible,
     setTabBarVisible,
+    isAlertVisible,
+    setAlertVisible,
+    alertDetails,
+    setAlertDetails,
   };
 
   return (

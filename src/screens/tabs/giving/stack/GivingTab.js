@@ -21,6 +21,7 @@ import Animated, {
 import CommunityPost from "../../../../components/ui/post/CommunityPost";
 import { colors } from "../../../../components/metrics/colors";
 import { MaterialIcons } from "@expo/vector-icons";
+import NotificationIcon from "../../../../components/ui/NotificationIcon";
 
 const GivingTab = () => {
   const [isGivingListShown, setGivingListShown] = React.useState(false);
@@ -54,7 +55,7 @@ const GivingTab = () => {
 
         <View className="flex-row items-center">
           <Image source={logo} className="w-[38px] h-9 mr-2" />
-          <Image source={not} className="w-6 h-7" />
+          <NotificationIcon />
         </View>
       </View>
 

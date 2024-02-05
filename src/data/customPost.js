@@ -5,20 +5,21 @@ export const AgapePostCustomData = [
       require("../../assets/icon.png").default ||
       require("../../assets/icon.png"),
     text: "Learning about kindness and helping others is an important part of being in church, and it's something we can practice every day",
-    source: require("../../assets/post-images/agape-post-1.png"),
+    source:
+      "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
     type: "image",
-    data: [
+    mediaUrls: [
       {
         type: "image",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "video",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "image",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
     ],
   },
@@ -31,18 +32,18 @@ export const AgapePostCustomData = [
     source:
       "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     type: "video",
-    data: [
+    mediaUrls: [
       {
         type: "image",
-        url: require("../../assets/post-images/amplified-comuunity-image-2.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "video",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "image",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
     ],
   },
@@ -68,18 +69,18 @@ export const AmplifiedPostCustomData = [
     source:
       "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Google_I_O_2013_Keynote.mp4",
     type: "video",
-    data: [
+    mediaUrls: [
       {
         type: "image",
-        url: require("../../assets/post-images/amplified-comuunity-image-2.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "video",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "image",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
     ],
   },
@@ -112,20 +113,21 @@ export const TeensPostCustomData = [
       require("../../assets/icons/teen-icon.png").default ||
       require("../../assets/icons/teen-icon.png"),
     text: "Agape Christian Ministries is a ministry of The Amplified Church is a ministry of The Amplified Church Agape Christian Ministries is a ministry of The Amplified Church",
-    source: require("../../assets/post-images/agape-post-1.png"),
+    source:
+      "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
     type: "image",
-    data: [
+    mediaUrls: [
       {
         type: "image",
-        url: require("../../assets/post-images/agape-community-image-2.png"),
+        link: require("../../assets/post-images/agape-community-image-2.png"),
       },
       {
         type: "video",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "image",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
     ],
   },
@@ -160,18 +162,18 @@ export const KidsPostCustomData = [
     text: "Learning about kindness and helping others is an important part of being in church, and it's something we can practice every day",
     source: require("../../assets/post-images/kids-post1.png"),
     type: "image",
-    data: [
+    mediaUrls: [
       {
         type: "image",
-        url: require("../../assets/post-images/kids-community-image-2.png"),
+        link: require("../../assets/post-images/kids-community-image-2.png"),
       },
       {
         type: "video",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
       {
         type: "image",
-        url: require("../../assets/post-images/agape-post-1.png"),
+        link: "https://res.cloudinary.com/dgyegrhpi/image/upload/v1705762359/qrhunyv960mj02cqwpng.jpg",
       },
     ],
   },

@@ -22,16 +22,19 @@ import { useAppContext } from "../../context/AppContext";
 import { EvilIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
+import useGetLoginToken from "../../hooks/useGetLoginToken";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Menu = ({ setShowMenu }) => {
   const { setTabBarVisible } = useAppContext();
   const navigation = useNavigation();
+  const { token } = useGetLoginToken();
 
   const MenuBtn = ({ title, icon, onPress }) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          setTabBarVisible(true);
+          setTabBarVisible((prev) => false);
           setShowMenu(false);
           onPress();
         }}
@@ -51,6 +54,16 @@ const Menu = ({ setShowMenu }) => {
         <View className="w-[82px] mx-auto border-b-[1px] border-b-[#F0DA6B8F] pt-8"></View>
       </TouchableOpacity>
     );
+  };
+
+  const logOut = async () => {
+    try {
+      await AsyncStorage.removeItem("Token");
+      setTabBarVisible((prev) => !prev);
+      await navigation.replace("Auth");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -91,7 +104,17 @@ const Menu = ({ setShowMenu }) => {
               </View>
 
               {/* profile */}
-              <MenuBtn title="Profile" />
+              <MenuBtn
+                title={token ? "Profile" : "Sign Up"}
+                onPress={() => {
+                  if (token) {
+                    navigation.navigate("Profile");
+                  } else {
+                    navigation.navigate("Signup");
+                    setTabBarVisible(false);
+                  }
+                }}
+              />
 
               {/* testimony */}
               <MenuBtn
@@ -129,15 +152,16 @@ const Menu = ({ setShowMenu }) => {
                 title="Rate App"
               />
 
-              {/* testimony */}
-              <MenuBtn
-                icon={<AntDesign name="logout" size={20} color="white" />}
-                title="Sign Out"
-                onPress={() => {
-                  navigation.navigate("Auth");
-                  setTabBarVisible(false);
-                }}
-              />
+              {/* log out*/}
+              {token && (
+                <MenuBtn
+                  icon={<AntDesign name="logout" size={20} color="white" />}
+                  title="Sign Out"
+                  onPress={() => {
+                    logOut();
+                  }}
+                />
+              )}
 
               <Image
                 source={require("../../../assets/icon.png")}

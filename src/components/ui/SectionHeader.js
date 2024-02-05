@@ -4,6 +4,7 @@ import { styles } from "../metrics/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../metrics/colors";
 import { useNavigation } from "@react-navigation/native";
+import NotificationIcon from "./NotificationIcon";
 
 const SectionHeader = ({ name, image, type, image2 }) => {
   const navigation = useNavigation();
@@ -23,7 +24,7 @@ const SectionHeader = ({ name, image, type, image2 }) => {
       )}
 
       {/* section image for type 2 */}
-      {type == 2 && (
+      {type > 1 && (
         <Image
           source={image2}
           className="h-9 w-[35] ml-2 mr-1"
@@ -39,7 +40,7 @@ const SectionHeader = ({ name, image, type, image2 }) => {
       </Text>
 
       {/* icon */}
-      {type == 2 && (
+      {type > 1 && (
         <Image
           source={image}
           className="h-9 w-[35] ml-1 mr-2"
@@ -47,11 +48,7 @@ const SectionHeader = ({ name, image, type, image2 }) => {
         />
       )}
 
-      <Image
-        resizeMode="cover"
-        source={require("../../../assets/icons/notification-icon.png")}
-        className="w-7 h-8"
-      />
+      {type < 3 && <NotificationIcon />}
     </View>
   );
 };

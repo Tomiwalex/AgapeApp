@@ -1,13 +1,25 @@
 import { View, Text, TouchableOpacity, StatusBar } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { styles } from "../../components/metrics/styles";
 import { colors } from "../../components/metrics/colors";
 import { useNavigation } from "@react-navigation/native";
 import AuthHeader from "../../components/ui/AuthHeader";
 import Touchable from "../../components/custom-ui/Touchable";
+import { useAppContext } from "../../context/AppContext";
+import useGetLoginToken from "../../hooks/useGetLoginToken";
 
 const AuthScreen = () => {
   const navigation = useNavigation();
+  const { setTabBarVisible } = useAppContext();
+  const { token } = useGetLoginToken();
+
+  useEffect(() => {
+    if (token) {
+      navigation.replace("Dashboard");
+    } else {
+      return;
+    }
+  }, []);
 
   return (
     <View
@@ -74,7 +86,7 @@ const AuthScreen = () => {
 
         {/* Continue as guest button */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("Dashboard")}
+          onPress={() => navigation.replace("Dashboard")}
           activeOpacity={0.7}
           className="mt-5 border-[1px] hover:border-none focus:border-none border-white rounded-[17px] p-4 "
         >

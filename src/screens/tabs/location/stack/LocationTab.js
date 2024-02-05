@@ -4,6 +4,7 @@ import { styles } from "../../../../components/metrics/styles";
 import not from "../../../../../assets/icons/notification-icon.png";
 import logo from "../../../../../assets/icon.png";
 import LocationList from "../../../../components/ui/location/LocationList";
+import NotificationIcon from "../../../../components/ui/NotificationIcon";
 
 const LocationTab = () => {
   return (
@@ -21,7 +22,7 @@ const LocationTab = () => {
 
         <View className="flex-row items-center">
           <Image source={logo} className="w-[38px] h-9 mr-2" />
-          <Image source={not} className="w-6 h-7" />
+          <NotificationIcon />
         </View>
       </View>
 

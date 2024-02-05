@@ -3,7 +3,11 @@ import React from "react";
 import { BlurView } from "expo-blur";
 import HomeNavbar, { GivingNavbar, LocationNavbar } from "../ui/Navbar";
 import Touchable from "./Touchable";
-import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
+import Animated, {
+  FadeInDown,
+  FadeOut,
+  FadeOutDown,
+} from "react-native-reanimated";
 import { useAppContext } from "../../context/AppContext";
 
 const CustomTabBar = ({ state, descriptors, navigation }) => {
@@ -22,7 +26,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
   return (
     <Animated.View
       entering={FadeInDown}
-      exiting={FadeOut}
+      exiting={FadeOutDown}
       style={{
         display: isTabBarVisible ? "flex" : "none" /* To hide the tab bar */,
       }}

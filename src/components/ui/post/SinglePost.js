@@ -12,7 +12,7 @@ import { Entypo } from "@expo/vector-icons";
 import { colors } from "../../metrics/colors";
 import SinglePostItem from "./SinglePostItem";
 
-const SinglePost = ({ details }) => {
+const SinglePost = ({ details, ash }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const scrollViewRef = React.useRef(null);
 
@@ -32,7 +32,7 @@ const SinglePost = ({ details }) => {
   };
 
   const handleNext = () => {
-    if (activeIndex !== details?.data.length - 1) {
+    if (activeIndex !== details?.mediaUrls.length - 1) {
       setActiveIndex((prev) => prev + 1);
     }
   };
@@ -44,7 +44,10 @@ const SinglePost = ({ details }) => {
   };
 
   return (
-    <View className="py-8">
+    <View
+      style={{ backgroundColor: ash && "#494B4D" }}
+      className="py-8 my-[2px]"
+    >
       {/* Post information || header */}
       <View className="flex-row items-center px-5">
         <Image
@@ -58,7 +61,7 @@ const SinglePost = ({ details }) => {
           style={styles.textbold}
           className="text-white max-w-[164px] text-sm ml-1"
         >
-          {details?.author}
+          {details?.author || details?.audience}
         </Text>
       </View>
 
@@ -68,7 +71,7 @@ const SinglePost = ({ details }) => {
         numberOfLines={3}
         className="text-white text-sm my-3 ml-[5px] h-[57px] px-5"
       >
-        {details?.text}
+        {details?.text || details?.description}
       </Text>
 
       <View>
@@ -79,14 +82,19 @@ const SinglePost = ({ details }) => {
           pagingEnabled
           onScroll={onScroll}
         >
-          {details.data.map((item, index) => (
-            <SinglePostItem key={index} item={item} />
-          ))}
+          {details.data
+            ? details.data.map((item, index) => (
+                <SinglePostItem key={index} item={item} />
+              ))
+            : details?.mediaUrls.map((item, index) => (
+                <SinglePostItem key={index} item={item} />
+              ))}
         </ScrollView>
 
         {/* The navigation icons to be shown when the data list is more than 1 details */}
-        {details?.data.length > 1 && (
-          <View className="flex-row absolute bottom-8 right-8">
+
+        {details.mediaUrls.length > 1 && (
+          <View className="flex-row absolute bottom-5 right-8">
             {/* The navigation buttons */}
             <TouchableOpacity
               onPress={handlePrev}
@@ -104,9 +112,10 @@ const SinglePost = ({ details }) => {
             {/* Right icon */}
             <TouchableOpacity
               onPress={handleNext}
-              disabled={activeIndex === details?.data.length - 1}
+              disabled={activeIndex === details?.mediaUrls.length - 1}
               style={{
-                opacity: activeIndex === details?.data.length - 1 ? 0.6 : 1,
+                opacity:
+                  activeIndex === details?.mediaUrls.length - 1 ? 0.6 : 1,
               }}
             >
               <Entypo

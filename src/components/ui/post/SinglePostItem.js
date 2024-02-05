@@ -24,56 +24,57 @@ const SinglePostItem = ({ item }) => {
       {/* Post image */}
       {item.type == "image" && (
         <TouchableHighlight
-          className="rounded-[22px] px-5"
+          className="rounded-[22px] mx-5"
           underlayColor={"#00000030"}
           onPress={() => {
             navigation.navigate("Home", {
               screen: "ImageExpand",
-              params: { image: item.url },
+              params: { image: item.link },
             });
             setTabBarVisible(false);
           }}
         >
           <Image
-            source={item.url}
+            source={{ uri: item.link }} // item.link}
             resizeMode="contain"
-            style={{ height: postWidth * 0.7 }}
+            style={{ height: postWidth * 0.8 }}
             className="w-full  bg-gray-900 rounded-[22px]"
           />
         </TouchableHighlight>
       )}
 
       {/* Post video */}
-      {item.type == "video" && (
-        <View style={{ width: deviceWidth }}>
-          <Video
-            ref={videoRef}
-            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-            style={{ height: postWidth * 0.7, width: postWidth }}
-            source={{
-              uri: item.url,
-            }}
-            useNativeControls
-            isLooping
-            resizeMode="cover"
-            className="w-full bg-gray-900 rounded-[22px] mx-auto"
-          />
+      {item.type == "video" ||
+        (item.type == "audio" && (
+          <View style={{ width: postWidth }} className="ml-5">
+            <Video
+              ref={videoRef}
+              onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+              style={{ height: postWidth * 0.8, width: postWidth }}
+              source={{
+                uri: item.link,
+              }}
+              useNativeControls
+              isLooping
+              resizeMode="cover"
+              className="w-full bg-gray-900 rounded-[22px] mx-auto"
+            />
 
-          {/* Play button */}
-          {!status.isPlaying ? (
-            <TouchableOpacity
-              className="absolute top-0 left-0 right-0 bottom-0 items-center justify-center bg-[#00000080] rounded-[22px]"
-              onPress={() =>
-                status.isPlaying
-                  ? videoRef.current.pauseAsync()
-                  : videoRef.current.playAsync()
-              }
-            >
-              <Image source={playIcon} className="h-10 w-10" />
-            </TouchableOpacity>
-          ) : null}
-        </View>
-      )}
+            {/* Play button */}
+            {!status.isPlaying ? (
+              <TouchableOpacity
+                className="absolute top-0 left-0 right-0 bottom-0 items-center justify-center bg-[#00000080] rounded-[22px]"
+                onPress={() =>
+                  status.isPlaying
+                    ? videoRef.current.pauseAsync()
+                    : videoRef.current.playAsync()
+                }
+              >
+                <Image source={playIcon} className="h-10 w-10" />
+              </TouchableOpacity>
+            ) : null}
+          </View>
+        ))}
     </View>
   );
 };

@@ -31,7 +31,6 @@ const SignupScreen = () => {
     password: "",
     verifyPassword: "",
   });
-
   const [inputError, setInputError] = React.useState({
     mailError: false,
     verifyPasswordError:
@@ -78,8 +77,7 @@ const SignupScreen = () => {
         style={[styles.container]}
         className="flex-1 justify-center items-center"
       >
-        <Animated.View
-          entering={FadeIn}
+        <View
           className="p-6 py-14 rounded-[39px] w-[90%] max-w-[394px]"
           style={{ backgroundColor: colors.mediumBlue }}
         >
@@ -99,6 +97,7 @@ const SignupScreen = () => {
                 placeholder="First Name"
                 placeholderTextColor={"#fff"}
                 cursorColor={colors.gold}
+                autoFocus={true}
               />
 
               {/* Last name */}
@@ -317,7 +316,7 @@ const SignupScreen = () => {
             className="text-white text-xs mt-3 text-center"
           >
             Already have an account?{" "}
-            <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
+            <TouchableOpacity onPress={() => navigation.replace("Signin")}>
               <Text
                 style={[styles.textmedium, { color: colors.gold }]}
                 className="underline top-1 text-xs "
@@ -326,7 +325,7 @@ const SignupScreen = () => {
               </Text>
             </TouchableOpacity>
           </Text>
-        </Animated.View>
+        </View>
       </View>
     </ScrollView>
   );

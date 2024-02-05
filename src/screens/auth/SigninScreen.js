@@ -16,7 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import googleIcon from "../../../assets/icons/google-icon.png";
 import { useNavigation } from "@react-navigation/native";
 import useGetLogin from "../../hooks/useGetLogin";
-import axios from "axios";
+import { message } from "../../hooks/messageProps";
 
 const SigninScreen = () => {
   const navigation = useNavigation();
@@ -27,7 +27,7 @@ const SigninScreen = () => {
   });
 
   // function to run the login process
-  const { data, error, fetchDetails } = useGetLogin({ userInfo });
+  const { error, fetchDetails, reset } = useGetLogin({ userInfo });
 
   return (
     <ScrollView
@@ -39,8 +39,8 @@ const SigninScreen = () => {
         style={[{ backgroundColor: colors.lightBlue }]}
         className="flex-1 justify-center items-center"
       >
-        <Animated.View
-          entering={FadeIn}
+        <View
+          // entering={FadeIn}
           className="p-6 py-14 rounded-[39px] w-[90%] max-w-[394px]"
           style={{ backgroundColor: colors.mediumBlue }}
         >
@@ -60,27 +60,44 @@ const SigninScreen = () => {
 
           {/* The sign in form */}
           <View className="mt-7">
-            {/* Mail input */}
+            {/* Mail or username input */}
             <TextInput
-              className="text-xs border-white border-[1px] rounded-[17px] p-3 text-white"
+              className="text-xs  border-[1px] rounded-[17px] p-3 text-white"
               value={userInfo.emailOrUsername}
-              onChangeText={(e) =>
-                setUserInfo({ ...userInfo, emailOrUsername: e })
-              }
-              style={styles.textbold}
-              placeholder="example@gmail.com"
+              onChangeText={(e) => {
+                setUserInfo({ ...userInfo, emailOrUsername: e });
+                reset();
+              }}
+              style={[
+                styles.textbold,
+                {
+                  borderColor:
+                    error == message.USER_DOES_NOT_EXIST ? "red" : "white",
+                },
+              ]}
+              placeholder="email or username"
               placeholderTextColor={"#A8A8A8"}
               cursorColor={colors.gold}
+              autoFocus={true}
             />
 
             {/* Password input */}
-            <View className="p-3 border-white border-[1px] rounded-[17px] mt-7 flex-row">
+            <View
+              style={{
+                borderColor:
+                  error == message.INVALID_PASSWORD ? "red" : "white",
+              }}
+              className="p-3  border-[1px] rounded-[17px] mt-7 flex-row"
+            >
               <TextInput
-                style={styles.textbold}
+                style={[styles.textbold]}
                 secureTextEntry={isPasswordShown ? false : true}
                 className="text-xm text-white flex-1 mr-1"
                 value={userInfo.password}
-                onChangeText={(e) => {setUserInfo({ ...userInfo, password: e });console.log(e)}}
+                onChangeText={(e) => {
+                  setUserInfo({ ...userInfo, password: e });
+                  reset();
+                }}
                 cursorColor={colors.gold}
               />
 
@@ -146,7 +163,7 @@ const SigninScreen = () => {
               className="text-white text-xs mt-3 text-center"
             >
               Don’t have an account?{" "}
-              <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+              <TouchableOpacity onPress={() => navigation.replace("Signup")}>
                 <Text
                   style={[styles.textmedium, { color: colors.gold }]}
                   className="underline top-1 text-xs "
@@ -156,7 +173,7 @@ const SigninScreen = () => {
               </TouchableOpacity>
             </Text>
           </View>
-        </Animated.View>
+        </View>
       </View>
     </ScrollView>
   );
