@@ -11,12 +11,6 @@ import ham from "../../../../../assets/icons/ham-menu-icon.png";
 import logo from "../../../../../assets/icon.png";
 import ScrollSection from "../../../../components/ui/ScrollSection";
 import PostFlatlist from "../../../../components/ui/PostFlatlist";
-import {
-  AgapePostCustomData,
-  AmplifiedPostCustomData,
-  KidsPostCustomData,
-  TeensPostCustomData,
-} from "../../../../data/customPost";
 import Menu from "../../../../components/ui/Menu";
 import { useAppContext } from "../../../../context/AppContext";
 import useHideTabBarOnScroll from "../../../../hooks/useHideTabBarOnScroll";
@@ -25,17 +19,20 @@ import { POST_URL } from "../../../../components/url/url";
 import { colors } from "../../../../components/metrics/colors";
 import SinglePost from "../../../../components/ui/post/SinglePost";
 import useGetData from "../../../../hooks/useGetData";
+import PostSkeleton from "../../../../components/skeletal-loading/PostSkeleton";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 const HomeTab = () => {
   const [data, setData] = React.useState({});
   const [isMenuShown, setShowMenu] = React.useState(false);
-  const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = React.useState(false);
   const { setTabBarVisible } = useAppContext();
   const { handleScroll } = useHideTabBarOnScroll();
   const { error, fetchDetails } = useGetData({
     url: POST_URL,
     data,
     setData,
+    setLoading,
   });
 
   // set the tab bar visible after 500ms
@@ -84,15 +81,29 @@ const HomeTab = () => {
         {/* The scroll section */}
         <ScrollSection />
 
-        <View className="pb-[10px]">
-          {data.data &&
-            data.data.map((item, index) => (
-              <SinglePost key={index} details={item} ash={true} />
-            ))}
+        {/* the post skeleton loader */}
+        {loading && (
+          <Animated.View entering={FadeIn} exiting={FadeOut}>
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+          </Animated.View>
+        )}
 
-          {/* flatlist section for the kids church */}
-          {/* <PostFlatlist data={KidsPostCustomData} /> */}
-        </View>
+        {!loading && (
+          <Animated.View
+            entering={FadeIn}
+            exiting={FadeOut}
+            className="pb-[10px]"
+          >
+            {data.data &&
+              data.data.map((item, index) => (
+                <SinglePost key={index} details={item} ash={true} />
+              ))}
+
+            {/* <PostFlatlist data={KidsPostCustomData} /> */}
+          </Animated.View>
+        )}
       </ScrollView>
 
       {/* the app menu */}

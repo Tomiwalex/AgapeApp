@@ -5,14 +5,18 @@ import not from "../../../../../assets/icons/notification-icon.png";
 import logo from "../../../../../assets/icon.png";
 import LocationList from "../../../../components/ui/location/LocationList";
 import NotificationIcon from "../../../../components/ui/NotificationIcon";
+import location from "../../../../data/locationData.json";
+import useHideTabBarOnScroll from "../../../../hooks/useHideTabBarOnScroll";
 
 const LocationTab = () => {
+  const { handleScroll } = useHideTabBarOnScroll();
   return (
     <ScrollView
+      onScroll={handleScroll}
       showsVerticalScrollIndicator={false}
       vertical
       style={styles.container}
-      className="flex-1 bg-[#111111]"
+      className="flex-1 bg-[#111111] pb-10"
     >
       {/* Header */}
       <View className="p-5 flex-row items-center justify-between border-b-[1px] border-b-[#F0DA6B]">
@@ -26,16 +30,12 @@ const LocationTab = () => {
         </View>
       </View>
 
-      <View className="">
-        <LocationList
-          description={"Possibility ground, 1 Agape Avenue, Akure 340110"}
-          location={"Akure"}
-        />
-
-        <LocationList
-          description={"Moferere, ajilosun, Ado-Ekiti."}
-          location={"Ekiti"}
-        />
+      <View className="mb-10">
+        {location.map((item, index) => {
+          return (
+            <LocationList key={index} item={item} location={item?.location} />
+          );
+        })}
       </View>
     </ScrollView>
   );

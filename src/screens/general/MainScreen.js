@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthScreen from "../auth/AuthScreen";
 import SigninScreen from "../auth/SigninScreen";
@@ -9,13 +9,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAppContext } from "../../context/AppContext";
 import { colors } from "../../components/metrics/colors";
 import DashboardScreen from "../tabs/TabHome";
-import { CustomAlert } from "../../components/custom-ui/CustomAlert";
+import { CustomAlertPopup } from "../../components/custom-ui/CustomAlert";
+import useGetLoginToken from "../../hooks/useGetLoginToken";
+import ForgotPasswordScreen from "../auth/ForgotPasswordScreen";
 
 const Stack = createNativeStackNavigator();
 
 const MainScreen = () => {
-  const { isAppLoading, isAlertVisible, alertDetails } = useAppContext();
-  const { CustomAlertPopup } = CustomAlert();
+  const { isAppLoading, setAppLoading, isAlertVisible, alertDetails } =
+    useAppContext();
+  const { token } = useGetLoginToken();
+  const [isUserSignedin, setIsUserSignedin] = React.useState(null);
 
   return (
     <View style={{ flex: 1, position: "relative" }}>
@@ -28,6 +32,7 @@ const MainScreen = () => {
               statusBarColor: colors.lightBlue,
             }}
           />
+
           <Stack.Screen
             name="Signin"
             component={SigninScreen}
@@ -37,6 +42,7 @@ const MainScreen = () => {
               animationTypeForReplace: "pop",
             }}
           />
+
           <Stack.Screen
             name="Signup"
             component={SignupScreen}
@@ -46,10 +52,21 @@ const MainScreen = () => {
           />
 
           <Stack.Screen
+            name="Forgotpassword"
+            component={ForgotPasswordScreen}
+            options={{
+              statusBarColor: colors.lightBlue,
+            }}
+          />
+
+          {/* The dashboard tab */}
+
+          <Stack.Screen
             name="Dashboard"
             component={DashboardScreen}
             options={{
-              statusBarColor: "#0e0e0e",
+              statusBarColor: "#0a0a0c",
+              // statusBarTranslucent: false,
               animation: "fade",
             }}
           />

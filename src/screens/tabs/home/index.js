@@ -9,6 +9,7 @@ import KidsScreen from "./stack/KidsScreen";
 import TeensScreen from "./stack/TeensScreen";
 import ImageExpand from "./stack/ImageExpand";
 import NotificationScreen from "./stack/NotificationScreen";
+import TestimonyScreen from "./stack/TestimonyScreen";
 
 const HomeStacks = () => {
   const HomeStack = createNativeStackNavigator();
@@ -25,6 +26,7 @@ const HomeStacks = () => {
       <HomeStack.Screen name="eKids" component={KidsScreen} />
       <HomeStack.Screen name="eTeens" component={TeensScreen} />
       <HomeStack.Screen name="Notification" component={NotificationScreen} />
+      <HomeStack.Screen name="Testimony" component={TestimonyScreen} />
       <HomeStack.Screen
         options={{ animation: "none" }}
         name="ImageExpand"

@@ -4,7 +4,7 @@ import { useAppContext } from "../context/AppContext";
 import { CustomAlert } from "../components/custom-ui/CustomAlert";
 import useGetLoginToken from "./useGetLoginToken";
 
-const useGetData = ({ url, data, setData }) => {
+const useGetData = ({ url, data, setData, setLoading }) => {
   const { setAppLoading } = useAppContext();
   const [error, setError] = React.useState(null);
   const { alert } = CustomAlert();
@@ -12,7 +12,7 @@ const useGetData = ({ url, data, setData }) => {
 
   const fetchData = async () => {
     try {
-      setAppLoading(true);
+      setLoading ? setLoading(true) : setAppLoading(true);
       const response = await axios.get(url, {
         headers: {
           "x-auth-token": token || "",
@@ -40,7 +40,11 @@ const useGetData = ({ url, data, setData }) => {
         alert(true, "Something went wrong. Please try again later.");
       }
     } finally {
-      setAppLoading(false);
+      if (setLoading) {
+        setLoading(false);
+      } else {
+        setAppLoading(false);
+      }
     }
   };
 

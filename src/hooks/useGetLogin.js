@@ -44,10 +44,6 @@ const useGetLogin = ({ userInfo }) => {
       // console.log("Error from request:", error);
 
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // other than 2xx. Access the response data for more details.
-        // console.log("Server response data:", error.response.data);
-        // console.log("Status code:", error.response.status);
         setError(error.response.data.message);
         alert(true, error.response.data.message);
       } else if (error.request) {

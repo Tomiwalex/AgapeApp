@@ -4,7 +4,7 @@ import { styles } from "../../metrics/styles";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-const LocationList = ({ image, description, location, distance }) => {
+const LocationList = ({ item }) => {
   const navigation = useNavigation();
 
   return (
@@ -13,22 +13,22 @@ const LocationList = ({ image, description, location, distance }) => {
       onPress={() =>
         navigation.navigate("Location", {
           screen: "LocationDetails",
-          params: { location: location },
+          params: { item: item },
         })
       }
       className="border-b-[1px] py-4 px-4"
     >
       <View className="flex-row items-center">
         {/* the church's image */}
-        {image && (
+        {item?.image && (
           <Image
-            source={image}
+            source={item?.image}
             className="w-[107px] h-20 rounded-[14px]"
             resizeMode="cover"
           />
         )}
 
-        {!image && (
+        {!item.image && (
           <View className="w-[107px] h-20 rounded-[14px] items-center justify-center bg-[#5F5F5F6E]">
             <FontAwesome5 name="church" size={60} color="#ffffff10" />
           </View>
@@ -37,7 +37,7 @@ const LocationList = ({ image, description, location, distance }) => {
         {/* church branch */}
         <View className="mx-3 flex-1">
           <Text style={styles.textbold} className="text-white text-xl">
-            {location ? location : "-"}
+            {item.location ? item.location : "-"}
           </Text>
 
           <Text
@@ -45,7 +45,7 @@ const LocationList = ({ image, description, location, distance }) => {
             style={styles.textmedium}
             className="text-white text-xs mt-2"
           >
-            {description ? description : "-"}
+            {item.address ? item.address : "-"}
           </Text>
         </View>
 
@@ -55,7 +55,7 @@ const LocationList = ({ image, description, location, distance }) => {
             style={styles.textmedium}
             className="text-white text-xs text-center"
           >
-            {distance ? distance : "-"}
+            {item.distance ? item.distance : "-"}
           </Text>
           <Text
             style={styles.textregular}

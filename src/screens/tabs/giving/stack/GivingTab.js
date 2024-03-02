@@ -22,11 +22,25 @@ import CommunityPost from "../../../../components/ui/post/CommunityPost";
 import { colors } from "../../../../components/metrics/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import NotificationIcon from "../../../../components/ui/NotificationIcon";
+import { useAppContext } from "../../../../context/AppContext";
+import { CustomAlert } from "../../../../components/custom-ui/CustomAlert";
+import axios from "axios";
+import { GIVING_URL } from "../../../../components/url/url";
 
 const GivingTab = () => {
   const [isGivingListShown, setGivingListShown] = React.useState(false);
   const [givingType, setGivingType] = React.useState("Offering");
   const [isGivingInputShown, setGivingInputShown] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const { setAppLoading } = useAppContext();
+  const { alert } = CustomAlert();
+
+  const [data, setData] = React.useState({
+    email: "",
+    type: givingType,
+    currency: "NGN",
+    amount: 0,
+  });
 
   const height = useSharedValue(0);
 
@@ -37,6 +51,25 @@ const GivingTab = () => {
     } else {
       height.value = withTiming(220);
       setGivingListShown(true);
+    }
+  };
+
+  const pay = async () => {
+    try {
+      setAppLoading(true);
+      const resp = await axios.post(GIVING_URL, data);
+      console.log(resp.data);
+    } catch (error) {
+      alert(true, error.message);
+    } finally {
+      setAppLoading(false);
+    }
+  };
+  const handleSubmit = () => {
+    if (data.amount > 0) {
+      pay();
+    } else {
+      setError(true);
     }
   };
 
@@ -89,11 +122,15 @@ const GivingTab = () => {
             className="absolute z-10 top-[80px] left-[16] rounded-3xl bg-white w-[60%] h-[0] overflow-hidden"
             style={{ height, padding: isGivingListShown ? 20 : 0 }}
           >
-            {["Offering", "Donation", "First fruit", "Tithe & Offering"].map(
+            {["Offering", "Donation", "First fruit", "Tithe"].map(
               (item, index) => (
                 <Pressable
                   key={index}
-                  onPress={() => setGivingType(item)}
+                  onPress={() => {
+                    setGivingType(item);
+                    setData({ ...data, type: item });
+                    toggleList();
+                  }}
                   className="py-3"
                 >
                   {isGivingListShown && (
@@ -133,7 +170,7 @@ const GivingTab = () => {
           <Animated.View
             entering={FadeIn}
             exiting={FadeOut}
-            style={{ borderColor: colors.gold }}
+            style={{ borderColor: error ? "red" : colors.gold }}
             className="bg-[#464646] absolute p-5 rounded-[34px] w-full  top-[16px] left-[16px] h-full border-[1px]"
           >
             <View className="flex-row items-center justify-between">
@@ -148,24 +185,26 @@ const GivingTab = () => {
             </View>
 
             <View className="items-center flex-1 justify-center">
-              <View className="flex-row">
-                <Text
-                  style={styles.textbold}
-                  className="text-[48px] text-blacke"
-                >
-                  ₦
-                </Text>
+              <View className=" w-full">
                 <TextInput
                   style={styles.textbold}
-                  className="text-[48px] text-black min-w-[40px]"
+                  className="text-5xl text-black  text-center"
                   cursorColor={colors.gold}
-                  keyboardType="number-pad"
-                  placeholder="0"
+                  value={`₦${data?.amount}`}
+                  placeholder="Enter amount"
+                  keyboardType="numeric"
+                  onChangeText={(text) => {
+                    setData({ ...data, amount: text.replace("₦", "") });
+                    setError(false);
+                  }}
                 />
               </View>
 
               {/* enter amount text */}
-              <Text style={styles.textmedium} className="text-sm text-black">
+              <Text
+                style={[styles.textmedium, { color: error ? "red" : "black" }]}
+                className="text-sm"
+              >
                 Enter amount
               </Text>
 
@@ -173,6 +212,7 @@ const GivingTab = () => {
               <TouchableOpacity
                 style={{ borderColor: colors.gold }}
                 className="p-4 border-[1px] rounded-[31px] top-10 w-[244px]"
+                onPress={handleSubmit}
               >
                 <Text
                   style={styles.textbold}

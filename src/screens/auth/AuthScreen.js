@@ -10,16 +10,17 @@ import useGetLoginToken from "../../hooks/useGetLoginToken";
 
 const AuthScreen = () => {
   const navigation = useNavigation();
-  const { setTabBarVisible } = useAppContext();
+  const { setTabBarVisible, setAppLoading } = useAppContext();
   const { token } = useGetLoginToken();
 
   useEffect(() => {
-    if (token) {
-      navigation.replace("Dashboard");
+    if (token == null || token == "") {
+      setAppLoading(false);
     } else {
-      return;
+      navigation.replace("Dashboard");
+      setAppLoading(false);
     }
-  }, []);
+  }, [token]);
 
   return (
     <View

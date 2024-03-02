@@ -48,10 +48,10 @@ const SigninScreen = () => {
           <AuthHeader />
 
           {/* Welcome text */}
-          <View className=" border-[#EFDA67] border-b-[3px] inline-block w-[141px] mt-5 ml-2">
+          <View className="   mt-5 ml-2 border-[#EFDA67] border-b-[3px] w-[131px]">
             <Text
               style={styles.textsemibold}
-              className="text-white text-lg top-[7]"
+              className="text-white text-lg top-[7] "
             >
               Welcome Back {""}
               {/* User's name should be inserted above if logged in */}
@@ -133,7 +133,9 @@ const SigninScreen = () => {
             </TouchableOpacity>
 
             {/* forgot password button */}
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Forgotpassword")}
+            >
               <Text
                 style={styles.textmedium}
                 className="mt-5 text-center text-white text-xs underline"

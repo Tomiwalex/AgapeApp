@@ -18,12 +18,13 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const LocationDetails = ({ route }) => {
   const navigation = useNavigation();
+  const item = route?.params.item;
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       vertical
       style={styles.container}
-      className="flex-1 bg-[#1f1f29]"
+      className="flex-1 bg-[#111111]"
     >
       {/* Header */}
       <View className="p-5 px-4 flex-row items-center justify-between border-b-[1px] border-b-[#F0DA6B]">
@@ -35,7 +36,7 @@ const LocationDetails = ({ route }) => {
           style={styles.textbold}
           className="text-white text-xl flex-1 ml-2"
         >
-          {route.params.location}
+          {item.location}
         </Text>
 
         <View className="flex-row items-center">
@@ -55,16 +56,19 @@ const LocationDetails = ({ route }) => {
             className="p-5 py-8"
           >
             {/* pastor's name and location */}
-            <View className="flex-row items-center">
-              <Text style={styles.textbold} className="text-base text-white">
-                {route.params.location}
+            <View className="flex-row items-center flex-wrap">
+              <Text
+                style={styles.textbold}
+                className="text-base text-white mr-1"
+              >
+                {item.location}
               </Text>
 
               <Text
                 style={[styles.textmedium, { color: colors.gold }]}
-                className="text-base text-white ml-1"
+                className="text-base text-white "
               >
-                {`(Pastor Alex)`}
+                {`(${item?.pastorName})`}
               </Text>
             </View>
 
@@ -74,8 +78,8 @@ const LocationDetails = ({ route }) => {
                 style={styles.textmedium}
                 className="text-xs mt-2 text-white"
               >
-                Lorem ipsum dolor sit amet consectetur. Nunc eleifend risus
-                lectus tincidunt. Morbi leo accumsan.
+                {item.branchName ? item.branchName + ", " : ""}
+                {item.address}
               </Text>
 
               {/* number */}

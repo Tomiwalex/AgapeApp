@@ -6,10 +6,10 @@ import { colors } from "../metrics/colors";
 import { useNavigation } from "@react-navigation/native";
 import NotificationIcon from "./NotificationIcon";
 
-const SectionHeader = ({ name, image, type, image2 }) => {
+const SectionHeader = ({ name, image, type, image2, style }) => {
   const navigation = useNavigation();
   return (
-    <View className="p-4 flex-row items-center">
+    <View style={style} className="p-4 flex-row items-center">
       <TouchableHighlight onPress={() => navigation.goBack()}>
         <Ionicons name="ios-chevron-back" size={24} color={colors.gold} />
       </TouchableHighlight>
@@ -18,7 +18,7 @@ const SectionHeader = ({ name, image, type, image2 }) => {
       {type == 1 && (
         <Image
           source={image}
-          className="h-9 w-[35] ml-1"
+          className="h-9 ml-1 w-[35]"
           resizeMode="contain"
         />
       )}
@@ -26,8 +26,9 @@ const SectionHeader = ({ name, image, type, image2 }) => {
       {/* section image for type 2 */}
       {type > 1 && (
         <Image
+          style={{ width: image2 ? 35 : 0 }}
           source={image2}
-          className="h-9 w-[35] ml-2 mr-1"
+          className="h-9  ml-2 mr-1"
           resizeMode="contain"
         />
       )}

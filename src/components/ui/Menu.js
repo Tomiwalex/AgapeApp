@@ -125,11 +125,18 @@ const Menu = ({ setShowMenu }) => {
                     source={require("../../../assets/icons/testimony-icon.png")}
                   />
                 }
+                onPress={() => {
+                  navigation.navigate("Testimony");
+                  setTabBarVisible(false);
+                }}
                 title="Testimony"
               />
 
               {/* share app */}
               <MenuBtn
+                onPress={() => {
+                  setTabBarVisible(false);
+                }}
                 icon={
                   <Image
                     resizeMode="contain"
@@ -141,16 +148,16 @@ const Menu = ({ setShowMenu }) => {
               />
 
               {/* share app */}
-              <MenuBtn
-                icon={<Ionicons name="share-outline" size={20} color="white" />}
-                title="Share App"
-              />
+              {/* // <MenuBtn
+              //   icon={<Ionicons name="share-outline" size={20} color="white" />}
+              //   title="Share App"
+              // /> */}
 
               {/* Rate app */}
-              <MenuBtn
-                icon={<EvilIcons name="star" size={24} color="white" />}
-                title="Rate App"
-              />
+              {/* // <MenuBtn
+              //   icon={<EvilIcons name="star" size={24} color="white" />}
+              //   title="Rate App"
+              // /> */}
 
               {/* log out*/}
               {token && (
@@ -168,7 +175,7 @@ const Menu = ({ setShowMenu }) => {
                 className="w-10 h-10 mt-auto mb-3 mx-auto"
               />
               <Text
-                style={[styles.textmedium, { color: colors.goldOpacity }]}
+                style={[styles.textsemibold, { color: colors.goldOpacity }]}
                 className="text-center text-xs"
               >
                 V1.0.01

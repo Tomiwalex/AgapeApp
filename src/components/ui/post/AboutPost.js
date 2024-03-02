@@ -19,7 +19,15 @@ import Animated, {
 import { MaterialIcons } from "@expo/vector-icons";
 import Touchable from "../../custom-ui/Touchable";
 
-const AboutPost = ({ bg, icon, title, description }) => {
+const AboutPost = ({
+  bg,
+  icon,
+  title,
+  description,
+  type,
+  onPress,
+  tapText,
+}) => {
   const [isShown, setShown] = React.useState(false);
 
   return (
@@ -39,7 +47,17 @@ const AboutPost = ({ bg, icon, title, description }) => {
         className=""
       >
         {!isShown && (
-          <Touchable onPress={() => setShown(true)} className="min-h-[238px]">
+          <Touchable
+            onPress={() => {
+              if (type == 2) {
+                onPress();
+              } else {
+                setShown(true);
+              }
+            }}
+            style={{ minHeight: type == 2 ? 400 : 238 }}
+            className=""
+          >
             {!isShown && (
               <Animated.View
                 entering={FadeInUp}
@@ -47,12 +65,13 @@ const AboutPost = ({ bg, icon, title, description }) => {
                 className="p-4 flex-row  flex-1 px-5"
               >
                 <SimpleLineIcons name="info" size={15} color={colors.gold} />
-                <Text
+                <Animated.Text
+                  entering={FadeIn}
                   style={styles.textmedium}
                   className="text-white text-xs ml-1"
                 >
-                  Tap to read
-                </Text>
+                  {type == 2 ? tapText : "Tap to read"}
+                </Animated.Text>
               </Animated.View>
             )}
 
@@ -64,8 +83,9 @@ const AboutPost = ({ bg, icon, title, description }) => {
               >
                 {/* icon */}
                 <Image
+                  style={{ width: icon ? 30 : 0 }}
                   source={icon}
-                  className="w-[30px] h-[27px]"
+                  className=" h-[27px]"
                   resizeMode="contain"
                 />
                 <Text
@@ -75,6 +95,14 @@ const AboutPost = ({ bg, icon, title, description }) => {
                   {title}
                 </Text>
               </Animated.View>
+            )}
+            {type == 2 && (
+              <Text
+                style={styles.textregular}
+                className="text-white text-sm px-5 pl-6 pb-3 bottom-3"
+              >
+                {description}
+              </Text>
             )}
           </Touchable>
         )}
