@@ -1,9 +1,9 @@
-import { View } from "react-native";
 import React, { useEffect } from "react";
+import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthScreen from "../auth/AuthScreen";
-import SigninScreen from "../auth/SigninScreen";
 import SignupScreen from "../auth/SignupScreen";
+import SigninScreen from "../auth/SigninScreen";
 import LoadingScreen from "../loading/LoadingScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAppContext } from "../../context/AppContext";
@@ -16,8 +16,7 @@ import ForgotPasswordScreen from "../auth/ForgotPasswordScreen";
 const Stack = createNativeStackNavigator();
 
 const MainScreen = () => {
-  const { isAppLoading, setAppLoading, isAlertVisible, alertDetails } =
-    useAppContext();
+  const { isAppLoading, isAlertVisible, alertDetails } = useAppContext();
   const { token } = useGetLoginToken();
   const [isUserSignedin, setIsUserSignedin] = React.useState(null);
 
@@ -32,7 +31,6 @@ const MainScreen = () => {
               statusBarColor: colors.lightBlue,
             }}
           />
-
           <Stack.Screen
             name="Signin"
             component={SigninScreen}
@@ -50,7 +48,6 @@ const MainScreen = () => {
               statusBarColor: colors.lightBlue,
             }}
           />
-
           <Stack.Screen
             name="Forgotpassword"
             component={ForgotPasswordScreen}
@@ -58,15 +55,12 @@ const MainScreen = () => {
               statusBarColor: colors.lightBlue,
             }}
           />
-
-          {/* The dashboard tab */}
-
+          {/* The dashboard tab  */}
           <Stack.Screen
             name="Dashboard"
             component={DashboardScreen}
             options={{
               statusBarColor: "#0a0a0c",
-              // statusBarTranslucent: false,
               animation: "fade",
             }}
           />

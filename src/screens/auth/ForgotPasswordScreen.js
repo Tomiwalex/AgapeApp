@@ -1,18 +1,11 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
-import React from "react";
+import { Text } from "react-native";
 import { colors } from "../../components/metrics/colors";
 import AuthHeader from "../../components/ui/AuthHeader";
 import { styles } from "../../components/metrics/styles";
 import axios from "axios";
 import { CustomAlert } from "../../components/custom-ui/CustomAlert";
 
-const ForgotPasswordScreen = () => {
+export const ForgotPasswordScreen = () => {
   const [email, setEmail] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const { alert } = CustomAlert();

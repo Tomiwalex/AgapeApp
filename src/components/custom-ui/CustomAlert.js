@@ -20,7 +20,7 @@ export const CustomAlert = () => {
 
   return { alert };
 };
-r;
+
 export const CustomAlertPopup = ({ details }) => {
   const { setAlertVisible } = useAppContext();
 

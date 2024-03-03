@@ -6,7 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import MainScreen from "./src/screens/general/MainScreen";
 
 // SplashScreen.preventAutoHideAsync();
-export default function App() {
+const App = () => {
   // making the tailwind stylesheet available
   NativeWindStyleSheet.setOutput({
     default: "native",
@@ -37,4 +37,6 @@ export default function App() {
       <MainScreen />
     </AppProvider>
   );
-}
+};
+
+export default App;
