@@ -14,7 +14,7 @@ const SermonScreen = () => {
       <SectionHeader
         type={1}
         name={"Sermon"}
-        image={require("../../../../../assets/icon.png")}
+        image={require("../../../../../assets/icons/agape-icon.png")}
       />
 
       <SinglePost details={AgapePostCustomData[0]} />

@@ -1,6 +1,6 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
-import logo from "../../../assets/icon.png";
+import logo from "../../../assets/icons/agape-icon.png";
 import { styles } from "../metrics/styles";
 
 const AuthHeader = () => {

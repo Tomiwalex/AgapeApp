@@ -1,8 +1,10 @@
 import { View, Text, TouchableHighlight, Image } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from "../../metrics/styles";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import * as Location from "expo-location";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 const LocationList = ({ item }) => {
   const navigation = useNavigation();
@@ -18,17 +20,17 @@ const LocationList = ({ item }) => {
       }
       className="border-b-[1px] py-4 px-4"
     >
-      <View className="flex-row items-center">
+      <Animated.View entering={FadeInDown} className="flex-row items-center">
         {/* the church's image */}
-        {item?.image && (
+        {item?.churchImage && (
           <Image
-            source={item?.image}
+            source={{ uri: item?.churchImage }}
             className="w-[107px] h-20 rounded-[14px]"
             resizeMode="cover"
           />
         )}
 
-        {!item.image && (
+        {!item.churchImage && (
           <View className="w-[107px] h-20 rounded-[14px] items-center justify-center bg-[#5F5F5F6E]">
             <FontAwesome5 name="church" size={60} color="#ffffff10" />
           </View>
@@ -36,7 +38,11 @@ const LocationList = ({ item }) => {
 
         {/* church branch */}
         <View className="mx-3 flex-1">
-          <Text style={styles.textbold} className="text-white text-xl">
+          <Text
+            numberOfLines={1}
+            style={styles.textbold}
+            className="text-white text-xl overflow-hidden overflow-ellipsis"
+          >
             {item.location ? item.location : "-"}
           </Text>
 
@@ -55,7 +61,7 @@ const LocationList = ({ item }) => {
             style={styles.textmedium}
             className="text-white text-xs text-center"
           >
-            {item.distance ? item.distance : "-"}
+            {item?.distance ? item?.distance : "-"}
           </Text>
           <Text
             style={styles.textregular}
@@ -64,7 +70,7 @@ const LocationList = ({ item }) => {
             KM
           </Text>
         </View>
-      </View>
+      </Animated.View>
     </TouchableHighlight>
   );
 };

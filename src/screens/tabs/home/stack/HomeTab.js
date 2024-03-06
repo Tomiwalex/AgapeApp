@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 import not from "../../../../../assets/icons/notification-icon.png";
 import ham from "../../../../../assets/icons/ham-menu-icon.png";
-import logo from "../../../../../assets/icon.png";
+import logo from "../../../../../assets/icons/agape-icon.png";
 import ScrollSection from "../../../../components/ui/ScrollSection";
 import PostFlatlist from "../../../../components/ui/PostFlatlist";
 import Menu from "../../../../components/ui/Menu";
@@ -96,8 +96,8 @@ const HomeTab = () => {
             exiting={FadeOut}
             className="pb-[10px]"
           >
-            {data.data &&
-              data.data.map((item, index) => (
+            {data?.data &&
+              data.data?.map((item, index) => (
                 <SinglePost key={index} details={item} ash={true} />
               ))}
 

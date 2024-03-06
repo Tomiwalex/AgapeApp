@@ -25,14 +25,21 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-    },
+    "extra": {},
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
       "fallbackToCacheTimeout": 1,
       "url": "https://u.expo.dev/a4d10c52-7e32-4659-9b96-56d2660faaa1"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Agape app to use your location."
+        }
+      ]
+    ]
   }
 }

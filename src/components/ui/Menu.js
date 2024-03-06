@@ -171,12 +171,12 @@ const Menu = ({ setShowMenu }) => {
               )}
 
               <Image
-                source={require("../../../assets/icon.png")}
+                source={require("../../../assets/icons/agape-icon.png")}
                 className="w-10 h-10 mt-auto mb-3 mx-auto"
               />
               <Text
                 style={[styles.textsemibold, { color: colors.goldOpacity }]}
-                className="text-center text-xs"
+                className="text-center text-xs tracking-wide"
               >
                 V1.0.01
               </Text>

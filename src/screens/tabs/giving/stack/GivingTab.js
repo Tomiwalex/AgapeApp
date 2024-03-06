@@ -8,8 +8,8 @@ import {
   TextInput,
   ActivityIndicator,
 } from "react-native";
-import React from "react";
-import logo from "../../../../../assets/icon.png";
+import React, { useEffect } from "react";
+import logo from "../../../../../assets/icons/agape-icon.png";
 import not from "../../../../../assets/icons/notification-icon.png";
 import { styles } from "../../../../components/metrics/styles";
 import { AntDesign } from "@expo/vector-icons";
@@ -29,6 +29,7 @@ import axios from "axios";
 import { GIVING_URL } from "../../../../components/url/url";
 import useGetLoginToken from "../../../../hooks/useGetLoginToken";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GivingTab = () => {
   const [isGivingListShown, setGivingListShown] = React.useState(false);
@@ -36,6 +37,7 @@ const GivingTab = () => {
   const [loading, setLoading] = React.useState(false);
   const [isGivingInputShown, setGivingInputShown] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [signedIn, setSignedIn] = React.useState(null);
   const { alert } = CustomAlert();
   const { token } = useGetLoginToken();
   const navigation = useNavigation();
@@ -86,6 +88,19 @@ const GivingTab = () => {
     }
   };
 
+  useEffect(() => {
+    const handleSigned = async () => {
+      const token = AsyncStorage.getItem("token");
+      if (token === null) {
+        setSignedIn(false);
+      } else {
+        setSignedIn(true);
+      }
+    };
+
+    handleSigned();
+  }, []);
+
   return (
     <ScrollView
       vertical
@@ -104,7 +119,6 @@ const GivingTab = () => {
           <NotificationIcon />
         </View>
       </View>
-
       {/* text */}
       <Text
         style={styles.textmedium}
@@ -113,10 +127,9 @@ const GivingTab = () => {
         Your generous contributions empower our church to spread love, hope, and
         faith in our community.
       </Text>
-
-      {/* filter */}
-      {token !== null ? (
-        <View>
+      {/* displaying the input when useris signed in and the sign in message when not signed in */}
+      {signedIn === true && (
+        <Animated.View entering={FadeIn}>
           <View className="flex-row p-4">
             {/* offering type */}
             <View className="bg-white flex-row p-4 rounded-[34px] w-[60%]">
@@ -265,34 +278,40 @@ const GivingTab = () => {
               source={require("../../../../../assets/post-images/stripe-image.png")}
             />
           </View>
-        </View>
-      ) : (
-        <View
-          style={{ borderColor: colors.gold, borderWidth: 1 }}
-          className="bg-black border-[1px] rounded-3xl p-5 m-5 items-center py-20"
+        </Animated.View>
+      )}
+
+      {signedIn === false && (
+        <Animated.View
+          entering={FadeIn}
+          style={{
+            borderColor: colors.goldOpacity,
+            borderWidth: 1,
+          }}
+          className="bg-black border-[1px] rounded-[33px] p-5 m-5 items-center py-20"
         >
-          <MaterialIcons name="error-outline" size={80} color="white" />
+          <MaterialIcons name="error-outline" size={80} color="#fcfcfc" />
 
           <Text
             style={styles.textregular}
-            className="text-white text-base leading-5 text-center my-5"
+            className="text-gray-200 text-sm leading-5 text-center my-5"
           >
-            Please sign in to continue{" "}
+            Please sign in to continue to use this feature.
           </Text>
 
           <TouchableOpacity
             onPress={() => navigation.navigate("Signin")}
-            style={{ backgroundColor: colors.gold }}
-            className=" rounded-2xl"
+            style={{ borderColor: colors.goldOpacity }}
+            className=" rounded-3xl border-[1px] mt-5"
           >
             <Text
               style={styles.textbold}
-              className="text-black text-base w-full p-4 px-10"
+              className="text-white text-base w-full p-4 px-20"
             >
               Sign in
             </Text>
           </TouchableOpacity>
-        </View>
+        </Animated.View>
       )}
     </ScrollView>
   );

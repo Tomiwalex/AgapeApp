@@ -50,12 +50,23 @@ const SinglePost = ({ details, ash }) => {
     >
       {/* Post information || header */}
       <View className="flex-row items-center px-5">
-        <Image
-          source={details?.icon}
-          alt="image"
-          className="h-11 w-11"
-          resizeMode="contain"
-        />
+        {details?.icon ? (
+          <Image
+            source={details?.icon}
+            alt="image"
+            className="h-11 w-11"
+            resizeMode="contain"
+          />
+        ) : (
+          <View className="h-11 w-11 mr-1 bg-gray-900 items-center justify-center rounded-full">
+            <Text
+              style={styles.textsemibold}
+              className="text-gray-500 text-3xl"
+            >
+              {details?.audience.trim().charAt(0).toUpperCase()}
+            </Text>
+          </View>
+        )}
 
         <Text
           style={styles.textbold}
@@ -69,7 +80,7 @@ const SinglePost = ({ details, ash }) => {
       <Text
         style={styles.textmedium}
         numberOfLines={3}
-        className="text-white text-sm my-3 ml-[5px] h-[57px] px-5"
+        className="text-white text-sm my-3 ml-[5px]  px-5   text-overflow-ellipsis overflow-hidden"
       >
         {details?.text || details?.description}
       </Text>
