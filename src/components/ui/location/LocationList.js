@@ -4,7 +4,7 @@ import { styles } from "../../metrics/styles";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import * as Location from "expo-location";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
 
 const LocationList = ({ item }) => {
   const navigation = useNavigation();
@@ -20,7 +20,7 @@ const LocationList = ({ item }) => {
       }
       className="border-b-[1px] py-4 px-4"
     >
-      <Animated.View entering={FadeInDown} className="flex-row items-center">
+      <Animated.View entering={FadeIn} className="flex-row items-center">
         {/* the church's image */}
         {item?.churchImage && (
           <Image

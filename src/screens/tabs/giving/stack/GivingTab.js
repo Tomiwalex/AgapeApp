@@ -90,7 +90,7 @@ const GivingTab = () => {
 
   useEffect(() => {
     const handleSigned = async () => {
-      const token = AsyncStorage.getItem("token");
+      const token = await AsyncStorage.getItem("Token");
       if (token === null) {
         setSignedIn(false);
       } else {
