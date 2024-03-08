@@ -9,10 +9,10 @@ export const PostData = ({ url, data }) => {
   const postData = async () => {
     try {
       setAppLoading(true);
-      console.log(url, "jcgfjdfbdj", data);
-
+      // console.log(url, "jcgfjdfbdj", data);
       const response = await axios.post(url, data);
-      console.log(response.data.message);
+      alert(false, response.data.message, "Success");
+      console.log("submitted");
     } catch (error) {
       alert(
         true,

@@ -1,7 +1,7 @@
 import { View, Text, ImageBackground, Image } from "react-native";
 import React from "react";
 import bg from "../../../assets/bg/loading-bg.png";
-import logo from "../../../assets/icon.png";
+import logo from "../../../assets/icons/agape-icon.png";
 import LoadingDot from "./LoadingDot";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";

@@ -33,7 +33,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GivingTab = () => {
   const [isGivingListShown, setGivingListShown] = React.useState(false);
-  const [givingType, setGivingType] = React.useState("Offering");
+  const [givingType, setGivingType] = React.useState("offering");
   const [loading, setLoading] = React.useState(false);
   const [isGivingInputShown, setGivingInputShown] = React.useState(false);
   const [error, setError] = React.useState(false);
@@ -56,7 +56,7 @@ const GivingTab = () => {
       height.value = withTiming(0);
       setGivingListShown(false);
     } else {
-      height.value = withTiming(220);
+      height.value = withTiming(130);
       setGivingListShown(true);
     }
   };
@@ -69,7 +69,8 @@ const GivingTab = () => {
           "x-auth-token": token,
         },
       });
-      console.log(resp.data);
+      navigation.navigate("Webview", { url: resp.data.data.checkout_url });
+      console.log(resp.data, "yeah");
     } catch (error) {
       if (error.response) {
         alert(true, error.response.data.message);
@@ -150,29 +151,27 @@ const GivingTab = () => {
                 className="absolute z-10 top-[80px] left-[16] rounded-3xl bg-white w-[60%] h-[0] overflow-hidden"
                 style={{ height, padding: isGivingListShown ? 20 : 0 }}
               >
-                {["Offering", "Donation", "First fruit", "Tithe"].map(
-                  (item, index) => (
-                    <Pressable
-                      key={index}
-                      onPress={() => {
-                        setGivingType(item);
-                        setData({ ...data, type: item });
-                        toggleList();
-                      }}
-                      className="py-3"
-                    >
-                      {isGivingListShown && (
-                        <Animated.Text
-                          entering={FadeIn}
-                          style={styles.textregular}
-                          className="text-[#00000091] text-sm"
-                        >
-                          {item}
-                        </Animated.Text>
-                      )}
-                    </Pressable>
-                  )
-                )}
+                {["offering", "tithe"].map((item, index) => (
+                  <Pressable
+                    key={index}
+                    onPress={() => {
+                      setGivingType(item);
+                      setData({ ...data, type: item });
+                      toggleList();
+                    }}
+                    className="py-3"
+                  >
+                    {isGivingListShown && (
+                      <Animated.Text
+                        entering={FadeIn}
+                        style={styles.textregular}
+                        className="text-[#00000091] text-sm"
+                      >
+                        {item}
+                      </Animated.Text>
+                    )}
+                  </Pressable>
+                ))}
               </Animated.View>
             }
 

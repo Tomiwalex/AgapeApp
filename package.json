@@ -37,7 +37,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-shimmer-placeholder": "^2.0.9",
     "react-native-web": "~0.19.6",
-    "expo-location": "~16.1.0"
+    "expo-location": "~16.1.0",
+    "react-native-webview": "13.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

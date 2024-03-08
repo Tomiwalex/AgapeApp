@@ -23,7 +23,7 @@ const TestimonyScreen = () => {
   const [testimonyData, setTestimonyData] = React.useState({
     title: "",
     phone: "",
-    type: "",
+    testimonyType: "",
     email: "",
     address: "",
     testimony: "",
@@ -178,8 +178,8 @@ const TestimonyScreen = () => {
                   style={styles.textmedium}
                   className="text-xs text-[#969696]"
                 >
-                  {testimonyData.type
-                    ? testimonyData.type
+                  {testimonyData.testimonyType
+                    ? testimonyData.testimonyType
                     : "Select Testimony Type"}
                 </Text>
 
@@ -197,7 +197,10 @@ const TestimonyScreen = () => {
                   <TouchableOpacity
                     onPress={() => {
                       setTypeShown(!isTypeShown);
-                      setTestimonyData({ ...testimonyData, type: "Agape" });
+                      setTestimonyData({
+                        ...testimonyData,
+                        testimonyType: "Agape",
+                      });
                     }}
                     className="border-b-[1px] border-b-[#F0DA6B70] p-3"
                   >

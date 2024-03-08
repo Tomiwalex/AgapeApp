@@ -6,6 +6,7 @@ import NotificationSkeleton from "../../../../components/skeletal-loading/Notifi
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { styles } from "../../../../components/metrics/styles";
 import useGetData from "../../../../hooks/useGetData";
+import { useNavigation } from "@react-navigation/native";
 
 const NotificationScreen = () => {
   const [data, setData] = useState(null);
@@ -16,6 +17,7 @@ const NotificationScreen = () => {
     setData,
     setLoading,
   });
+  const navigation = useNavigation();
 
   return (
     <View className="bg-[#101010] flex-1 pt-3">
@@ -26,7 +28,7 @@ const NotificationScreen = () => {
         <SectionHeader
           type={3}
           name={"Announcement"}
-          image={require("../../../../../assets/icon.png")}
+          image={require("../../../../../assets/icons/agape-icon.png")}
           image2={require("../../../../../assets/icons/notification-icon.png")}
         />
       </View>
@@ -47,31 +49,41 @@ const NotificationScreen = () => {
       {!loading && (
         <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
           <Animated.View entering={FadeIn} exiting={FadeOut} className="mt-3">
-            <TouchableOpacity
-              onPress={fetchDetails}
-              activeOpacity={0.7}
-              className=" flex-row items-center mx-4 my-3 overflow-hidden"
-            >
-              <Image
-                resizeMode="contain"
-                className="bg-gray-800 "
-                style={{ height: 70, width: 107, borderRadius: 14 }}
-              />
-
-              <View className="mt-2 ml-2 relative overflow-hidden flex-1">
-                <Text style={styles.textbold} className="text-xl text-white">
-                  Testing
-                </Text>
-
-                <Text
-                  style={styles.textmedium}
-                  numberOfLines={2}
-                  className="text-xs text-white overflow-hidden overflow-ellipsis "
+            {data.data &&
+              data.data.map((item, index) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Notificationdetails", { data: item })
+                  }
+                  activeOpacity={0.7}
+                  key={index}
+                  className=" flex-row items-center mx-4 my-3 overflow-hidden"
                 >
-                  This is a test notification, notification reloads on press
-                </Text>
-              </View>
-            </TouchableOpacity>
+                  <Image
+                    resizeMode="contain"
+                    source={{ uri: item?.banner }}
+                    className="bg-gray-800 "
+                    style={{ height: 70, width: 107, borderRadius: 14 }}
+                  />
+
+                  <View className="mt-2 ml-2 relative overflow-hidden flex-1">
+                    <Text
+                      style={styles.textbold}
+                      className="text-xl text-white"
+                    >
+                      {item?.title}
+                    </Text>
+
+                    <Text
+                      style={styles.textmedium}
+                      numberOfLines={2}
+                      className="text-xs mt-1 text-white overflow-hidden overflow-ellipsis "
+                    >
+                      {item?.body}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
           </Animated.View>
         </ScrollView>
       )}

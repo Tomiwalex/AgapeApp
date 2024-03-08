@@ -1,9 +1,16 @@
-import { Text } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { colors } from "../../components/metrics/colors";
 import AuthHeader from "../../components/ui/AuthHeader";
 import { styles } from "../../components/metrics/styles";
 import axios from "axios";
 import { CustomAlert } from "../../components/custom-ui/CustomAlert";
+import React from "react";
 
 export const ForgotPasswordScreen = () => {
   const [email, setEmail] = React.useState("");
@@ -65,6 +72,10 @@ export const ForgotPasswordScreen = () => {
           className="text-white text-lg my-6 mt-10 ml-2"
         >
           Enter your mail
+        </Text>
+
+        <Text style={styles.textsemibold} className="text-white text-sm  ml-2">
+          enter your registered mail address
         </Text>
 
         <View>
