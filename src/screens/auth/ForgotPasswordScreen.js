@@ -11,11 +11,13 @@ import { styles } from "../../components/metrics/styles";
 import axios from "axios";
 import { CustomAlert } from "../../components/custom-ui/CustomAlert";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export const ForgotPasswordScreen = () => {
   const [email, setEmail] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const { alert } = CustomAlert();
+  const navigation = useNavigation();
 
   const [inputError, setInputError] = React.useState({
     mailError: false,
@@ -42,6 +44,9 @@ export const ForgotPasswordScreen = () => {
       );
 
       console.log(resp.data);
+      navigation.replace("Otp", {
+        mail: email,
+      });
     } catch (error) {
       if (error.response) {
         alert(true, error?.response?.data.message);
@@ -69,12 +74,15 @@ export const ForgotPasswordScreen = () => {
 
         <Text
           style={styles.textsemibold}
-          className="text-white text-lg my-6 mt-10 ml-2"
+          className="text-white text-lg my-3 mt-10 ml-2 mb-2/"
         >
           Enter your mail
         </Text>
 
-        <Text style={styles.textsemibold} className="text-white text-sm  ml-2">
+        <Text
+          style={styles.textsemibold}
+          className="mb-5 text-white text-sm  ml-2"
+        >
           enter your registered mail address
         </Text>
 

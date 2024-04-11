@@ -5,6 +5,21 @@ import { BASE_URL } from "../components/url/url";
 import { CustomAlert } from "../components/custom-ui/CustomAlert";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import JWT from "expo-jwt";
+import useGetLoginToken from "./useGetLoginToken";
+
+export async function storeMail() {
+  try {
+    const token = await AsyncStorage.getItem("Token");
+    const decodedToken = JWT.decode(token, null, {
+      json: true,
+    });
+    await AsyncStorage.setItem("UserMail", decodedToken.email);
+    console.log("user's mail stored successfully");
+  } catch (error) {
+    console.error("Error storing user's mail:", error);
+  }
+}
 
 const useGetLogin = ({ userInfo }) => {
   const { setAppLoading } = useAppContext();
@@ -12,6 +27,7 @@ const useGetLogin = ({ userInfo }) => {
   const [error, setError] = React.useState(null);
   const { alert } = CustomAlert();
   const navigation = useNavigation();
+  const { token: loginToken } = useGetLoginToken();
 
   // function to reset error to null
   const reset = () => {
@@ -21,7 +37,7 @@ const useGetLogin = ({ userInfo }) => {
   const storeLoginToken = async (token) => {
     try {
       await AsyncStorage.setItem("Token", token); //set token in async storage
-      console.log("Login token stored successfully");
+      console.log("token stored successfully");
     } catch (error) {
       console.error("Error storing login token:", error);
     }
@@ -37,12 +53,10 @@ const useGetLogin = ({ userInfo }) => {
 
       console.log(response.data.token, response.data.message, "response");
       setData(response.data);
-      // alert(false, "Login Successful");
-      storeLoginToken(response.data.token); //store token in async storage
+      storeLoginToken(response.data.token);
+      //store token in async storage
       navigation.replace("Dashboard");
     } catch (error) {
-      // console.log("Error from request:", error);
-
       if (error.response) {
         setError(error.response.data.message);
         alert(true, error.response.data.message);
@@ -59,6 +73,7 @@ const useGetLogin = ({ userInfo }) => {
         alert(true, "Something went wrong. Please try again later.");
       }
     } finally {
+      storeMail();
       setAppLoading(false);
     }
   };

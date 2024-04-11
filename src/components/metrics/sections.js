@@ -1,5 +1,10 @@
 export const sections = [
   { name: "Agape", img: require("../../../assets/section-img/agape.png") },
+  {
+    name: "DevotionalStack",
+    mainName: "Devotional",
+    img: require("../../../assets/section-img/devotional.png"),
+  },
   { name: "Sermon", img: require("../../../assets/section-img/sermon.png") },
   { name: "Streams", img: require("../../../assets/section-img/stream.png") },
   {
@@ -8,9 +13,9 @@ export const sections = [
   },
   { name: "eKids", img: require("../../../assets/section-img/ekids.png") },
   { name: "eTeens", img: require("../../../assets/section-img/eteens.png") },
-  { name: "Papa", img: require("../../../assets/section-img/papa.png") },
-  { name: "Mama", img: require("../../../assets/section-img/mama.png") },
-  { name: "P.D", img: require("../../../assets/section-img/pd.png") },
+  // { name: "Papa", img: require("../../../assets/section-img/papa.png") },
+  // { name: "Mama", img: require("../../../assets/section-img/mama.png") },
+  // { name: "P.D", img: require("../../../assets/section-img/pd.png") },
   { name: "Audio", img: require("../../../assets/section-img/audio.png") },
   { name: "Books", img: require("../../../assets/section-img/books.png") },
 ];

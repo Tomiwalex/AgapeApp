@@ -11,6 +11,8 @@ import { deviceWidth, styles } from "../../metrics/styles";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from "../../metrics/colors";
 import SinglePostItem from "./SinglePostItem";
+import agapeIcon from "../../../../assets/icons/agape-icon.png";
+import amplifiedIcon from "../../../../assets/icons/amp-icon.png";
 
 const SinglePost = ({ details, ash }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -50,9 +52,13 @@ const SinglePost = ({ details, ash }) => {
     >
       {/* Post information || header */}
       <View className="flex-row items-center px-5">
-        {details?.icon ? (
+        {details?.audience === "agape" ||
+        details?.audience === "all" ||
+        details?.audience === "amplified" ? (
           <Image
-            source={details?.icon}
+            source={
+              details?.audience === "amplified" ? amplifiedIcon : agapeIcon
+            }
             alt="image"
             className="h-11 w-11"
             resizeMode="contain"
@@ -72,7 +78,13 @@ const SinglePost = ({ details, ash }) => {
           style={styles.textbold}
           className="text-white max-w-[164px] text-sm ml-1"
         >
-          {details?.author || details?.audience}
+          {details?.author === "agape" || details?.audience === "agape"
+            ? "The Agape Christian Ministries"
+            : details?.audience === "amplified"
+            ? "The Amplified Church"
+            : details?.audience === "all"
+            ? "The Agape Christian Ministries"
+            : details?.audience}
         </Text>
       </View>
 

@@ -35,6 +35,7 @@ const GivingTab = () => {
   const [isGivingListShown, setGivingListShown] = React.useState(false);
   const [givingType, setGivingType] = React.useState("offering");
   const [loading, setLoading] = React.useState(false);
+  const [mail, setMail] = React.useState("");
   const [isGivingInputShown, setGivingInputShown] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [signedIn, setSignedIn] = React.useState(null);
@@ -43,11 +44,24 @@ const GivingTab = () => {
   const navigation = useNavigation();
 
   const [data, setData] = React.useState({
-    email: "coderiger@gmail.com",
+    email: mail,
     type: givingType,
     currency: "NGN",
     amount: "",
   });
+
+  const userMail = async () => {
+    try {
+      const mail = await AsyncStorage.getItem("UserMail");
+      setData((prev) => ({ ...prev, email: mail }));
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    userMail();
+  }, []);
 
   const height = useSharedValue(0);
 
@@ -62,6 +76,7 @@ const GivingTab = () => {
   };
 
   const pay = async () => {
+    userMail();
     try {
       setLoading(true);
       const resp = await axios.post(GIVING_URL, data, {
@@ -81,6 +96,7 @@ const GivingTab = () => {
       setLoading(false);
     }
   };
+
   const handleSubmit = () => {
     if (data.amount > 0) {
       pay();
@@ -175,13 +191,13 @@ const GivingTab = () => {
               </Animated.View>
             }
 
-            <TouchableOpacity className="rounded-full bg-[#0C2769] ml-3 h-[52] w-[52] items-center justify-center">
+            {/* <TouchableOpacity className="rounded-full bg-[#0C2769] ml-3 h-[52] w-[52] items-center justify-center">
               <Image
                 resizeMode="contain"
                 className="h-[18] w-[18]"
                 source={require("../../../../../assets/icons/settings-icon.png")}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
           <View className="p-4">

@@ -12,7 +12,7 @@ const AgapeScreen = () => {
       <SectionHeader
         type={1}
         name={"Agape Christian Ministries"}
-        image={require("../../../../../assets/icon.png")}
+        image={require("../../../../../assets/icons/agape-icon.png")}
       />
 
       {/* Section category */}

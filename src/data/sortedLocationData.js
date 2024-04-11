@@ -1,27 +1,34 @@
-import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import data from "./locationData.json";
 import * as Location from "expo-location";
 
-const sortedLocationData = () => {
+const sortedLocationData = (setLoading) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [sortedLocation, setSortedLocation] = useState([...data]);
 
   useEffect(() => {
     // Request permission to access device location
+    setLoading(true);
     const handleLocation = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          console.log("Permission to access location was denied");
+          return;
+        }
 
-      // Get current location
-      let location = await Location.getCurrentPositionAsync({});
-      setCurrentLocation(location.coords);
-      //   calculateDistance(location.coords);
+        let location = await Location.getCurrentPositionAsync({});
+        setCurrentLocation(location.coords);
+      } catch (error) {
+        console.error("Error updating location:", error);
+      } finally {
+        setLoading(false);
+      }
     };
-    handleLocation();
+
+    const intervalId = setInterval(() => {
+      handleLocation();
+    }, 5000);
 
     if (currentLocation) {
       // Calculate distance for each location
@@ -41,31 +48,31 @@ const sortedLocationData = () => {
         updatedLocations.sort((a, b) => a.distance - b.distance)
       );
     }
+
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
-    setInterval(() => {
-      if (currentLocation) {
-        // Calculate distance for each location
-        const updatedLocations = sortedLocation.map((location) => {
-          const distance = calculateDistance(
-            currentLocation.latitude,
-            currentLocation.longitude,
-            location.latitude ? location.latitude : null,
-            location.longitude
-          );
-
-          return { ...location, distance };
-        });
-
-        // Update state with the calculated distances
-        setSortedLocation((prev) =>
-          updatedLocations.sort((a, b) => a.distance - b.distance)
+    if (currentLocation) {
+      // Calculate distance for each location
+      const updatedLocations = sortedLocation.map((location) => {
+        const distance = calculateDistance(
+          currentLocation.latitude,
+          currentLocation.longitude,
+          location.latitude ? location.latitude : null,
+          location.longitude
         );
-      }
-    }, 2000);
 
-    clearInterval();
+        return { ...location, distance };
+      });
+
+      // Update state with the calculated distances
+      setSortedLocation((prev) =>
+        updatedLocations.sort((a, b) => a.distance - b.distance)
+      );
+      // console.log("done");
+    }
+    // console.log("done");
   }, [currentLocation]);
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {

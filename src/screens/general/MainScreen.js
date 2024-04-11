@@ -12,6 +12,9 @@ import DashboardScreen from "../tabs/TabHome";
 import { CustomAlertPopup } from "../../components/custom-ui/CustomAlert";
 import useGetLoginToken from "../../hooks/useGetLoginToken";
 import ForgotPasswordScreen from "../auth/ForgotPasswordScreen";
+import * as SplashScreen from "expo-splash-screen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import OtpScreen from "../auth/OtpScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,11 +22,33 @@ const MainScreen = () => {
   const { isAppLoading, isAlertVisible, alertDetails } = useAppContext();
   const { token } = useGetLoginToken();
   const [isUserSignedin, setIsUserSignedin] = React.useState(null);
+  SplashScreen.preventAutoHideAsync();
+
+  useEffect(() => {
+    const handleSignedIn = async () => {
+      try {
+        const token = await AsyncStorage.getItem("Token");
+        if (token) {
+          setIsUserSignedin(true);
+        } else {
+          setIsUserSignedin(false);
+        }
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        await SplashScreen.hideAsync();
+      }
+    };
+
+    handleSignedIn();
+  }, []);
 
   return (
     <View style={{ flex: 1, position: "relative" }}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false, animation: "slide_from_left" }}
+        >
           <Stack.Screen
             name="Auth"
             component={AuthScreen}
@@ -31,6 +56,16 @@ const MainScreen = () => {
               statusBarColor: colors.lightBlue,
             }}
           />
+
+          <Stack.Screen
+            name="Dashboard"
+            component={DashboardScreen}
+            options={{
+              statusBarColor: "#0a0a0c",
+              animation: "slide_from_left",
+            }}
+          />
+
           <Stack.Screen
             name="Signin"
             component={SigninScreen}
@@ -55,13 +90,11 @@ const MainScreen = () => {
               statusBarColor: colors.lightBlue,
             }}
           />
-          {/* The dashboard tab  */}
           <Stack.Screen
-            name="Dashboard"
-            component={DashboardScreen}
+            name="Otp"
+            component={OtpScreen}
             options={{
-              statusBarColor: "#0a0a0c",
-              animation: "fade",
+              statusBarColor: colors.lightBlue,
             }}
           />
         </Stack.Navigator>

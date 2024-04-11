@@ -21,6 +21,7 @@ import SinglePost from "../../../../components/ui/post/SinglePost";
 import useGetData from "../../../../hooks/useGetData";
 import PostSkeleton from "../../../../components/skeletal-loading/PostSkeleton";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { NotificationProcess } from "../../../../hooks/useGetNotification";
 
 const HomeTab = () => {
   const [data, setData] = React.useState({});
@@ -101,7 +102,7 @@ const HomeTab = () => {
                 <SinglePost key={index} details={item} ash={true} />
               ))}
 
-            {/* <PostFlatlist data={KidsPostCustomData} /> */}
+            <NotificationProcess />
           </Animated.View>
         )}
       </ScrollView>

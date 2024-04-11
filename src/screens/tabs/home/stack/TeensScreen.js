@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import React from "react";
 import SectionHeader from "../../../../components/ui/SectionHeader";
 import SectionCategory from "../../../../components/ui/SectionCategory";
@@ -8,15 +8,11 @@ import TeensCommunity from "../../../../components/section-community/TeensCommun
 
 const TeensScreen = () => {
   return (
-    <ScrollView
-      vertical
-      showsVerticalScrollIndicator={false}
-      className="bg-[#0e0e0e] flex-1 pt-3 pb-24"
-    >
+    <View className="bg-[#0e0e0e] flex-1 pt-3 pb-24">
       <SectionHeader
         type={2}
         name={"e-Teens"}
-        image={require("../../../../../assets/icon.png")}
+        image={require("../../../../../assets/icons/agape-icon.png")}
         image2={require("../../../../../assets/icons/teen-icon.png")}
       />
 
@@ -26,7 +22,7 @@ const TeensScreen = () => {
         secondContent={<TeensAbout />}
         thirdContent={<TeensCommunity />}
       />
-    </ScrollView>
+    </View>
   );
 };
 

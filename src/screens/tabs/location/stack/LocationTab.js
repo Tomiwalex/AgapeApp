@@ -1,5 +1,5 @@
-import { ScrollView, View, Text, Image } from "react-native";
-import React from "react";
+import { ScrollView, View, Text, Image, ActivityIndicator } from "react-native";
+import React, { useState } from "react";
 import { styles } from "../../../../components/metrics/styles";
 import logo from "../../../../../assets/icons/agape-icon.png";
 import LocationList from "../../../../components/ui/location/LocationList";
@@ -7,10 +7,13 @@ import NotificationIcon from "../../../../components/ui/NotificationIcon";
 import location from "../../../../data/locationData.json";
 import useHideTabBarOnScroll from "../../../../hooks/useHideTabBarOnScroll";
 import sortedLocationData from "../../../../data/sortedLocationData";
+import { colors } from "../../../../components/metrics/colors";
+import Animated, { FadeInUp, FadeOutUp } from "react-native-reanimated";
 
 const LocationTab = () => {
+  const [loading, setLoading] = useState(false);
   const { handleScroll } = useHideTabBarOnScroll();
-  const sortedLocation = sortedLocationData();
+  const sortedLocation = sortedLocationData(setLoading);
   const availableLocation = sortedLocation.filter(
     (item) => item.distance !== null
   );
@@ -34,6 +37,22 @@ const LocationTab = () => {
           <NotificationIcon />
         </View>
       </View>
+
+      {/* location update loading */}
+
+      {loading && (
+        <Animated.View
+          entering={FadeInUp}
+          exiting={FadeOutUp}
+          style={{ backgroundColor: colors.mediumBlue }}
+          className="p-5 rounded-lg flex-row justify-between items-center m-4"
+        >
+          <Text style={styles.textmedium} className="text-white">
+            Calculating distance
+          </Text>
+          <ActivityIndicator color={"white"} size={24} />
+        </Animated.View>
+      )}
 
       <View className="mb-2">
         <Text

@@ -8,7 +8,7 @@ const useHideTabBarOnScroll = () => {
   const handleScroll = (event) => {
     const currentOffsetY = event.nativeEvent.contentOffset.y;
 
-    if (currentOffsetY > offsetY) {
+    if (currentOffsetY > offsetY + 20) {
       setOffsetY((prev) => currentOffsetY);
       setTabBarVisible(false);
     } else if (offsetY > currentOffsetY) {

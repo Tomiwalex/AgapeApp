@@ -25,7 +25,7 @@ const ScrollSection = () => {
               className="text-white  text-xs mt-2"
               style={styles.textsemibold}
             >
-              {item.name}
+              {item?.mainName || item?.name}
             </Text>
           </TouchableOpacity>
         )}

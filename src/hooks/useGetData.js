@@ -26,6 +26,9 @@ const useGetData = ({ url, data, setData, setLoading }) => {
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message);
+        if (error.response.data.message === "No item match your search") {
+          return;
+        }
         alert(true, error.response.data.message);
       } else if (error.request) {
         // The request was made but no response was received
@@ -39,6 +42,8 @@ const useGetData = ({ url, data, setData, setLoading }) => {
         console.log("Error message:", error.message);
         alert(true, "Something went wrong. Please try again later.");
       }
+
+      // console.log(error.message);
     } finally {
       if (setLoading) {
         setLoading(false);

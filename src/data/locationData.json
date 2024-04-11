@@ -135,16 +135,16 @@
   {
     "address": "1 Agape Avenue, Akure 340110, Ondo",
     "branchName": "Possibility Ground",
-    "latitude": 7.2626036,
-    "location": "Akure (HQ)",
-    "longitude": 5.1814132,
+    "latitude": 7.282862,
+    "location": "Possibility Ground",
+    "longitude": 5.159497,
     "mail": "",
     "mapAddress": "https://maps.app.goo.gl/zXYhKfedueiYh86o7",
     "pastorImage": "",
-    "pastorName": "",
+    "pastorName": "Pastor Femi Aladenola",
     "distance": null,
     "phoneNo": "",
-    "churchImage": "https://lh5.googleusercontent.com/p/AF1QipPxOElGS10esjOGyDJ1GAxeCQBBIg_r1I0c0uM=w408-h545-k-no"
+    "churchImage": "https://res.cloudinary.com/degg7xvzv/image/upload/v1712323171/agape-app-images/20240405_140527_2_uol7le.jpg"
   },
   {
     "address": "Agape Christian Assembly, The GreenHouse Community Hub, 22 Thomas Road, Luton. Lu2 7UY.",
@@ -173,18 +173,60 @@
     "phoneNo": "08052724406"
   },
   {
+    "address": "Ilawe road, Ado-Ekiti, Ekiti State.",
+    "branchName": "Favoured Assembly",
+    "latitude": 7.6171907,
+    "location": "Ilawe Road",
+    "longitude": 5.1725938,
+    "mail": "",
+    "mapAddress": "https://maps.app.goo.gl/RtvEg2919zno99fF8",
+    "pastorImage": "https://res.cloudinary.com/degg7xvzv/image/upload/v1712323682/agape-app-images/WhatsApp_Image_2024-04-05_at_11.45.13_3b2803e1_ny5ejw.jpg",
+    "pastorName": "Pastor Ayodeji Alabi",
+    "distance": null,
+    "phoneNo": ""
+  },
+  {
     "address": "Moferere, Adjacent Soladola Fuel Station, Ajilosun, Ado-Ekiti, Ekiti State",
     "branchName": "Center of Greatness",
-    "latitude": "",
-    "location": "Ajilosun",
-    "longitude": "",
+    "latitude": 7.5991611,
+    "location": "Moferere",
+    "longitude": 5.222842,
     "mail": "anthonyadesua@gmail.com",
-    "mapAddress": "",
+    "mapAddress": "https://maps.app.goo.gl/9YKLn7CnhGSr3LJB6",
     "pastorImage": "https://res.cloudinary.com/degg7xvzv/image/upload/v1709562468/agape-app-images/WhatsApp_Image_2024-02-22_at_01.30.18_f941c978_a08jzo.jpg",
     "pastorName": "Pastor Adesua Anthony Omololu",
     "phoneNo": "08038554206",
-    "distance": null
+    "distance": null,
+    "churchImage": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=kI9hnkxO_G7EyjJ6dpeVNg&cb_client=maps_sv.tactile.gps&w=224&h=298&yaw=2.0820403&pitch=0&thumbfov=100"
   },
+  {
+    "address": "66 Brig. Ademulegun road, Opposite Adesuper Hotel ,P O Box 1392, ONDO City",
+    "branchName": "",
+    "latitude": 7.5991611,
+    "location": "Ondo City",
+    "longitude": 5.222842,
+    "mail": "",
+    "mapAddress": "",
+    "pastorImage": "",
+    "pastorName": "Pastor Ayodele Adiji",
+    "phoneNo": "",
+    "distance": null,
+    "churchImage": ""
+  },
+  {
+    "address": "Deji-Fakunle Lane, Ayedun quarters, Akure, Ondo state.",
+    "branchName": "",
+    "latitude": "",
+    "location": "Ayedun Quarters",
+    "longitude": "",
+    "mail": "",
+    "mapAddress": "",
+    "pastorImage": "https://res.cloudinary.com/degg7xvzv/image/upload/v1712324000/agape-app-images/WhatsApp_Image_2024-04-04_at_12.31.28_e004553b_dn3ixj.jpg",
+    "pastorName": "Pastor Segun Owele",
+    "distance": null,
+    "phoneNo": ""
+  },
+
   {
     "address": "Adeniyi street, Opposite Ifelodun Junction, Igoba Akure North, Ondo State.",
     "branchName": "",

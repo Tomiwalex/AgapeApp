@@ -12,6 +12,10 @@ import NotificationScreen from "./stack/NotificationScreen";
 import TestimonyScreen from "./stack/TestimonyScreen";
 import WebviewPage from "../../../components/custom-ui/Webview";
 import NotificationDetails from "./stack/NotificationDetails";
+import AudioScreen from "./stack/AudioScreen";
+import BookScreen from "./stack/BookScreen";
+import DevotionalScreen from "./stack/DevotionalScreen";
+import DevotionalStacks from "./devotional";
 
 const HomeStacks = () => {
   const HomeStack = createNativeStackNavigator();
@@ -27,12 +31,15 @@ const HomeStacks = () => {
       <HomeStack.Screen name="Amplified" component={AmplifiedScreen} />
       <HomeStack.Screen name="eKids" component={KidsScreen} />
       <HomeStack.Screen name="eTeens" component={TeensScreen} />
+      <HomeStack.Screen name="Audio" component={AudioScreen} />
+      <HomeStack.Screen name="Books" component={BookScreen} />
       <HomeStack.Screen name="Notification" component={NotificationScreen} />
       <HomeStack.Screen
         name="Notificationdetails"
         component={NotificationDetails}
       />
       <HomeStack.Screen name="Testimony" component={TestimonyScreen} />
+      <HomeStack.Screen name="DevotionalStack" component={DevotionalStacks} />
       <HomeStack.Screen
         options={{ animation: "none" }}
         name="ImageExpand"

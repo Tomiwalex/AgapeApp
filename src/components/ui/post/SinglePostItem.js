@@ -36,7 +36,7 @@ const SinglePostItem = ({ item }) => {
         >
           <Image
             source={{ uri: item.link }} // item.link}
-            resizeMode="contain"
+            resizeMode="cover"
             style={{ height: postWidth * 0.8 }}
             className="w-full  bg-gray-900 rounded-[22px]"
           />

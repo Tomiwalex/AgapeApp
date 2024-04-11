@@ -135,7 +135,8 @@ const Menu = ({ setShowMenu }) => {
               {/* share app */}
               <MenuBtn
                 onPress={() => {
-                  setTabBarVisible(false);
+                  navigation.navigate("DevotionalStack");
+                  setTabBarVisible(true);
                 }}
                 icon={
                   <Image
@@ -178,7 +179,7 @@ const Menu = ({ setShowMenu }) => {
                 style={[styles.textsemibold, { color: colors.goldOpacity }]}
                 className="text-center text-xs tracking-wide"
               >
-                V1.0.01
+                V1.0.33
               </Text>
             </ScrollView>
           </Animated.View>
