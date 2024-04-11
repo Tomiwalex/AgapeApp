@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "googleServicesFile": "./google-services.json",
+      "googleServicesFile": "../../api-keys/agape-google-services.json",
 
       "package": "com.agape.agapeApp",
       "versionCode": 3,
