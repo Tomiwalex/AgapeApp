@@ -16,11 +16,11 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "../../../Documents/api-keys/agape-google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "googleServicesFile": "../../api-keys/agape-google-services.json",
 
       "package": "com.agape.agapeApp",
       "versionCode": 3,
@@ -39,7 +39,7 @@
       }
     },
     "runtimeVersion": {
-      "policy": "sdkVersion"
+      "policy": "appVersion"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
