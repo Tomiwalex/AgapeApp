@@ -7,6 +7,7 @@ export const AppProvider = ({ children }) => {
   const [isAppLoading, setAppLoading] = useState(false);
   const [isTabBarVisible, setTabBarVisible] = useState(false);
   const [isAlertVisible, setAlertVisible] = useState(false);
+  const [isNotificationVisible, setNotificationVisible] = useState(false);
   const [alertDetails, setAlertDetails] = useState({
     error: false,
     text: "",
@@ -22,6 +23,8 @@ export const AppProvider = ({ children }) => {
     setAlertVisible,
     alertDetails,
     setAlertDetails,
+    isNotificationVisible,
+    setNotificationVisible,
   };
 
   return (

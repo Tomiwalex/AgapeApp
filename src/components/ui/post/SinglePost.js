@@ -13,9 +13,11 @@ import { colors } from "../../metrics/colors";
 import SinglePostItem from "./SinglePostItem";
 import agapeIcon from "../../../../assets/icons/agape-icon.png";
 import amplifiedIcon from "../../../../assets/icons/amp-icon.png";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 const SinglePost = ({ details, ash }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [showText, setShowText] = React.useState(false);
   const scrollViewRef = React.useRef(null);
 
   useEffect(() => {
@@ -89,13 +91,20 @@ const SinglePost = ({ details, ash }) => {
       </View>
 
       {/* Post text */}
-      <Text
-        style={styles.textmedium}
-        numberOfLines={3}
-        className="text-white text-sm my-3 ml-[5px]  px-5   text-overflow-ellipsis overflow-hidden"
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => setShowText(!showText)}
       >
-        {details?.text || details?.description}
-      </Text>
+        <Animated.Text
+          entering={FadeIn}
+          exiting={FadeOut}
+          style={styles.textmedium}
+          numberOfLines={showText ? null : 3}
+          className="text-white text-sm my-3 ml-[5px]  px-5 text-ellipsis overflow-hidden"
+        >
+          {details?.text || details?.description}
+        </Animated.Text>
+      </TouchableOpacity>
 
       <View>
         <ScrollView

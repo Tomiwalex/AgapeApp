@@ -60,7 +60,7 @@ const Menu = ({ setShowMenu }) => {
     try {
       await AsyncStorage.removeItem("Token");
       setTabBarVisible((prev) => !prev);
-      await navigation.replace("Auth");
+      await navigation.replace("Auth2");
     } catch (error) {
       console.log(error);
     }

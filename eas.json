@@ -2,11 +2,18 @@
   "cli": {
     "version": ">= 5.9.3"
   },
+
   "build": {
     "development": {
       "channel": "development",
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "env": {
+          "GOOGLE_SERVICES_JSON": "${GOOGLE_SERVICES_JSON}",
+          "projectId": "a4d10c52-7e32-4659-9b96-56d2660faaa1"
+        }
+      }
     },
     "preview": {
       "channel": "preview",
@@ -21,7 +28,11 @@
     "production": {
       "channel": "production",
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "app-bundle",
+        "env": {
+          "GOOGLE_SERVICES_JSON": "${GOOGLE_SERVICES_JSON}",
+          "extra.eas.projectId": "a4d10c52-7e32-4659-9b96-56d2660faaa1"
+        }
       }
     }
   },

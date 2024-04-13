@@ -9,15 +9,16 @@ import JWT from "expo-jwt";
 import useGetLoginToken from "./useGetLoginToken";
 
 export async function storeMail() {
+  const token = await AsyncStorage.getItem("Token");
   try {
-    const token = await AsyncStorage.getItem("Token");
+    console.log(token);
     const decodedToken = JWT.decode(token, null, {
       json: true,
     });
     await AsyncStorage.setItem("UserMail", decodedToken.email);
     console.log("user's mail stored successfully");
   } catch (error) {
-    console.error("Error storing user's mail:", error);
+    console.log("Error storing user's mail:", error.message);
   }
 }
 

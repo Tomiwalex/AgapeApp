@@ -5,9 +5,6 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import MainScreen from "./src/screens/general/MainScreen";
 import * as Updates from "expo-updates";
-import messaging from "@react-native-firebase/messaging";
-// import { firebase } from "@react-native-firebase/messaging";
-import { Alert } from "react-native";
 
 const App = () => {
   /**
@@ -24,65 +21,9 @@ const App = () => {
     }
   };
 
-  // requesting for notification permission
-  const requestUserPermission = async () => {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === FirebaseMessagingTypes.AuthorizationStatus.PROVISIONAL;
-
-    if (enabled) {
-      console.log("Authorization status:", authStatus);
-    }
-  };
-  {
-    /* 
   useEffect(() => {
     checkForUpdate();
-    if (requestUserPermission()) {
-      // return token for this device
-      messaging()
-        .getToken()
-        .then((token) => {
-          console.log(token, "firebase token");
-        });
-    } else {
-      console.log("Failed token status", authStatus);
-    }
-
-    //getInitialNotification: When the application is opened from a quit state.
-    messaging()
-      .getInitialNotification()
-      .then(async (remoteMessage) => {
-        if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
-        }
-      });
-
-    //  Assume a message-notification contains a type property in data payload of the screen to open
-    messaging().onNotificationOpenedApp(async (remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
-    });
-
-    // Register background handler
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      console.log("Notification handled in the background:", remoteMessage);
-    });
-
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
-    });
-
-    return unsubscribe;
   }, []);
-  */
-  }
 
   const [isUserSignedin, setIsUserSignedin] = React.useState(null);
 
