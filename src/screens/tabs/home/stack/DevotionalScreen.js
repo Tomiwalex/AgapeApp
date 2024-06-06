@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect } from "react";
 import SectionHeader from "../../../../components/ui/SectionHeader";
 import { colors } from "../../../../components/metrics/colors";
@@ -19,6 +26,8 @@ const DevotionalScreen = () => {
   const [loading, setLoading] = React.useState(false);
   const [showPayment, setShowPayment] = React.useState(false);
   const { handleScroll } = useHideTabBarOnScroll();
+  const [isSubscribed, setSubscribed] = React.useState(null);
+
   // const { error, fetchDetails } = useGetData({
   //   url: "https://api.agapechristianministries.com/api/devotionals/",
   //   data,
@@ -36,7 +45,19 @@ const DevotionalScreen = () => {
       }
     };
 
+    // fetch user's subscriprion status
+    const fetchedSubscribed = async () => {
+      const val = await AsyncStorage.getItem("UserSubscribed");
+      console.log(val);
+      if (val === "true") {
+        setSubscribed(true);
+      } else {
+        setSubscribed(false);
+      }
+    };
+
     handleSigned();
+    fetchedSubscribed();
   }, []);
 
   return (
@@ -127,8 +148,13 @@ const DevotionalScreen = () => {
                     </Text>
 
                     <TouchableOpacity
-                      onPress={() => setShowPayment(!showPayment)}
-                      // onPress={() => navigation.navigate("Months")}
+                      onPress={() => {
+                        if (isSubscribed) {
+                          navigation.navigate("Months");
+                        } else {
+                          setShowPayment(!showPayment);
+                        }
+                      }}
                       activeOpacity={0.6}
                       className="mt-1 bg-[#F0DA6B] rounded-[9px] py-1 w-[130px]"
                     >
@@ -136,7 +162,12 @@ const DevotionalScreen = () => {
                         className="text-[#0C2769] text-center text-sm py-[2px]"
                         style={styles.textsemibold}
                       >
-                        Get
+                        {isSubscribed == null && (
+                          <ActivityIndicator color={"#0C2769"} />
+                        )}
+
+                        {isSubscribed == false && "Get"}
+                        {isSubscribed === true && "Read"}
                       </Text>
                     </TouchableOpacity>
                   </View>

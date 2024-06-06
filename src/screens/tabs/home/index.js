@@ -41,7 +41,11 @@ const HomeStacks = () => {
       <HomeStack.Screen name="Testimony" component={TestimonyScreen} />
       <HomeStack.Screen name="DevotionalStack" component={DevotionalStacks} />
       <HomeStack.Screen
-        options={{ animation: "none" }}
+        options={{
+          animation: "slide_from_right",
+          statusBarTranslucent: true,
+          statusBarColor: "transparent",
+        }}
         name="ImageExpand"
         component={ImageExpand}
       />

@@ -15,10 +15,16 @@ export async function storeMail() {
     const decodedToken = JWT.decode(token, null, {
       json: true,
     });
+
+    console.log(decodedToken);
     await AsyncStorage.setItem("UserMail", decodedToken.email);
-    console.log("user's mail stored successfully");
+    await AsyncStorage.setItem(
+      "UserSubscribed",
+      decodedToken.isSubscribed.toString()
+    );
+    console.log("user's mail and subscription stored successfully");
   } catch (error) {
-    console.log("Error storing user's mail:", error.message);
+    console.log("Error storing user's mail or subscription:", error.message);
   }
 }
 

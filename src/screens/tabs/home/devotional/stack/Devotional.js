@@ -1,15 +1,18 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SectionHeader from "../../../../../components/ui/SectionHeader";
 import { colors } from "../../../../../components/metrics/colors";
 import { styles } from "../../../../../components/metrics/styles";
 import { devotionalText } from "../../../../../data/devotional/devotional";
 import { EvilIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Devotional = ({ route }) => {
   const [pday, setPday] = useState(route.params.day);
   const [pmonth, setPmonth] = useState(route.params.month);
   const [dateStr, setDateStr] = useState(`${pmonth}/${pday}/2024`);
+  const [isSubscribed, setSubscribed] = useState(null);
   const [month, day, year] = dateStr.split("/").map(Number);
+
   const date = new Date(year, month - 1, day);
   const localeDateString = date.toLocaleDateString(undefined, {
     year: "numeric",
