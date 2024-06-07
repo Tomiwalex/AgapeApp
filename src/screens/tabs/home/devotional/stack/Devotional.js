@@ -10,7 +10,6 @@ const Devotional = ({ route }) => {
   const [pday, setPday] = useState(route.params.day);
   const [pmonth, setPmonth] = useState(route.params.month);
   const [dateStr, setDateStr] = useState(`${pmonth}/${pday}/2024`);
-  const [isSubscribed, setSubscribed] = useState(null);
   const [month, day, year] = dateStr.split("/").map(Number);
 
   const date = new Date(year, month - 1, day);

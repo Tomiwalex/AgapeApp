@@ -14,7 +14,6 @@ const LiveStream = () => {
     setLoading,
   });
 
-  console.log(data);
 
   return (
     <ScrollView className="flex-1" vertical>
