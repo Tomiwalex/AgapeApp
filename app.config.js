@@ -1,7 +1,7 @@
 export default {
   name: "Agape",
   slug: "AgapeApp",
-  version: "1.0.34",
+  version: "2",
   orientation: "portrait",
   icon: "./assets/icon.png",
   userInterfaceStyle: "dark",
@@ -15,7 +15,7 @@ export default {
     },
 
     package: "com.agape.agapeApp",
-    versionCode: 3,
+    versionCode: 4,
     permissions: [
       "android.permission.ACCESS_COARSE_LOCATION",
       "android.permission.ACCESS_FINE_LOCATION",
