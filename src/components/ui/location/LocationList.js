@@ -1,10 +1,10 @@
 import { View, Text, TouchableHighlight, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { styles } from "../../metrics/styles";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import * as Location from "expo-location";
-import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
+import Animated, { FadeIn } from "react-native-reanimated";
+import logo from "../../../../assets/icons/agape-icon.png";
 
 const LocationList = ({ item }) => {
   const navigation = useNavigation();
@@ -24,16 +24,23 @@ const LocationList = ({ item }) => {
         {/* the church's image */}
         {item?.churchImage && (
           <Image
-            source={{ uri: item?.churchImage }}
+            source={{ uri: item.churchImage }}
             className="w-[107px] h-20 rounded-[14px]"
             resizeMode="cover"
           />
         )}
 
         {!item.churchImage && (
-          <View className="w-[107px] h-20 rounded-[14px] items-center justify-center bg-[#5F5F5F6E]">
-            <FontAwesome5 name="church" size={60} color="#ffffff10" />
+          <View className="w-[107px] h-20 bg-gray-900 justify-center items-center rounded-[14px]">
+            <Image
+              className="w-[100px] h-16 rounded-[14px]"
+              resizeMode="contain"
+              source={logo}
+            />
           </View>
+          // <View className="w-[107px] h-20 rounded-[14px] items-center justify-center bg-[#5F5F5F6E]">
+          //   <FontAwesome5 name="church" size={60} color="#ffffff10" />
+          // </View>
         )}
 
         {/* church branch */}
@@ -59,16 +66,19 @@ const LocationList = ({ item }) => {
         <View className="rounded-[5px] bg-[#5F5F5F6E] w-[76px] h-[59px] items-center justify-center">
           <Text
             style={styles.textmedium}
-            className="text-white text-xs text-center"
+            className="text-white text-xs text-center p-1"
           >
-            {item?.distance ? item?.distance : "-"}
+            {item?.distance ? item?.distance : "not available"}
           </Text>
-          <Text
-            style={styles.textregular}
-            className="text-white text-[10px] text-center"
-          >
-            KM
-          </Text>
+
+          {item?.distance && (
+            <Text
+              style={styles.textregular}
+              className="text-white text-[10px] text-center"
+            >
+              KM
+            </Text>
+          )}
         </View>
       </Animated.View>
     </TouchableHighlight>

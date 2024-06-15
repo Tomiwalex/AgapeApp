@@ -124,61 +124,67 @@ const LocationDetails = ({ route }) => {
       {/* navigation */}
       <View className="flex-row px-6 mt-3">
         {/* mail icon */}
-        <TouchableOpacity
-          disabled={item.mail == "" ? true : false}
-          style={{ opacity: item.mail == "" ? 0.5 : 1 }}
-          onPress={() => handleOpenLink(`mailto:${item?.mail}`)}
-          className="mr-2"
-        >
-          <Ionicons
-            name="mail"
-            size={27}
-            color={colors.gold}
-            style={{
-              borderColor: colors.gold,
-              paddingHorizontal: 18,
-              borderRadius: 11,
-              paddingVertical: 9,
-              borderWidth: 1,
-              width: 65,
-            }}
-          />
-        </TouchableOpacity>
+        {item.mail !== "" && (
+          <TouchableOpacity
+            disabled={item.mail == "" ? true : false}
+            style={{ opacity: item.mail == "" ? 0.5 : 1 }}
+            onPress={() => handleOpenLink(`mailto:${item?.mail}`)}
+            className="mr-2"
+          >
+            <Ionicons
+              name="mail"
+              size={27}
+              color={colors.gold}
+              style={{
+                borderColor: colors.gold,
+                paddingHorizontal: 18,
+                borderRadius: 11,
+                paddingVertical: 9,
+                borderWidth: 1,
+                width: 65,
+              }}
+            />
+          </TouchableOpacity>
+        )}
 
         {/* navigate icon */}
-        <TouchableOpacity
-          disabled={item.phoneNo == "" ? true : false}
-          onPress={() => handleOpenLink(`tel:${item?.phoneNo}`)}
-          style={{ opacity: item.phoneNo == "" ? 0.5 : 1 }}
-        >
-          <Ionicons
-            name="call"
-            size={25}
-            color={colors.gold}
+        {item.phoneNo !== "" && (
+          <TouchableOpacity
+            disabled={item.phoneNo == "" ? true : false}
+            onPress={() => handleOpenLink(`tel:${item?.phoneNo}`)}
+            style={{ opacity: item.phoneNo == "" ? 0.5 : 1 }}
+          >
+            <Ionicons
+              name="call"
+              size={25}
+              color={colors.gold}
+              style={{
+                borderColor: colors.gold,
+                paddingHorizontal: 18,
+                borderRadius: 11,
+                paddingVertical: 11,
+                borderWidth: 1,
+              }}
+            />
+          </TouchableOpacity>
+        )}
+
+        {item.mapAddress && (
+          <TouchableOpacity
+            onPress={() => handleOpenLink(item?.mapAddress)}
             style={{
               borderColor: colors.gold,
-              paddingHorizontal: 18,
-              borderRadius: 11,
-              paddingVertical: 11,
-              borderWidth: 1,
             }}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => handleOpenLink(item?.mapAddress)}
-          style={{
-            borderColor: colors.gold,
-          }}
-          className="border-[1px] py-[10] rounded-[12px] ml-2 justify-self-end flex-1"
-        >
-          <Text
-            style={[styles.textbold]}
-            className="text-base text-white text-center"
+            className="border-[1px] py-[10] rounded-[12px] ml-2 justify-self-end flex-1"
           >
-            Navigate
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[styles.textbold]}
+              className="text-base text-white text-center"
+            >
+              Navigate
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   );
