@@ -3,6 +3,7 @@ import React from "react";
 import SectionHeader from "../../../../components/ui/SectionHeader";
 import SectionCategory from "../../../../components/ui/SectionCategory";
 import LiveStream from "../../../../components/section-home/LiveStream";
+import NoPost from "../../../../components/ui/post/NoPost";
 
 const StreamScreen = () => {
   return (
@@ -16,6 +17,8 @@ const StreamScreen = () => {
 
       <SectionCategory
         title={["Recent", "Podcast", "Livestream"]}
+        firstContent={<NoPost title={"Stream"} />}
+        secondContent={<NoPost title="Podcast" />}
         thirdContent={<LiveStream />}
       />
     </View>

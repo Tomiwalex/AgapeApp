@@ -6,6 +6,7 @@ import { colors } from "../metrics/colors";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import PostSkeleton from "../skeletal-loading/PostSkeleton";
 import useGetData from "../../hooks/useGetData";
+import NoPost from "../ui/post/NoPost";
 
 const AmplifiedHome = () => {
   const { handleScroll } = useHideTabBarOnScroll();
@@ -17,7 +18,6 @@ const AmplifiedHome = () => {
     setData,
     setLoading,
   });
-  console.log(data);
   return (
     <ScrollView
       refreshControl={
@@ -52,6 +52,7 @@ const AmplifiedHome = () => {
             data.data?.map((item, index) => (
               <SinglePost key={index} details={item} ash={false} />
             ))}
+          {!data.data?.length && <NoPost />}
         </Animated.View>
       )}
     </ScrollView>

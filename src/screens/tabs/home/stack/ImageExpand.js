@@ -73,7 +73,7 @@ const ImageExpand = ({ route }) => {
         </TouchableOpacity>
 
         <View className="flex-1 justify-center">
-          {loading && (
+          {loading && !error && (
             <View
               style={{ left: deviceWidth / 2 - 32 }}
               className="w-16 h-16 items-center justify-center absolute z-[5]  left-auto  rounded-md bg-[#0F3581]"
@@ -83,7 +83,10 @@ const ImageExpand = ({ route }) => {
           )}
 
           {error ? (
-            <Text style={styles.textmedium} className="text-center text-white">
+            <Text
+              style={styles.textmedium}
+              className="text-center text-red-700 text-lg bg-red-200 p-4 rounded-2xl"
+            >
               Error loading image
             </Text>
           ) : (

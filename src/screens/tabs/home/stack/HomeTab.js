@@ -65,6 +65,7 @@ const HomeTab = () => {
         {/* Header */}
         <View className="p-5 flex-row items-center justify-between">
           <TouchableOpacity
+            activeOpacity={0.5}
             onPress={() => {
               setShowMenu(!isMenuShown);
               setTabBarVisible(false);

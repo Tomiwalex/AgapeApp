@@ -6,6 +6,7 @@ import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import PostSkeleton from "../skeletal-loading/PostSkeleton";
 import useGetData from "../../hooks/useGetData";
 import { colors } from "../metrics/colors";
+import NoPost from "../ui/post/NoPost";
 
 const AgapeHome = () => {
   const { handleScroll } = useHideTabBarOnScroll();
@@ -17,6 +18,8 @@ const AgapeHome = () => {
     setData,
     setLoading,
   });
+  // console.log(data.data.length);
+
   return (
     <ScrollView
       refreshControl={
@@ -30,7 +33,7 @@ const AgapeHome = () => {
       onScroll={handleScroll}
       vertical
       showsVerticalScrollIndicator={false}
-      className="pb-20"
+      className="pb-20 flex-1"
     >
       {/* the post skeleton loader */}
       {loading && (
@@ -45,12 +48,14 @@ const AgapeHome = () => {
         <Animated.View
           entering={FadeIn}
           exiting={FadeOut}
-          className="pb-[10px]"
+          className="pb-[10px] flex-1"
         >
           {data?.data &&
             data.data?.map((item, index) => (
               <SinglePost key={index} details={item} ash={false} />
             ))}
+
+          {!data.data?.length && <NoPost />}
         </Animated.View>
       )}
     </ScrollView>

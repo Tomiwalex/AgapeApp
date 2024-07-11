@@ -6,6 +6,7 @@ import useGetData from "../../hooks/useGetData";
 import { colors } from "../metrics/colors";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import PostSkeleton from "../skeletal-loading/PostSkeleton";
+import NoPost from "../ui/post/NoPost";
 
 const TeensHome = () => {
   const { handleScroll } = useHideTabBarOnScroll();
@@ -51,6 +52,7 @@ const TeensHome = () => {
             data.data?.map((item, index) => (
               <SinglePost key={index} details={item} ash={false} />
             ))}
+          {!data.data?.length && <NoPost />}
         </Animated.View>
       )}
     </ScrollView>

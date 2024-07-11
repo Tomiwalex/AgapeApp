@@ -2,6 +2,8 @@ import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import React from "react";
 import useGetData from "../../hooks/useGetData";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import NoPost from "../ui/post/NoPost";
+import PostSkeleton from "../skeletal-loading/PostSkeleton";
 
 const LiveStream = () => {
   const [data, setData] = React.useState({});
@@ -14,17 +16,24 @@ const LiveStream = () => {
     setLoading,
   });
 
-
   return (
     <ScrollView className="flex-1" vertical>
+      {/* the post skeleton loader */}
       {loading && (
+        <Animated.View entering={FadeIn} exiting={FadeOut}>
+          <PostSkeleton />
+          <PostSkeleton />
+          <PostSkeleton />
+        </Animated.View>
+      )}
+      {!loading && (
         <Animated.View
           entering={FadeIn}
           exiting={FadeOut}
           //   style={{ display: "flex" }}
-          className="flex flex-1 items-center justify-center bg-red-100 h-full my-auto"
+          className="flex flex-1 items-center justify-center h-full my-auto"
         >
-          <ActivityIndicator color={"white"} size={"large"} />
+          {!data.data?.length && <NoPost title="Livestream" />}
         </Animated.View>
       )}
     </ScrollView>

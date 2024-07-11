@@ -7,6 +7,7 @@ import useGetData from "../../../../hooks/useGetData";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { colors } from "../../../../components/metrics/colors";
 import PostSkeleton from "../../../../components/skeletal-loading/PostSkeleton";
+import NoPost from "../../../../components/ui/post/NoPost";
 
 const SermonScreen = () => {
   const { handleScroll } = useHideTabBarOnScroll();
@@ -58,6 +59,8 @@ const SermonScreen = () => {
             data.data?.map((item, index) => (
               <SinglePost key={index} details={item} ash={false} />
             ))}
+
+          {!data.data?.length && <NoPost title={"Sermon"} />}
         </Animated.View>
       )}
     </ScrollView>

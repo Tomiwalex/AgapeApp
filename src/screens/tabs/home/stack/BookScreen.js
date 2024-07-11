@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import useGetData from "../../../../hooks/useGetData";
 import useHideTabBarOnScroll from "../../../../hooks/useHideTabBarOnScroll";
 import BookSkeleton from "../../../../components/skeletal-loading/BookSkeleton";
+import NoPost from "../../../../components/ui/post/NoPost";
 
 const BookScreen = () => {
   const [signedIn, setSignedIn] = React.useState(null);
@@ -143,6 +144,8 @@ const BookScreen = () => {
                       </View>
                     </View>
                   ))}
+
+                {!data.data?.length && <NoPost title="Book" />}
               </Animated.View>
             )}
           </Animated.View>

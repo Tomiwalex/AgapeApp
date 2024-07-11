@@ -57,10 +57,11 @@ const SectionCategory = ({
         scrol
         showsHorizontalScrollIndicator={false}
         onScroll={onScroll}
+        style={styles.scrollV}
         // scrollEventThrottle={10}
       >
         {/* home content */}
-        <View style={styles.slide}>{firstContent}</View>
+        <View style={[styles.slide, { flex: 1 }]}>{firstContent}</View>
 
         {/* about content */}
         <View style={styles.slide}>{secondContent}</View>
@@ -76,7 +77,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
+  scrollV: {
+    flex: 1,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",

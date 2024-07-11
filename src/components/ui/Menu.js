@@ -72,11 +72,7 @@ const Menu = ({ setShowMenu }) => {
       exiting={FadeOut}
       style={{ height: deviceHeight, width: "100%", position: "absolute" }}
     >
-      <BlurView
-        // tint="dark"
-        intensity={30}
-        className="absolute top-0 bottom-0 right-0 left-0 bg-[#030E2590]"
-      >
+      <View className="absolute top-0 bottom-0 right-0 left-0 bg-[#000000c5]">
         <Pressable
           className="flex-1"
           onPress={(e) => {
@@ -90,7 +86,7 @@ const Menu = ({ setShowMenu }) => {
             style={[
               styles.container,
               {
-                backgroundColor: "#030E2599",
+                backgroundColor: "#030E25",
                 height: "90%",
                 borderColor: "#F0DA6B",
               },
@@ -104,17 +100,19 @@ const Menu = ({ setShowMenu }) => {
               </View>
 
               {/* profile */}
-              <MenuBtn
-                title={token ? "Profile" : "Sign Up"}
-                onPress={() => {
-                  if (token) {
-                    navigation.navigate("Profile");
-                  } else {
-                    navigation.navigate("Signup");
-                    setTabBarVisible(false);
-                  }
-                }}
-              />
+              {!token && (
+                <MenuBtn
+                  title={token ? "Profile" : "Sign Up"}
+                  onPress={() => {
+                    if (token) {
+                      navigation.navigate("Profile");
+                    } else {
+                      navigation.navigate("Signup");
+                      setTabBarVisible(false);
+                    }
+                  }}
+                />
+              )}
 
               {/* testimony */}
               <MenuBtn
@@ -184,7 +182,7 @@ const Menu = ({ setShowMenu }) => {
             </ScrollView>
           </Animated.View>
         </Pressable>
-      </BlurView>
+      </View>
     </Animated.View>
   );
 };
