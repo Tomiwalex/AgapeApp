@@ -10,15 +10,15 @@ const NoPost = ({ title }) => {
       <View className="items-center bg-[#00184dd4] rounded-full p-5">
         <MaterialCommunityIcons name="post" size={44} color={"white"} />
       </View>
-      <Text style={styles.textsemibold} className="text-2xl text-white mt-3">
+      <Text style={styles.textmedium} className="text-2xl text-white mt-3">
         No {title ? title : "Post"} Yet
       </Text>
       <Text
         style={styles.textregular}
-        className="text-base leading-[1.6] text-white mt-3 text-center max-w-[300px]"
+        className="text-sm leading-[1.6] max-w-[270px] mx-auto text-white mt-1 text-center"
       >
-        There are no {title ? `${title?.toLowerCase()}s` : "posts"} available at
-        the moment for this section. Please check back soon.
+        There is no {title ? `${title?.toLowerCase()}` : "post"} available at
+        the moment in this section. Please check back again soon.
       </Text>
     </View>
   );

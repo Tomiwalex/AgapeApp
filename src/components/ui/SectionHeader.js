@@ -11,7 +11,7 @@ const SectionHeader = ({ name, image, type, image2, style }) => {
   return (
     <View style={style} className="p-4 flex-row items-center">
       <TouchableHighlight onPress={() => navigation.goBack()}>
-        <Ionicons name="ios-chevron-back" size={24} color={colors.gold} />
+        <Ionicons name="chevron-back" size={24} color={colors.gold} />
       </TouchableHighlight>
 
       {/* icon */}

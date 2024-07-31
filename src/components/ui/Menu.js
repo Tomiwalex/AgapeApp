@@ -91,95 +91,107 @@ const Menu = ({ setShowMenu }) => {
                 borderColor: "#F0DA6B",
               },
             ]}
-            className="w-[60%] ml-[5%] p-4 my-[5%] rounded-[21px] border-[1px] max-w-[168px]"
+            className="w-[60%] ml-[5%] p-4 my-[5%] rounded-[21px] border-[1.2px] max-w-[168px]"
           >
-            <ScrollView verical showsVerticalScrollIndicator={false}>
-              {/* profile image */}
-              <View className="h-[52px] w-[52] border-[1px] rounded-full items-center justify-center mx-auto border-[#F0DA6B50] mb-8">
+            <View
+              // verical
+              // contentContainerStyle={{
+              //   justifyContent: "space-between",
+              //   display: "flex",
+              // }}
+              className="flex-1"
+              // showsVerticalScrollIndicator={false}
+            >
+              <View style={{ flex: 1 }} className="flex-1 mt-14">
+                {/* profile image */}
+                {/* <View className="h-[52px] w-[52] border-[1px] rounded-full items-center justify-center mx-auto border-[#F0DA6B50] mb-8">
                 <Ionicons name="person-outline" size={20} color={"#fff"} />
-              </View>
+              </View> */}
 
-              {/* profile */}
-              {!token && (
+                {/* profile */}
+                {!token && (
+                  <MenuBtn
+                    title={token ? "Profile" : "Sign Up"}
+                    onPress={() => {
+                      if (token) {
+                        navigation.navigate("Profile");
+                      } else {
+                        navigation.navigate("Signup");
+                        setTabBarVisible(false);
+                      }
+                    }}
+                  />
+                )}
+
+                {/* testimony */}
                 <MenuBtn
-                  title={token ? "Profile" : "Sign Up"}
+                  icon={
+                    <Image
+                      resizeMode="contain"
+                      className="w-4 h-5"
+                      source={require("../../../assets/icons/testimony-icon.png")}
+                    />
+                  }
                   onPress={() => {
-                    if (token) {
-                      navigation.navigate("Profile");
-                    } else {
-                      navigation.navigate("Signup");
-                      setTabBarVisible(false);
-                    }
+                    navigation.navigate("Testimony");
+                    setTabBarVisible(false);
                   }}
+                  title="Testimony"
                 />
-              )}
 
-              {/* testimony */}
-              <MenuBtn
-                icon={
-                  <Image
-                    resizeMode="contain"
-                    className="w-4 h-5"
-                    source={require("../../../assets/icons/testimony-icon.png")}
-                  />
-                }
-                onPress={() => {
-                  navigation.navigate("Testimony");
-                  setTabBarVisible(false);
-                }}
-                title="Testimony"
-              />
+                {/* share app */}
+                <MenuBtn
+                  onPress={() => {
+                    navigation.navigate("DevotionalStack");
+                    setTabBarVisible(true);
+                  }}
+                  icon={
+                    <Image
+                      resizeMode="contain"
+                      className="w-4 h-5"
+                      source={require("../../../assets/icons/bible-icon.png")}
+                    />
+                  }
+                  title="Devotional"
+                />
 
-              {/* share app */}
-              <MenuBtn
-                onPress={() => {
-                  navigation.navigate("DevotionalStack");
-                  setTabBarVisible(true);
-                }}
-                icon={
-                  <Image
-                    resizeMode="contain"
-                    className="w-4 h-5"
-                    source={require("../../../assets/icons/bible-icon.png")}
-                  />
-                }
-                title="Devotional"
-              />
-
-              {/* share app */}
-              {/* // <MenuBtn
+                {/* share app */}
+                {/* // <MenuBtn
               //   icon={<Ionicons name="share-outline" size={20} color="white" />}
               //   title="Share App"
               // /> */}
 
-              {/* Rate app */}
-              {/* // <MenuBtn
+                {/* Rate app */}
+                {/* // <MenuBtn
               //   icon={<EvilIcons name="star" size={24} color="white" />}
               //   title="Rate App"
               // /> */}
 
-              {/* log out*/}
-              {token && (
-                <MenuBtn
-                  icon={<AntDesign name="logout" size={20} color="white" />}
-                  title="Sign Out"
-                  onPress={() => {
-                    logOut();
-                  }}
-                />
-              )}
+                {/* log out*/}
+                {token && (
+                  <MenuBtn
+                    icon={<AntDesign name="logout" size={20} color="white" />}
+                    title="Sign Out"
+                    onPress={() => {
+                      logOut();
+                    }}
+                  />
+                )}
+              </View>
 
-              <Image
-                source={require("../../../assets/icons/agape-icon.png")}
-                className="w-10 h-10 mt-auto mb-3 mx-auto"
-              />
-              <Text
-                style={[styles.textsemibold, { color: colors.goldOpacity }]}
-                className="text-center text-xs tracking-wide"
-              >
-                V1.0.33
-              </Text>
-            </ScrollView>
+              <View className="mt-20">
+                <Image
+                  source={require("../../../assets/icons/agape-icon.png")}
+                  className="w-10 h-10 mb-3 mx-auto"
+                />
+                <Text
+                  style={[styles.textmedium, { color: colors.goldOpacity }]}
+                  className="text-center text-xs tracking-wide"
+                >
+                  V1.0.33
+                </Text>
+              </View>
+            </View>
           </Animated.View>
         </Pressable>
       </View>

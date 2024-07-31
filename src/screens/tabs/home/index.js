@@ -22,7 +22,11 @@ const HomeStacks = () => {
 
   return (
     <HomeStack.Navigator
-      screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      screenOptions={{
+        headerShown: false,
+        animation: "ios",
+        animationTypeForReplace: "push",
+      }}
     >
       <HomeStack.Screen name="HomeScreen" component={HomeTab} />
       <HomeStack.Screen name="Agape" component={AgapeScreen} />
@@ -42,7 +46,6 @@ const HomeStacks = () => {
       <HomeStack.Screen name="DevotionalStack" component={DevotionalStacks} />
       <HomeStack.Screen
         options={{
-          animation: "slide_from_right",
           statusBarTranslucent: true,
           statusBarColor: "transparent",
         }}

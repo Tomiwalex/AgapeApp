@@ -1,14 +1,19 @@
 export default {
-  name: "Agape",
-  slug: "Agape",
-  version: "3",
+  name: "Agape Inc",
+  slug: "AgapeApp",
+  version: "1",
   orientation: "portrait",
   icon: "./assets/icon.png",
   userInterfaceStyle: "dark",
+  splash: {
+    image: "./assets/splash.png",
+    resizeMode: "cover",
+    backgroundColor: "#ffffff",
+  },
+  assetBundlePatterns: ["**/*"],
 
   android: {
-    googleServicesFile: process.env.GOOGLE_SERVICES_JSON,
-
+    googleServicesFile: "./google-services.json",
     adaptiveIcon: {
       foregroundImage: "./assets/icon.png",
       backgroundColor: "#ffffff",
@@ -21,6 +26,12 @@ export default {
       "android.permission.ACCESS_FINE_LOCATION",
       "android.permission.FOREGROUND_SERVICE",
     ],
+  },
+  ios: {
+    supportsTablet: true,
+    entitlements: {
+      "aps-environment": "production",
+    },
   },
 
   extra: {
@@ -36,6 +47,7 @@ export default {
     url: "https://u.expo.dev/a4d10c52-7e32-4659-9b96-56d2660faaa1",
   },
   plugins: [
+    "expo-font",
     [
       "expo-location",
       {

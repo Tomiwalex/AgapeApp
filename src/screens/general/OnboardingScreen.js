@@ -32,7 +32,7 @@ const OnboardingScreen = () => {
     }, 4000);
 
     const handleNavigate = setTimeout(() => {
-      navigate.replace("Auth");
+      navigate.replace("Auth2");
     }, 8000);
 
     return () => {

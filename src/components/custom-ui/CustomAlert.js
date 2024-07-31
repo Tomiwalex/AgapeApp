@@ -8,12 +8,13 @@ import { Octicons } from "@expo/vector-icons";
 export const CustomAlert = () => {
   const { setAlertVisible, setAlertDetails } = useAppContext();
 
-  const alert = (error, text, head) => {
+  const alert = (error, text, head, fallback) => {
     setAlertDetails((prev) => ({
       ...prev,
       error: error,
       text: text,
       head: head,
+      fallback: fallback,
     }));
     setAlertVisible(true);
   };
@@ -86,7 +87,13 @@ export const CustomAlertPopup = ({ details }) => {
           </TouchableHighlight>
         ) : (
           <TouchableOpacity
-            onPress={() => setAlertVisible(false)}
+            onPress={() => {
+              if (details.fallback) {
+                fallback();
+              } else {
+                setAlertVisible(false);
+              }
+            }}
             className="p-4 bg-[#F0DA6B] w-[244] mx-auto rounded-[8px] mt-8"
           >
             <Text style={styles.textsemibold} className="text-center">

@@ -6,6 +6,7 @@ import { styles } from "../../../../../components/metrics/styles";
 import { devotionalText } from "../../../../../data/devotional/devotional";
 import { EvilIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import NoPost from "../../../../../components/ui/post/NoPost";
 const Devotional = ({ route }) => {
   const [pday, setPday] = useState(route.params.day);
   const [pmonth, setPmonth] = useState(route.params.month);
@@ -50,6 +51,7 @@ const Devotional = ({ route }) => {
   });
 
   const currdevotional = devotionalText[Number(pmonth)].devotion[Number(pday)];
+  console.log(currdevotional);
 
   const handleNextDay = () => {
     if (pday + 1 > route.params.noOfDays) {
@@ -87,6 +89,11 @@ const Devotional = ({ route }) => {
         image2={require("../../../../../../assets/icons/book-icon.png")}
       />
 
+      {!currdevotional && (
+        <View className="mb-10">
+          <NoPost title={"Content"} />
+        </View>
+      )}
       {currdevotional && (
         <View
           style={{ borderTopColor: colors.gold }}
@@ -97,14 +104,14 @@ const Devotional = ({ route }) => {
               style={styles.textsemibold}
               className="text-white text-xl mr-1"
             >
-              {currdevotional.topic}
+              {currdevotional?.topic}
             </Text>
             <Text
               style={styles.textmedium}
               className="text-[#F0DA6B] text-sm underline "
             >
-              {currdevotional.bibleReference &&
-                `(${currdevotional.bibleReference})`}
+              {currdevotional?.bibleReference &&
+                `(${currdevotional?.bibleReference})`}
             </Text>
           </View>
 

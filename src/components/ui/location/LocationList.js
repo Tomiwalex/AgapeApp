@@ -65,7 +65,7 @@ const LocationList = ({ item }) => {
         {/* kilometers away */}
         <View className="rounded-[5px] bg-[#5F5F5F6E] w-[76px] h-[59px] items-center justify-center">
           <Text
-            style={styles.textmedium}
+            style={styles.textregular}
             className="text-white text-xs text-center p-1"
           >
             {item?.distance ? item?.distance : "not available"}

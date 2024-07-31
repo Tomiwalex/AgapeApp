@@ -8,7 +8,7 @@ const LocationStacks = () => {
 
   return (
     <LocationStack.Navigator
-      screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      screenOptions={{ headerShown: false, animation: "ios" }}
     >
       <LocationStack.Screen name="LocationScreen" component={LocationTab} />
       <LocationStack.Screen

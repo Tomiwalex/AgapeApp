@@ -167,9 +167,9 @@ const SignupScreen = () => {
 
               <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
                 {isPasswordShown ? (
-                  <Ionicons name="md-eye-outline" size={24} color="white" />
+                  <Ionicons name="eye-outline" size={24} color="white" />
                 ) : (
-                  <Ionicons name="md-eye-off-outline" size={24} color="white" />
+                  <Ionicons name="eye-off-outline" size={24} color="white" />
                 )}
               </Pressable>
             </View>
@@ -199,9 +199,9 @@ const SignupScreen = () => {
 
               <Pressable onPress={() => setIsPassword2Shown(!isPassword2Shown)}>
                 {isPassword2Shown ? (
-                  <Ionicons name="md-eye-outline" size={24} color="white" />
+                  <Ionicons name="eye-outline" size={24} color="white" />
                 ) : (
-                  <Ionicons name="md-eye-off-outline" size={24} color="white" />
+                  <Ionicons name="eye-off-outline" size={24} color="white" />
                 )}
               </Pressable>
             </View>
@@ -296,7 +296,7 @@ const SignupScreen = () => {
           </TouchableOpacity>
 
           {/* sign up with google button */}
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => null}
             activeOpacity={0.7}
             className="mt-7 border-[1px] border-white rounded-[17px] p-4 flex-row justify-center "
@@ -308,7 +308,7 @@ const SignupScreen = () => {
             >
               Sign in with Google
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* Sign in option */}
           <Text

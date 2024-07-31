@@ -32,8 +32,8 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
       }}
       className="absolute w-[85%] mx-[7.5%] mb-2 rounded-[22px] bottom-0 overflow-hidden"
     >
-      <BlurView tint="dark" intensity={70} className="rounded-[22px]">
-        <View className="bg-[#14338340] flex-row justify-around items-center w-full h-16 rounded-[21px]">
+      <BlurView tint="dark" intensity={100} className="rounded-[22px]">
+        <View className="bg-[#112c71b9] backdrop-blur-md flex-row justify-around items-center w-full h-16 rounded-[21px]">
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const label =

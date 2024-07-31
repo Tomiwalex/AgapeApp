@@ -48,7 +48,7 @@ const SigninScreen = () => {
           <AuthHeader />
 
           {/* Welcome text */}
-          <View className="   mt-5 ml-2 border-[#EFDA67] border-b-[3px] w-[131px]">
+          <View className="   mt-5 text-xl ml-2  w-[131px]">
             <Text
               style={styles.textsemibold}
               className="text-white text-lg top-[7] "
@@ -103,12 +103,24 @@ const SigninScreen = () => {
 
               <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
                 {isPasswordShown ? (
-                  <Ionicons name="md-eye-outline" size={24} color="white" />
+                  <Ionicons name="eye-outline" size={24} color="white" />
                 ) : (
-                  <Ionicons name="md-eye-off-outline" size={24} color="white" />
+                  <Ionicons name="eye-off-outline" size={24} color="white" />
                 )}
               </Pressable>
             </View>
+
+            {/* forgot password button */}
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Forgotpassword")}
+            >
+              <Text
+                style={styles.textmedium}
+                className="mt-2 text-right text-white text-xs underline"
+              >
+                Forgot password
+              </Text>
+            </TouchableOpacity>
 
             {/* Sign in button */}
             <TouchableOpacity
@@ -132,20 +144,8 @@ const SigninScreen = () => {
               </Text>
             </TouchableOpacity>
 
-            {/* forgot password button */}
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Forgotpassword")}
-            >
-              <Text
-                style={styles.textmedium}
-                className="mt-5 text-center text-white text-xs underline"
-              >
-                Forgot password?
-              </Text>
-            </TouchableOpacity>
-
             {/* sign in with google */}
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => null}
               activeOpacity={0.7}
               className="mt-7 border-[1px] border-white rounded-[17px] p-4 flex-row justify-center"
@@ -157,7 +157,7 @@ const SigninScreen = () => {
               >
                 Sign in with Google
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             {/* Sign up option */}
             <Text

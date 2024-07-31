@@ -46,7 +46,7 @@ const LocationDetails = ({ route }) => {
       {/* Header */}
       <View className="p-5 px-4 flex-row items-center justify-between border-b-[1px] border-b-[#F0DA6B]">
         <TouchableHighlight onPress={() => navigation.goBack()}>
-          <Ionicons name="ios-chevron-back" size={24} color={colors.gold} />
+          <Ionicons name="chevron-back" size={24} color={colors.gold} />
         </TouchableHighlight>
 
         <Text

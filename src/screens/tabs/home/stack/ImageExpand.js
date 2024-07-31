@@ -1,7 +1,6 @@
 import {
   ImageBackground,
   Image,
-  Pressable,
   ActivityIndicator,
   TouchableOpacity,
   Text,
@@ -9,7 +8,6 @@ import {
   StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { BlurView } from "expo-blur";
 import { useNavigation } from "@react-navigation/native";
 import { useAppContext } from "../../../../context/AppContext";
 import { colors } from "../../../../components/metrics/colors";
@@ -19,6 +17,7 @@ import {
   styles,
 } from "../../../../components/metrics/styles";
 import { Ionicons } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
 
 const ImageExpand = ({ route }) => {
   const navigation = useNavigation();
@@ -51,13 +50,9 @@ const ImageExpand = ({ route }) => {
       className="flex-1"
       resizeMode="cover"
     >
-      <BlurView
-        style={{ paddingTop: StatusBar.currentHeight }}
-        tint="dark"
-        intensity={50}
-        className="flex-1  bg-[#1e121250]"
-      >
+      <BlurView tint="dark" intensity={80} className="flex-1  bg-[#00000099]">
         <TouchableOpacity
+          style={{ paddingTop: StatusBar.currentHeight }}
           onPress={() => {
             navigation.goBack();
             setTabBarVisible(true);
@@ -72,7 +67,10 @@ const ImageExpand = ({ route }) => {
           />
         </TouchableOpacity>
 
-        <View className="flex-1 justify-center">
+        <View
+          style={{ bottom: StatusBar.currentHeight }}
+          className="flex-1 justify-center"
+        >
           {loading && !error && (
             <View
               style={{ left: deviceWidth / 2 - 32 }}

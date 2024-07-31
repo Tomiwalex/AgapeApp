@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
     error: false,
     text: "",
     head: "",
+    fallback: "",
   });
 
   const contextValue = {

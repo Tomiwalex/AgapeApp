@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:117625334891:android:469431e2555e9a2481d52e",
+        "android_client_info": {
+          "package_name": "com.agape.agape"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT0AG1h0ezlpzv9ufGBPgKXXWLJ-7Omto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:117625334891:android:81294c492e6ef9a781d52e",
         "android_client_info": {
           "package_name": "com.agape.agapeApp"

@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "../metrics/styles";
 import { useAppContext } from "../../context/AppContext";
 import messaging from "@react-native-firebase/messaging";
-import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
@@ -14,13 +13,17 @@ const NotificationIcon = () => {
 
   // requesting for notification permission
   const requestUserPermission = async () => {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === FirebaseMessagingTypes.AuthorizationStatus.PROVISIONAL;
+    try {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-    if (enabled) {
-      console.log("Authorization status:", authStatus);
+      if (enabled) {
+        console.log("Authorization status:", authStatus);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -46,50 +49,54 @@ const NotificationIcon = () => {
   };
 
   useEffect(() => {
-    if (requestUserPermission()) {
-      // return token for this device
-      messaging()
-        .getToken()
-        .then((token) => {
-          submitPushToken(token);
-        });
-    } else {
-      console.log("Failed token status", authStatus);
-    }
+    try {
+      if (requestUserPermission()) {
+        // return token for this device
+        messaging()
+          .getToken()
+          .then((token) => {
+            submitPushToken(token);
+          });
+      } else {
+        console.log("Failed token status", authStatus);
+      }
 
-    //getInitialNotification: When the application is opened from a quit state.
-    messaging()
-      .getInitialNotification()
-      .then(async (remoteMessage) => {
-        if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
-        }
+      //getInitialNotification: When the application is opened from a quit state.
+      messaging()
+        .getInitialNotification()
+        .then(async (remoteMessage) => {
+          if (remoteMessage) {
+            console.log(
+              "Notification caused app to open from quit state:",
+              remoteMessage.notification
+            );
+          }
+        });
+
+      //  Assume a message-notification contains a type property in data payload of the screen to open
+      messaging().onNotificationOpenedApp(async (remoteMessage) => {
+        console.log(
+          "Notification caused app to open from background state:",
+          remoteMessage.notification
+        );
       });
 
-    //  Assume a message-notification contains a type property in data payload of the screen to open
-    messaging().onNotificationOpenedApp(async (remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
-    });
+      // Register background handler
+      messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+        console.log("Notification handled in the background:", remoteMessage);
+      });
 
-    // Register background handler
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      console.log("Notification handled in the background:", remoteMessage);
-    });
+      // if user is on the app and a notification enters
+      const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+        setNotificationVisible(true);
+      });
 
-    // if user is on the app and a notification enters
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      // Alert.alert("New notification", JSON.stringify(remoteMessage));
-      setNotificationVisible(true);
-    });
-
-    return unsubscribe;
+      return unsubscribe;
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
+
   return (
     <TouchableOpacity
       className="relative"

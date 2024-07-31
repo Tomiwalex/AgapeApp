@@ -13,6 +13,7 @@ import axios from "axios";
 import { CustomAlert } from "../../components/custom-ui/CustomAlert";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export const OtpScreen = ({ route }) => {
   const [loading, setLoading] = React.useState(false);
@@ -26,6 +27,7 @@ export const OtpScreen = ({ route }) => {
     verifyPassword: "",
   });
   const { alert } = CustomAlert();
+  const navigation = useNavigation();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -40,7 +42,8 @@ export const OtpScreen = ({ route }) => {
       alert(
         false,
         "Your password has been changed successfully",
-        "Password Changed"
+        "Password Changed",
+        navigation.replace("Signin")
       );
     } catch (error) {
       if (error.response) {
@@ -121,9 +124,9 @@ export const OtpScreen = ({ route }) => {
 
             <Pressable onPress={() => setIsPasswordShown(!isPasswordShown)}>
               {isPasswordShown ? (
-                <Ionicons name="md-eye-outline" size={24} color="white" />
+                <Ionicons name="eye-outline" size={24} color="white" />
               ) : (
-                <Ionicons name="md-eye-off-outline" size={24} color="white" />
+                <Ionicons name="eye-off-outline" size={24} color="white" />
               )}
             </Pressable>
           </View>
@@ -153,9 +156,9 @@ export const OtpScreen = ({ route }) => {
 
             <Pressable onPress={() => setIsPassword2Shown(!isPassword2Shown)}>
               {isPassword2Shown ? (
-                <Ionicons name="md-eye-outline" size={24} color="white" />
+                <Ionicons name="eye-outline" size={24} color="white" />
               ) : (
-                <Ionicons name="md-eye-off-outline" size={24} color="white" />
+                <Ionicons name="eye-off-outline" size={24} color="white" />
               )}
             </Pressable>
           </View>
