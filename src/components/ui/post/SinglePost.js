@@ -53,7 +53,7 @@ const SinglePost = ({ details, ash }) => {
       className="py-8 my-[2px]"
     >
       {/* Post information || header */}
-      <View className="flex-row items-center px-5">
+      <View className="flex-row items-center px-3">
         {details?.audience === "agape" ||
         details?.audience === "all" ||
         details?.audience === "amplified" ? (
@@ -100,7 +100,7 @@ const SinglePost = ({ details, ash }) => {
           exiting={FadeOut}
           style={styles.textmedium}
           numberOfLines={showText ? null : 3}
-          className="text-white text-sm my-3 ml-[5px]  px-5 text-ellipsis overflow-hidden"
+          className="text-white text-sm my-3 ml-[5px]  px-3 text-ellipsis overflow-hidden"
         >
           {details?.text || details?.description}
         </Animated.Text>
@@ -124,7 +124,6 @@ const SinglePost = ({ details, ash }) => {
         </ScrollView>
 
         {/* The navigation icons to be shown when the data list is more than 1 details */}
-
         {details.mediaUrls.length > 1 && (
           <View className="flex-row absolute bottom-5 right-8">
             {/* The navigation buttons */}

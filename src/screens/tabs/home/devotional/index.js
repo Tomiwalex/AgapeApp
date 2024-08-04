@@ -9,7 +9,7 @@ const DevotionalStacks = () => {
 
   return (
     <DevotionalStack.Navigator
-      screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      screenOptions={{ headerShown: false, animation: "flip" }}
     >
       <DevotionalStack.Screen name="Devotional" component={DevotionalScreen} />
       <DevotionalStack.Screen name="Months" component={MonthSelection} />

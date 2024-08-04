@@ -1,7 +1,7 @@
 export default {
   name: "Agape Inc",
   slug: "AgapeApp",
-  version: "1",
+  version: "1.0.1",
   orientation: "portrait",
   icon: "./assets/icon.png",
   userInterfaceStyle: "dark",
@@ -11,7 +11,6 @@ export default {
     backgroundColor: "#ffffff",
   },
   assetBundlePatterns: ["**/*"],
-
   android: {
     googleServicesFile: "./google-services.json",
     adaptiveIcon: {
@@ -33,21 +32,23 @@ export default {
       "aps-environment": "production",
     },
   },
-
+  web: {
+    favicon: "./assets/favicon.png",
+  },
   extra: {
     eas: {
       projectId: "a4d10c52-7e32-4659-9b96-56d2660faaa1",
     },
   },
-  runtimeVersion: {
-    policy: "sdkVersion",
-  },
+  runtimeVersion: "1.0.0",
   updates: {
     fallbackToCacheTimeout: 0,
     url: "https://u.expo.dev/a4d10c52-7e32-4659-9b96-56d2660faaa1",
   },
   plugins: [
     "expo-font",
+    "@react-native-firebase/app",
+    "@react-native-firebase/messaging",
     [
       "expo-location",
       {
