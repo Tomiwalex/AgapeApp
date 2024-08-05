@@ -22,7 +22,11 @@
         "simulator": true
       },
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "env": {
+          "GOOGLE_SERVICES_JSON": "${GOOGLE_SERVICES_JSON}",
+          "projectId": "a4d10c52-7e32-4659-9b96-56d2660faaa1"
+        }
       }
     },
     "production": {

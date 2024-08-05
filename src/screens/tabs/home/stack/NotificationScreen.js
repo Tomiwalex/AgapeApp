@@ -7,6 +7,7 @@ import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { styles } from "../../../../components/metrics/styles";
 import useGetData from "../../../../hooks/useGetData";
 import { useNavigation } from "@react-navigation/native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const NotificationScreen = () => {
   const [data, setData] = useState(null);
@@ -59,12 +60,23 @@ const NotificationScreen = () => {
                   key={index}
                   className=" flex-row items-center mx-4 my-3 overflow-hidden"
                 >
-                  <Image
-                    resizeMode="contain"
-                    source={{ uri: item?.banner }}
-                    className="bg-gray-800 "
-                    style={{ height: 70, width: 107, borderRadius: 14 }}
-                  />
+                  <View className="h-[70px] w-[107px] rounded-xl items-center justify-center bg-gray-800 overflow-hidden">
+                    {item.banner && (
+                      <Image
+                        resizeMode="cover"
+                        source={{ uri: item?.banner }}
+                        className=" h-full w-full"
+                      />
+                    )}
+
+                    {!item.banner && (
+                      <MaterialCommunityIcons
+                        name="image-off-outline"
+                        size={24}
+                        color="#ffffff50"
+                      />
+                    )}
+                  </View>
 
                   <View className="mt-2 ml-2 relative overflow-hidden flex-1">
                     <Text

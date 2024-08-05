@@ -23,13 +23,14 @@ const NotificationIcon = () => {
         console.log("Authorization status:", authStatus);
       }
     } catch (err) {
-      console.log(err);
+      console.log("Could not request firebase permission", err);
     }
   };
 
   const submitPushToken = async (token) => {
     try {
       const loginToken = await AsyncStorage.getItem("Token");
+      console.log(token, "notification token");
       const resp = await axios.post(
         "https://api.agapechristianministries.com/api/users/register_push_token",
         {
@@ -44,7 +45,11 @@ const NotificationIcon = () => {
 
       console.log(resp?.data?.message);
     } catch (err) {
-      console.log(err.message, "error in submitting pushToken");
+      if (err.response) {
+        console.log(err.response.data.message);
+      } else {
+        console.log(err.message, "error in submitting pushToken");
+      }
     }
   };
 

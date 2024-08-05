@@ -56,12 +56,5 @@ export default {
           "Allow Agape app to use your location.",
       },
     ],
-    [
-      "expo-notifications",
-      {
-        icon: "./assets/icons/agape-icon.png",
-        color: "#ffffff",
-      },
-    ],
   ],
 };

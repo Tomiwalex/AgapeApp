@@ -37,7 +37,7 @@ const SinglePostItem = ({ item }) => {
           <Image
             source={{ uri: item.link }} // item.link}
             resizeMode="cover"
-            style={{ height: postWidth * 0.8 }}
+            style={{ height: postWidth * 1 }}
             className="w-full  bg-gray-900 rounded-[22px]"
           />
         </TouchableHighlight>
@@ -49,13 +49,13 @@ const SinglePostItem = ({ item }) => {
           <Video
             ref={videoRef}
             onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-            style={{ height: postWidth * 0.8, width: postWidth }}
+            style={{ height: postWidth * 1, width: postWidth }}
             source={{
               uri: item.link,
             }}
             useNativeControls
             isLooping
-            resizeMode="cover"
+            resizeMode="contain"
             className="w-full bg-gray-900 rounded-[22px] mx-auto"
           />
 

@@ -58,7 +58,7 @@ const PostItem = ({ item }) => {
           <Image
             source={item.source}
             resizeMode="contain"
-            style={{ height: postWidth * 0.7 }}
+            style={{ height: postWidth * 0.9 }}
             className="w-full  bg-gray-900 rounded-[22px]"
           />
         </TouchableHighlight>

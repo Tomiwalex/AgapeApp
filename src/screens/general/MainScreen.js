@@ -16,6 +16,8 @@ import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import OtpScreen from "../auth/OtpScreen";
 import OnboardingScreen from "./OnboardingScreen";
+import { StatusBar } from "expo-status-bar";
+import Animated from "react-native-reanimated";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,7 +66,7 @@ const MainScreen = () => {
 
   if (isUserSignedin !== null) {
     return (
-      <View style={{ flex: 1, position: "relative" }}>
+      <Animated.View style={{ flex: 1, position: "relative" }}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{ headerShown: false, animation: "slide_from_left" }}
@@ -145,7 +147,7 @@ const MainScreen = () => {
 
         {/* the alert pop up */}
         {isAlertVisible && <CustomAlertPopup details={alertDetails} />}
-      </View>
+      </Animated.View>
     );
   } else {
     return <LoadingScreen />;

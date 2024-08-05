@@ -50,7 +50,7 @@ const ImageExpand = ({ route }) => {
       className="flex-1"
       resizeMode="cover"
     >
-      <BlurView tint="dark" intensity={80} className="flex-1  bg-[#00000099]">
+      <BlurView tint="dark" intensity={100} className="flex-1  bg-[#00000099]">
         <TouchableOpacity
           style={{ paddingTop: StatusBar.currentHeight }}
           onPress={() => {

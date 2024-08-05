@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Animated, { FadeIn } from "react-native-reanimated";
 import logo from "../../../../assets/icons/agape-icon.png";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const LocationList = ({ item }) => {
   const navigation = useNavigation();
@@ -32,10 +33,10 @@ const LocationList = ({ item }) => {
 
         {!item.churchImage && (
           <View className="w-[107px] h-20 bg-gray-900 justify-center items-center rounded-[14px]">
-            <Image
-              className="w-[100px] h-16 rounded-[14px]"
-              resizeMode="contain"
-              source={logo}
+            <MaterialCommunityIcons
+              name="image-off-outline"
+              size={24}
+              color="#ffffff40"
             />
           </View>
           // <View className="w-[107px] h-20 rounded-[14px] items-center justify-center bg-[#5F5F5F6E]">
