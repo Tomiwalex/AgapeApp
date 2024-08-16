@@ -50,7 +50,7 @@ const NotificationScreen = () => {
       {!loading && (
         <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
           <Animated.View entering={FadeIn} exiting={FadeOut} className="mt-3">
-            {data.data &&
+            {data &&
               data.data.map((item, index) => (
                 <TouchableOpacity
                   onPress={() =>

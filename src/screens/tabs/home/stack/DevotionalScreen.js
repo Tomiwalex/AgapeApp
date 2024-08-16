@@ -149,7 +149,7 @@ const DevotionalScreen = () => {
 
                     <TouchableOpacity
                       onPress={() => {
-                        if (!isSubscribed) {
+                        if (isSubscribed) {
                           navigation.navigate("Months");
                         } else {
                           setShowPayment(!showPayment);
