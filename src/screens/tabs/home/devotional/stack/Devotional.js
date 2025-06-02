@@ -8,11 +8,17 @@ import { EvilIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NoPost from "../../../../../components/ui/post/NoPost";
 import { usePreventScreenCapture } from "expo-screen-capture";
+import useGetData from "../../../../../hooks/useGetData";
 const Devotional = ({ route }) => {
   usePreventScreenCapture();
+  const [devotional, setDevotional] = useState();
+  const [loading, setLoading] = useState(false);
+  // ###
   const [pday, setPday] = useState(route.params.day);
   const [pmonth, setPmonth] = useState(route.params.month);
-  const [dateStr, setDateStr] = useState(`${pmonth}/${pday}/2024`);
+  const [dateStr, setDateStr] = useState(
+    `${pmonth}/${pday}/${new Date().getFullYear()}`
+  );
   const [month, day, year] = dateStr.split("/").map(Number);
 
   const date = new Date(year, month - 1, day);
@@ -31,7 +37,9 @@ const Devotional = ({ route }) => {
   const previousDate = new Date(
     year,
     pday - 1 < 1 ? month - 2 : month - 1,
-    pday - 1 < 1 ? getDaysInMonth(previousMonth, 2024) : pday - 1
+    pday - 1 < 1
+      ? getDaysInMonth(previousMonth, new Date().getFullYear())
+      : pday - 1
   );
 
   const nextDate = new Date(
@@ -58,10 +66,10 @@ const Devotional = ({ route }) => {
     if (pday + 1 > route.params.noOfDays) {
       setPmonth(pmonth + 1);
       setPday(1);
-      setDateStr(`${pmonth + 1}/${1}/2024`);
+      setDateStr(`${pmonth + 1}/${1}/new Date().getFullYear()`);
     } else {
       setPday(pday + 1);
-      setDateStr(() => `${pmonth}/${pday + 1}/2024`);
+      setDateStr(() => `${pmonth}/${pday + 1}/new Date().getFullYear()`);
     }
   };
 
@@ -69,14 +77,23 @@ const Devotional = ({ route }) => {
     if (pday - 1 < 1) {
       const newMonth = pmonth - 1;
       setPmonth(newMonth);
-      const newDaysInMonth = getDaysInMonth(newMonth, 2024);
+      const newDaysInMonth = getDaysInMonth(newMonth, new Date().getFullYear());
       setPday(newDaysInMonth);
-      setDateStr(`${pmonth - 1}/${newDaysInMonth}/2024`);
+      setDateStr(`${pmonth - 1}/${newDaysInMonth}/new Date().getFullYear()`);
     } else {
       setPday(pday - 1);
-      setDateStr(() => `${pmonth}/${pday - 1}/2024`);
+      setDateStr(() => `${pmonth}/${pday - 1}/new Date().getFullYear()`);
     }
   };
+
+  const { data } = useGetData({
+    url: "https://api.agapechristianministries.com/api/devotionals/daily",
+    data: devotional,
+    setData: setDevotional,
+    setLoading,
+  });
+
+  console.log(data);
 
   return (
     <View className="bg-[#0e0e0e] flex-1 pt-3">
@@ -154,7 +171,9 @@ const Devotional = ({ route }) => {
           </View>
         )}
       </ScrollView>
-      <View className="flex-row items-center justify-between py-6 border-black border-[1px] px-5 mt-auto">
+
+      {/* next and previous devotional button */}
+      {/* <View className="flex-row items-center justify-between py-6 border-black border-[1px] px-5 mt-auto">
         <TouchableOpacity
           onPress={handlePreviousDay}
           className="flex-row items-center"
@@ -174,7 +193,7 @@ const Devotional = ({ route }) => {
           </Text>
           <EvilIcons name="arrow-right" size={24} color={colors.gold} />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

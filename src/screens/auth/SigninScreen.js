@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import React from "react";
 import { styles } from "../../components/metrics/styles";
@@ -17,6 +18,7 @@ import googleIcon from "../../../assets/icons/google-icon.png";
 import { useNavigation } from "@react-navigation/native";
 import useGetLogin from "../../hooks/useGetLogin";
 import { message } from "../../hooks/messageProps";
+import { useAppContext } from "../../context/AppContext";
 
 const SigninScreen = () => {
   const navigation = useNavigation();
@@ -27,7 +29,7 @@ const SigninScreen = () => {
   });
 
   // function to run the login process
-  const { error, fetchDetails, reset } = useGetLogin({ userInfo });
+  const { error, fetchDetails, reset, loading } = useGetLogin({ userInfo });
 
   return (
     <ScrollView
@@ -112,6 +114,7 @@ const SigninScreen = () => {
 
             {/* forgot password button */}
             <TouchableOpacity
+              className="block mb-7"
               onPress={() => navigation.navigate("Forgotpassword")}
             >
               <Text
@@ -125,16 +128,20 @@ const SigninScreen = () => {
             {/* Sign in button */}
             <TouchableOpacity
               disabled={
-                !userInfo.emailOrUsername || !userInfo.password ? true : false
+                !userInfo.emailOrUsername || !userInfo.password
+                  ? true
+                  : false || loading
               }
               style={{
                 opacity:
-                  !userInfo.emailOrUsername || !userInfo.password ? 0.5 : 1,
+                  !userInfo.emailOrUsername || !userInfo.password || loading
+                    ? 0.5
+                    : 1,
                 backgroundColor: colors.gold,
               }}
               onPress={fetchDetails}
               activeOpacity={0.7}
-              className="p-4 mt-5 rounded-[17px]"
+              className="rounded-[17px] block flex-row gap-2 items-center justify-center pb-4 pt-2"
             >
               <Text
                 className="text-center text-base"
@@ -142,6 +149,7 @@ const SigninScreen = () => {
               >
                 Sign in
               </Text>
+              {loading && <ActivityIndicator color={colors.deepBlue} />}
             </TouchableOpacity>
 
             {/* sign in with google */}

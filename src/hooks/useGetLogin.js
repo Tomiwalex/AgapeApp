@@ -29,8 +29,8 @@ export async function storeMail() {
 }
 
 const useGetLogin = ({ userInfo }) => {
-  const { setAppLoading } = useAppContext();
   const [data, setData] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const { alert } = CustomAlert();
   const navigation = useNavigation();
@@ -52,7 +52,7 @@ const useGetLogin = ({ userInfo }) => {
 
   const fetchData = async () => {
     try {
-      setAppLoading(true);
+      setLoading(true);
       const response = await axios.post(`${BASE_URL}/api/users/login`, {
         emailOrUsername: userInfo.emailOrUsername,
         password: userInfo.password,
@@ -81,7 +81,7 @@ const useGetLogin = ({ userInfo }) => {
       }
     } finally {
       storeMail();
-      setAppLoading(false);
+      setLoading(false);
     }
   };
 
@@ -89,7 +89,7 @@ const useGetLogin = ({ userInfo }) => {
     fetchData();
   };
 
-  return { data, error, fetchDetails, reset };
+  return { data, error, fetchDetails, reset, loading };
 };
 
 export default useGetLogin;

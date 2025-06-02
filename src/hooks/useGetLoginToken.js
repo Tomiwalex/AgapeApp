@@ -7,9 +7,9 @@ const useGetLoginToken = () => {
   const fetchToken = async () => {
     try {
       const storedToken = await AsyncStorage.getItem("Token");
-      setToken(storedToken || null);
+      setToken(() => storedToken || null);
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
   };
 

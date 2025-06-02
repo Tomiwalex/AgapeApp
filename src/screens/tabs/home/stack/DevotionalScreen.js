@@ -60,11 +60,13 @@ const DevotionalScreen = () => {
     fetchedSubscribed();
   }, []);
 
+  console.log("signedin", signedIn);
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       onScroll={handleScroll}
-      className="bg-[#0e0e0e] flex-1 pt-3 pb-24"
+      className="bg-[#151516] flex-1 pt-3 pb-24"
     >
       <SectionHeader
         type={2}
@@ -147,7 +149,22 @@ const DevotionalScreen = () => {
                       (Bishop & Rev. Funke-Felix Adejumo)
                     </Text>
 
+                    {/* Read devotional btn */}
                     <TouchableOpacity
+                      onPress={() => navigation.navigate("Months")}
+                      activeOpacity={0.6}
+                      className="mt-1 bg-[#F0DA6B] rounded-[9px] py-1 w-[130px]"
+                    >
+                      <Text
+                        className="text-[#0C2769] text-center text-sm py-[2px]"
+                        style={styles.textsemibold}
+                      >
+                        Read
+                      </Text>
+                    </TouchableOpacity>
+
+                    {/* subscribe or read button */}
+                    {/* <TouchableOpacity
                       onPress={() => {
                         if (isSubscribed) {
                           navigation.navigate("Months");
@@ -169,7 +186,7 @@ const DevotionalScreen = () => {
                         {isSubscribed == false && "Get"}
                         {isSubscribed === true && "Read"}
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </View>
                 </View>
               </Animated.View>

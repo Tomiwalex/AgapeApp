@@ -44,7 +44,7 @@ const MonthSelection = () => {
       >
         <Text
           style={styles.textsemibold}
-          className="text-white text-xl ml-2 mb-5"
+          className="text-white text-lg ml-2 mb-5"
         >
           Months
         </Text>
@@ -61,10 +61,13 @@ const MonthSelection = () => {
               }
               underlayColor={colors.gold}
               style={{ borderColor: colors.gold }}
-              className=" p-5 rounded-2xl my-3  border-[1px]"
+              className=" p-4 px-6 rounded-2xl my-2  border-[1px]"
               key={index}
             >
-              <Text style={styles.textsemibold} className="text-white text-lg">
+              <Text
+                style={styles.textsemibold}
+                className="text-white text-base"
+              >
                 {month}
               </Text>
             </TouchableHighlight>

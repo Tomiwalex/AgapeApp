@@ -1,28 +1,30 @@
 import React, { useEffect } from "react";
-import axios from "axios"; // Make sure to import axios
+import axios from "axios";
 import { useAppContext } from "../context/AppContext";
 import { CustomAlert } from "../components/custom-ui/CustomAlert";
 import useGetLoginToken from "./useGetLoginToken";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const useGetData = ({ url, data, setData, setLoading }) => {
   const { setAppLoading } = useAppContext();
   const [error, setError] = React.useState(null);
   const { alert } = CustomAlert();
   const { token } = useGetLoginToken();
+  console.log(token, "token");
 
   const fetchData = async () => {
     try {
       setLoading ? setLoading(true) : setAppLoading(true);
       const response = await axios.get(url, {
         headers: {
-          "x-auth-token": token || "",
+          "x-auth-token": (await AsyncStorage.getItem("Token")) || "",
         },
       });
 
       console.log("response: ", response.data.message);
       setData((prev) => {
         return { ...prev, ...response.data };
-      }); // setData(response.data);
+      });
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message);
