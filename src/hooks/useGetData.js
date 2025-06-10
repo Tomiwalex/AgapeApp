@@ -4,13 +4,14 @@ import { useAppContext } from "../context/AppContext";
 import { CustomAlert } from "../components/custom-ui/CustomAlert";
 import useGetLoginToken from "./useGetLoginToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const useGetData = ({ url, data, setData, setLoading }) => {
   const { setAppLoading } = useAppContext();
   const [error, setError] = React.useState(null);
   const { alert } = CustomAlert();
   const { token } = useGetLoginToken();
-  console.log(token, "token");
+  const navigation = useNavigation();
 
   const fetchData = async () => {
     try {
@@ -26,9 +27,17 @@ const useGetData = ({ url, data, setData, setLoading }) => {
         return { ...prev, ...response.data };
       });
     } catch (error) {
+      // if the error is from the response
       if (error.response) {
         setError(error.response.data.message);
         if (error.response.data.message === "No item match your search") {
+          return;
+        }
+        if (error.response.data.error === "jwt expired") {
+          await AsyncStorage.removeItem("Token");
+          setTabBarVisible((prev) => !prev);
+          await navigation.replace("Auth2");
+          alert(true, "Your session has expired, please login again");
           return;
         }
         alert(true, error.response.data.message);

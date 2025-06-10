@@ -13,6 +13,7 @@ import { colors } from "../../metrics/colors";
 import SinglePostItem from "./SinglePostItem";
 import agapeIcon from "../../../../assets/icons/agape-icon.png";
 import amplifiedIcon from "../../../../assets/icons/amp-icon.png";
+import kidsIcon from "../../../../assets/icons/kids-icon.png";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 const SinglePost = ({ details, ash }) => {
@@ -56,10 +57,15 @@ const SinglePost = ({ details, ash }) => {
       <View className="flex-row items-center px-3">
         {details?.audience === "agape" ||
         details?.audience === "all" ||
-        details?.audience === "amplified" ? (
+        details?.audience === "amplified" ||
+        details?.audience === "children" ? (
           <Image
             source={
-              details?.audience === "amplified" ? amplifiedIcon : agapeIcon
+              details?.audience === "amplified"
+                ? amplifiedIcon
+                : details?.audience === "children"
+                ? kidsIcon
+                : agapeIcon
             }
             alt="image"
             className="h-11 w-11"
@@ -86,6 +92,8 @@ const SinglePost = ({ details, ash }) => {
             ? "The Amplified Church"
             : details?.audience === "all"
             ? "The Agape Christian Ministries"
+            : details?.audience === "children"
+            ? "Agape Children"
             : details?.audience}
         </Text>
       </View>

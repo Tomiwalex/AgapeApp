@@ -2,7 +2,7 @@
   "expo": {
     "name": "Agape Inc",
     "slug": "AgapeApp",
-    "version": "1.0.1",
+    "version": "1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -13,6 +13,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "bundleIdentifier": "com.agape.agape",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      },
       "supportsTablet": true,
       "entitlements": {
         "aps-environment": "production"
@@ -40,7 +45,7 @@
         "projectId": "a4d10c52-7e32-4659-9b96-56d2660faaa1"
       }
     },
-    "runtimeVersion": "1.0.0",
+    "runtimeVersion": "1.1",
     "updates": {
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/a4d10c52-7e32-4659-9b96-56d2660faaa1"

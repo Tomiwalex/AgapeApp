@@ -140,7 +140,7 @@ const DevotionalScreen = () => {
                       style={styles.textbold}
                       className="text-white text-base"
                     >
-                      2024 Grace For This Day
+                      2025 Grace For This Day
                     </Text>
                     <Text
                       style={styles.textmedium}
@@ -151,7 +151,7 @@ const DevotionalScreen = () => {
 
                     {/* Read devotional btn */}
                     <TouchableOpacity
-                      onPress={() => navigation.navigate("Months")}
+                      onPress={() => navigation.navigate("DailyDevotion")}
                       activeOpacity={0.6}
                       className="mt-1 bg-[#F0DA6B] rounded-[9px] py-1 w-[130px]"
                     >

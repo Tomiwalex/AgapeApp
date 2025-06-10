@@ -2,7 +2,6 @@
   "cli": {
     "version": ">= 5.9.3"
   },
-
   "build": {
     "development": {
       "channel": "development",
@@ -37,6 +36,11 @@
           "GOOGLE_SERVICES_JSON": "${GOOGLE_SERVICES_JSON}",
           "extra.eas.projectId": "a4d10c52-7e32-4659-9b96-56d2660faaa1"
         }
+      },
+      "ios": {
+        "env": {
+          "EXTRA_EAS_PROJECT_ID": "a4d10c52-7e32-4659-9b96-56d2660faaa1"
+        }
       }
     }
   },
@@ -44,6 +48,10 @@
     "production": {
       "android": {
         "serviceAccountKeyPath": "../../../Documents/api-keys/agape-app-414911-2c69c01d8509.json"
+      },
+      "ios": {
+        "appleId": "agapechristianministriesdev@gmail.com",
+        "ascAppId": "6746920890"
       }
     }
   }

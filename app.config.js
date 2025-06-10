@@ -28,6 +28,11 @@ export default {
   },
   ios: {
     supportsTablet: true,
+    bundleIdentifier: "com.agape.agape",
+    googleServicesFile: "./GoogleService-Info.plist",
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
     entitlements: {
       "aps-environment": "production",
     },

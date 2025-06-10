@@ -11,11 +11,13 @@ import {
 import React, { useEffect } from "react";
 import logo from "../../../../../assets/icons/agape-icon.png";
 import not from "../../../../../assets/icons/notification-icon.png";
-import { styles } from "../../../../components/metrics/styles";
+import { deviceHeight, styles } from "../../../../components/metrics/styles";
 import { AntDesign } from "@expo/vector-icons";
 import Animated, {
   FadeIn,
+  FadeInDown,
   FadeOut,
+  FadeOutDown,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
@@ -31,10 +33,12 @@ import useGetLoginToken from "../../../../hooks/useGetLoginToken";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { copyToClipboard } from "../../../../utils/CopyToClipboard";
+import { offeringAccounts } from "../../../../data/offeringAccounts";
+import useHideTabBarOnScroll from "../../../../hooks/useHideTabBarOnScroll";
 
 const GivingTab = () => {
   const [isGivingListShown, setGivingListShown] = React.useState(false);
-  const [givingType, setGivingType] = React.useState("offering");
+  const [givingType, setGivingType] = React.useState("Offering");
   const [loading, setLoading] = React.useState(false);
   const [mail, setMail] = React.useState("");
   const [isGivingInputShown, setGivingInputShown] = React.useState(false);
@@ -71,7 +75,7 @@ const GivingTab = () => {
       height.value = withTiming(0);
       setGivingListShown(false);
     } else {
-      height.value = withTiming(130);
+      height.value = withTiming("auto");
       setGivingListShown(true);
     }
   };
@@ -119,9 +123,12 @@ const GivingTab = () => {
     handleSigned();
   }, []);
 
+  const { handleScroll } = useHideTabBarOnScroll();
+
   return (
     <ScrollView
       vertical
+      onScroll={handleScroll}
       showsVerticalScrollIndicator={false}
       style={styles.container}
       className="flex-1 bg-[#151516] pb-20"
@@ -147,7 +154,7 @@ const GivingTab = () => {
       </Text>
 
       {/* displaying the input when useris signed in and the sign in message when not signed in */}
-      <Animated.View entering={FadeIn}>
+      <Animated.View entering={FadeIn} className="">
         <View className="flex-row p-4">
           {/* offering type */}
           <TouchableOpacity
@@ -161,40 +168,40 @@ const GivingTab = () => {
 
             <Text
               style={styles.textregular}
-              className="text-[#00000091] text-sm ml-2 capitalize"
+              className="text-[#00000091] text-sm ml-2"
             >
               {givingType}
             </Text>
           </TouchableOpacity>
 
-          {
+          {isGivingListShown && (
             <Animated.View
-              className="absolute z-10 top-[80px] left-[16] rounded-3xl bg-white w-[60%] h-[0] overflow-hidden"
-              style={{ height, padding: isGivingListShown ? 20 : 0 }}
+              entering={FadeInDown}
+              exiting={FadeOutDown}
+              className="absolute z-10 top-[80px] left-[16px] rounded-3xl bg-white w-[60%] mb-20 p-5 space-y-4"
             >
-              {["offering", "tithe"].map((item, index) => (
+              {offeringAccounts.map((item, index) => (
                 <Pressable
                   key={index}
                   onPress={() => {
-                    setGivingType(item);
+                    setGivingType(item.type);
                     setData({ ...data, type: item });
                     toggleList();
                   }}
-                  className="py-3"
                 >
                   {isGivingListShown && (
                     <Animated.Text
                       entering={FadeIn}
                       style={styles.textregular}
-                      className="text-[#00000091] text-sm capitalize "
+                      className="text-[#00000091] text-sm"
                     >
-                      {item}
+                      {item.type}
                     </Animated.Text>
                   )}
                 </Pressable>
               ))}
             </Animated.View>
-          }
+          )}
 
           {/* <TouchableOpacity className="rounded-full bg-[#0C2769] ml-3 h-[52] w-[52] items-center justify-center">
               <Image
@@ -206,12 +213,14 @@ const GivingTab = () => {
         </View>
 
         <View className="p-4">
-          <CommunityPost
-            onPress={() => setGivingInputShown(true)}
-            title={givingType}
-            bg={require("../../../../../assets/post-images/giving-image.png")}
-            description={`knowing that your commitment helps to build a stronger, more compassionate church that radiates God's light. Together, we can make a difference and sow the seeds of positivity and faith.`}
-          />
+          {!isGivingInputShown && (
+            <CommunityPost
+              onPress={() => setGivingInputShown(true)}
+              title={givingType}
+              bg={require("../../../../../assets/post-images/giving-image.png")}
+              description={`knowing that your commitment helps to build a stronger, more compassionate church that radiates God's light. Together, we can make a difference and sow the seeds of positivity and faith.`}
+            />
+          )}
 
           {/* giving Input */}
           {isGivingInputShown && (
@@ -219,7 +228,7 @@ const GivingTab = () => {
               entering={FadeIn}
               exiting={FadeOut}
               style={{ borderColor: error ? "red" : colors.gold }}
-              className="bg-[#464646] absolute p-5 rounded-[34px] w-full  top-[16px] left-[16px] h-full border-[1px]"
+              className="bg-[#464646] p-5 rounded-[34px] w-full min-h-[350] border-[1px]"
             >
               <View className="flex-row items-center justify-between p-1">
                 <Text
@@ -239,72 +248,58 @@ const GivingTab = () => {
               <View className="items-center flex-1 justify-center">
                 <Text
                   style={styles.textsemibold}
-                  className="text-white text-base"
+                  className="text-white text-base text-center uppercase mt-5"
                 >
-                  AGAPE CHRISTIAN MINISTRIES
+                  {
+                    offeringAccounts.find((data) => data.type === givingType)
+                      .name
+                  }
                 </Text>
 
-                <View className="bg-[#D9D9D975] mt-5 rounded-[15px] w-full p-5 py-7  max-w-[324px]">
+                <View className="bg-[#D9D9D975] mt-5 rounded-[15px] w-full  py-7  max-w-[324px]">
                   <Text
                     style={styles.textsemibold}
-                    className="text-white text-sm text-center mb-5 w-full"
+                    className="text-white text-sm text-center w-full"
                   >
                     Give Offering
                   </Text>
 
                   {/* account informations zenith bank */}
-                  <View className="flex-row items-center gap-3 max-w-[290px]">
-                    <Text
-                      style={styles.textsemibold}
-                      className="text-white text-xl mt-3"
-                    >
-                      1013613902
-                    </Text>
+                  <View className="gap-2 px-5 mt-1">
+                    {offeringAccounts
+                      .find((data) => data.type === givingType)
+                      .acc.map((info) => (
+                        <View
+                          key={info.accNo}
+                          className="flex-row items-center  max-w-[290px] justify-between block"
+                        >
+                          <View>
+                            <Text
+                              style={styles.textsemibold}
+                              className="text-white text-xl mt-3"
+                            >
+                              {info.accNo}
+                            </Text>
 
-                    <Text
-                      style={styles.textmedium}
-                      className="text-white text-xs mt-3"
-                    >
-                      ZENITH BANK
-                    </Text>
+                            <Text
+                              style={styles.textmedium}
+                              className="text-white text-xs mt-1"
+                            >
+                              {info.bankName}
+                            </Text>
+                          </View>
 
-                    {/* copy icon */}
-                    <TouchableOpacity
-                      onPress={() => copyToClipboard("1013613902")}
-                    >
-                      <Image
-                        source={require("../../../../../assets/icons/copy-icon.png")}
-                        className="w-6 h-6"
-                      />
-                    </TouchableOpacity>
-                  </View>
-
-                  {/* first bank */}
-                  <View className="flex-row items-center gap-3 mt-1 mb-1">
-                    <Text
-                      style={styles.textsemibold}
-                      className="text-white text-xl mt-3"
-                    >
-                      2008920300
-                    </Text>
-
-                    <Text
-                      style={styles.textmedium}
-                      className="text-white text-xs mt-3"
-                    >
-                      FIRST BANK
-                    </Text>
-
-                    {/* copy account number */}
-                    <TouchableOpacity
-                      className="flex-1"
-                      onPress={async () => copyToClipboard("2008920300")}
-                    >
-                      <Image
-                        source={require("../../../../../assets/icons/copy-icon.png")}
-                        className="w-6 h-6"
-                      />
-                    </TouchableOpacity>
+                          {/* copy icon */}
+                          <TouchableOpacity
+                            onPress={() => copyToClipboard(info.accNo)}
+                          >
+                            <Image
+                              source={require("../../../../../assets/icons/copy-icon.png")}
+                              className="w-6 h-6"
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      ))}
                   </View>
                 </View>
               </View>
@@ -363,7 +358,7 @@ const GivingTab = () => {
             borderColor: colors.gold,
             borderWidth: isGivingInputShown ? 1 : 0,
           }}
-          className="mb-28 bg-[#464646] rounded-[20px] mx-4 mt-4"
+          className="mb-28 bg-[#464646] rounded-[20px] mx-4 mt-4 block"
         >
           <Image
             resizeMode="contain"

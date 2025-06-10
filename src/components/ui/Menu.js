@@ -188,7 +188,7 @@ const Menu = ({ setShowMenu }) => {
                   style={[styles.textmedium, { color: colors.goldOpacity }]}
                   className="text-center text-xs tracking-wide"
                 >
-                  V1.0.33
+                  V 1.1
                 </Text>
               </View>
             </View>
