@@ -140,7 +140,7 @@ const DevotionalScreen = () => {
                       style={styles.textbold}
                       className="text-white text-base"
                     >
-                      2025 Grace For This Day
+                      Grace For This Day
                     </Text>
                     <Text
                       style={styles.textmedium}
